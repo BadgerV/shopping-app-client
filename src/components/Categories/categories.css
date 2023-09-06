@@ -1,0 +1,32 @@
+.categories {
+    display: grid;
+    place-content: center;
+    margin-top: 1rem;
+    padding: 2rem;
+  }
+  .categoriesContainer {
+    width: 90%;
+    display: grid;
+    grid-template-columns: 20rem 20rem 20rem;
+    gap: 1rem;
+  }
+  
+  @media only screen and (max-width: 1116px) {
+    .categoriesContainer {
+      width: 100%;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+  
+  @media only screen and (max-width: 1116px) {
+    .categoriesContainer {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  @media only screen and (max-width: 570px) {
+    .categoriesContainer {
+      grid-template-columns: 1fr;
+    }
+  }
+  

@@ -1,0 +1,9 @@
+.home-style {
+    background-image: url('assets/background-image.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  

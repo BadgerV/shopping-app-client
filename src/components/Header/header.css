@@ -1,0 +1,150 @@
+.headerNew_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  
+    position: sticky;
+  
+    padding: 1.5rem;
+    background-color: hsla(0, 0%, 0%, 0.484);
+  }
+  
+  .newHeader_logoContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .newHeaderLogImg {
+    max-height: 3rem;
+    aspect-ratio: 1;
+  }
+  
+  .newHeader_logoText {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: white;
+  }
+
+  .headerSearchContainer {
+    position: relative;
+  }
+
+  .header-search {
+    border-radius: 0.2rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    outline: none;
+    width: 30rem;
+  }
+
+  .header-search_icon {
+    position: absolute;
+    right: 0.7rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  .newHeaderButtonContainer {
+    display: flex;
+    gap: 1.2rem;
+  }
+  
+  .buttonNew {
+    padding: 0.5rem 1.5rem;
+    background-color: transparent;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    border: none;
+    outline: 1px solid white;
+    font-weight: 400;
+    color: white;
+    cursor: pointer;
+  
+    position: relative;
+  
+    transition: 0.2s all ease-in-out;
+  }
+  .buttonNew span {
+    z-index: 1;
+    position: relative;
+    border-radius: 5px;
+  }
+  
+  .buttonNew::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background-color: hsla(0, 0%, 100%, 0.548);
+    color: white;
+    opacity: 1;
+  
+    border-radius: 5px;
+  
+    transition: 0.2s all ease-in-out;
+    z-index: 0;
+  }
+  
+  .buttonNew:hover::before {
+    width: 100%;
+  }
+  
+  .buttonNew:hover {
+    box-shadow: rgba(255, 253, 253, 0.24) 0px 3px 8px;
+    outline: none;
+  }
+  
+  .buttonNew:active {
+    scale: 0.95;
+    box-shadow: rgba(240, 240, 240, 0.24) 0px 5px 15px;
+  }
+
+  .link-buttons {
+    text-decoration: none;
+    color: inherit;
+    z-index: 9999999999999999999999;
+  }
+  
+  @media (max-width: 950px) {
+    .header-search {
+      width: 20rem;
+    }
+  }
+  @media (max-width: 700px) {
+    .headerSearchContainer {
+      display: none;
+    }
+  }
+  @media (max-width: 572px) {
+    .newHeader_logoText {
+      display: none;
+    }
+    .buttonNew {
+      padding: 0.5rem 1rem;
+    }
+  }
+  
+  @media (max-width: 521px) {
+    .newHeader_logoText {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 483px) {
+    .headerNew_container {
+      padding: 1rem;
+    }
+    .newHeaderLogImg {
+      scale: 1.2;
+    }
+    .buttonNew {
+      padding: 0.5rem 1rem;
+    }
+  }
+  

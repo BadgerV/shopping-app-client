@@ -1,0 +1,132 @@
+.more-details {
+  position: fixed;
+  width: 60%;
+  overflow: hidden;
+  z-index: 999999999999999999999999999;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 30rem;
+
+  border-radius: 0.2rem;
+
+  background-color: rgba(255, 255, 255, 0.971);
+}
+.close-button {
+  position: absolute;
+  right: 1rem;
+  top: 0.5em;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  font-size: 1.1rem;
+
+  cursor: pointer;
+}
+.more-details-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  height: 100%;
+  padding: 2rem;
+}
+
+.more-details-container-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.more-details-image {
+  max-width: 80%;
+}
+
+.more-details-container-right {
+  padding: 0.5rem;
+}
+
+.more-details-name {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  margin-bottom: 1rem;
+}
+
+.more-details-description {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.more-details-price {
+  font-weight: bold;
+  font-size: 0.95rem;
+  letter-spacing: 0.1rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.starRating {
+  margin-bottom: 2.5rem;
+}
+
+.more-details-buttons {
+  position: absolute;
+  bottom: 1rem;
+  display: flex;
+  gap: 2rem;
+  flex-direction: row;
+
+}
+
+.more-details-button {
+  display: block;
+  text-align: center;
+  padding: 0.8rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  outline: none;
+  background: transparent;
+  border: 1px double black;
+  color: black;
+
+  cursor: pointer;
+
+  border-radius: 5px;
+  transition: 0.1s all;
+}
+
+.more-details-button:hover {
+  color: white;
+  background-color: hsla(0, 0%, 0%, 0.483);
+  border: 1px solid white;
+}
+.more-details-button:active {
+  scale: 0.95;
+}
+
+@media screen and (max-width : 1100px) {
+  .more-details {
+    width : 80%;
+  }
+}
+@media screen and (max-width : 826px) {
+  .more-details {
+    width : 90%;
+  }
+}
+@media screen and (max-width : 700px) {
+  .more-details{
+    height: auto;
+  }
+  .more-details-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .more-details-buttons {
+    position: relative;
+  }
+}

@@ -1,0 +1,101 @@
+.signUp_page {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.signUp_main {
+    width: max(40%, 500px);
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+}
+form {
+    font-size: 0.75em;
+    color: #333;
+  }
+  input[type="checkbox"] {
+    margin-right: 1rem;
+    transform: scale(1.5);
+  }
+  label {
+    cursor: pointer;
+    display: block;
+  }
+
+  .signUp_createAcc {
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 1.3em;
+    margin-bottom: 0.3em;
+  }
+
+  .signUpinput {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid black;
+    font-size: 0.8em;
+    padding: 0.8em 0;
+    margin: 0.5em;
+    font-size: 0.9em;
+  }
+
+  .signUp_attachToPassword {
+    font-size: 0.7em;
+    margin: 0.5em;
+    margin-top: 0;
+    padding: 0.5em 0;
+
+  }
+
+  .signUpPassword {
+    margin-bottom: 0;
+  }
+
+  .signUp_form {
+    padding: 2.5em 1.5em;
+
+    width: 100%;
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .signUp_label1 {
+    margin-bottom: 0.2em;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    font-size: 0.85em;
+    color: black;
+  }
+
+
+  .signUp_register {
+    border: none;
+    outline: none;
+    background-color: black;
+    padding: 0.8em 0;
+    color: white;
+    font-size: 0.8em;
+  }
+  
+
+  .sigup_textCOnt {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.3em;
+    font-size: 0.75em;
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .SignUpPage_twoButtonCont {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0.3em;
+  }
