@@ -22,12 +22,6 @@ export const SignUp = () => {
     (state: RootState) => state.userSlice.isLoading
   );
 
-  const data = useSelector(
-    (state: RootState) => state.userSlice
-  );
-
-  console.log(data)
-
 
 
   const [formData, setFormData] = useState({
@@ -43,8 +37,8 @@ export const SignUp = () => {
     try {
       const response = await dispatch(registerUser(formData));
       console.log(response);
-      if(response.payload) {
-        navigate("/")
+      if (response.payload) {
+        navigate("/");
       }
     } catch (error) {
       console.log(error);
@@ -104,7 +98,7 @@ export const SignUp = () => {
                 name="password"
                 className="login_input"
               />
-              <button className="login_button" onClick={handleSubmit}>
+              <button className="login_button" onClick={handleSubmit} disabled = {isLoading}>
                 {isLoading ? (
                   <img src="/assets/spinner.svg" alt="spinner" />
                 ) : (

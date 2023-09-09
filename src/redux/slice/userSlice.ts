@@ -48,7 +48,7 @@ export const loginUser = createAsyncThunk(
   async ({ email, password }: LoginProps) => {
     try {
       const response = await axios.post(
-        "https://shopping-app-j93p.onrender.com/v1/user/signup",
+        "https://shopping-app-j93p.onrender.com/v1/user/login",
         {
           email: email,
           password: password,

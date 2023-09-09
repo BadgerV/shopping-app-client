@@ -1,14 +1,155 @@
+.profile-page {
+  background-image: url("assets/background-image.jpg");
+  background-size: cover;
+  background-position: center;
+}
 .profile-page-main {
-    display: grid;
-    grid-template-columns: 1fr 3.5fr;
+  display: grid;
+  grid-template-columns: 1fr 3.5fr;
 }
 
 .profile-page-left {
-    background-color: green;
-    width: 100%;
+  background-color: white;
+  width: 100%;
+  padding-top: 15vh;
+  position: relative;
+}
+
+.profile-side-bar-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.profile-sidebar-link-button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  color: black;
+  display: flex;
+  align-items: center;
+}
+
+.profile-sidebar-link {
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  position: relative;
+
+  cursor: pointer;
+}
+
+.profile-sidebar-link:hover {
+  background-color: #edf6ff;
+}
+
+.profile-sidebar-link-arrow {
+  border: none;
+  background-color: transparent;
+
+  display: flex;
+  align-items: center;
+
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translate(-50%, -50%);
+}
+
+.profile-main-left-bottom-div {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.profile-main-left-bottom {
+  border: 1px solid #a6c8e9;
+  padding: 0.7rem 1.2rem;
+  border-radius: 1.5rem;
+  max-width: fit-content;
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-main-left-bottom button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+}
+.profile-main-left-bottom span {
+  font-size: 0.9rem;
+}
+.profile-page-right {
+  background-color: #fbf7f4;
+  width: 100%;
 }
 
 .profile-page-right {
-    background-color: red;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  padding: 1rem 3rem;
+}
+
+.profile-user-text {
+  font-size: 1.3rem;
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid #384d6c;
+  max-width: fit-content;
+  color: #384d6c;
+}
+
+.profile-photo-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-photo-left {
+  height: 8rem;
+}
+
+.profile-pic {
+  max-height: 100%;
+  border-radius: 50%;
+}
+
+.profile-photo-middle {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-photo-name {
+  color: #384d6c;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.profile-photo-isVendor {
+  color: #384d6c;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.profile-photo-right {
+  margin-left: auto; /* Pushes the right div to the extreme right */
+}
+
+.profile-photo-right-button {
+  padding: 0.8rem 0.9rem;
+  outline: none;
+  border: none;
+  background-color: #384d6c;
+  border-radius: 0.5rem;
+  color: white;
+  cursor: pointer;
+  /* Remove "right: 0;" as it's not needed */
 }

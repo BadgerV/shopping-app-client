@@ -3,9 +3,10 @@ import "./login.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import NewHeader from "../../components/NewHeader/NewHeader";
+import { RootState } from "../../redux/store";
 // import HeaderNew from "../../components/HeaderNew/HeaderNew";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { loginUser } from "../../redux/slice/userSlice";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +14,11 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+
+  const isLoading = useSelector(
+    (state: RootState) => state.userSlice.isLoading
+  );
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -28,7 +34,7 @@ const Login = () => {
       if (response.payload) {
         navigate("/");
       }
-    } catch (error : any) {
+    } catch (error: any) {
       console.log(error.message);
     }
   };
@@ -70,8 +76,12 @@ const Login = () => {
                 id="password"
                 name="password"
               />
-              <button className="login_button" type="submit">
-                Log In
+              <button className="login_button" disabled = {isLoading} type="submit">
+                {isLoading ? (
+                  <img src="/assets/spinner.svg" alt="" />
+                ) : (
+                  <span>Login</span>
+                )}
               </button>
             </form>
             <Link to="/signup" className="link">

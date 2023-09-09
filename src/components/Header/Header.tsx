@@ -8,12 +8,26 @@ import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import { useEffect, useState } from "react";
 const Header = () => {
-  const isSignedIn = true;
   const isAVendor = true;
+
+  const [user, setUser] = useState(false);
 
   const data = useSelector((state: RootState) => state.userSlice);
   const navigate = useNavigate();
+
+  const checkIfUser = () => {
+    if (data.user !== null) {
+      setUser(true);
+    } else {
+      setUser(false);
+    }
+  };
+
+  useEffect(() => {
+    checkIfUser();
+  }, [data]);
 
   return (
     <div className="headerNew_container">
@@ -30,7 +44,7 @@ const Header = () => {
         <BsSearch className="header-search_icon" />
       </div>
 
-      {isSignedIn ? (
+      {user ? (
         <div className="header-left-component">
           <button className="header-left-button">
             <BsBell size={27} />
