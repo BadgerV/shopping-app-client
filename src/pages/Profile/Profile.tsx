@@ -4,22 +4,35 @@ import {
   MdKeyboardArrowRight,
   MdOutlineExitToApp,
 } from "react-icons/md";
+import { SiProducthunt } from "react-icons/si";
 import Header from "../../components/Header/Header";
 import "./profile.css";
 import { FcSettings } from "react-icons/fc";
 import { GoSignOut } from "react-icons/go";
+import {MdProductionQuantityLimits} from "react-icons/md"
 
 import { useState } from "react";
 
 const Profile = () => {
-  
-  const [firstName, setFirstName] = useState("Faozan");
+  const [formData, setFormData] = useState({
+    firstName: "John",
+    lastName: "Doe",
+    email: "johndoe@example.com",
+    phoneNumber: "123-456-7890",
+  });
+
+  const handleInputChange = (e: any) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
   const name = "Segunmaru Faozan";
   const isAVendor = true;
 
   return (
-
     <div className="profile-page">
       <Header />
 
@@ -81,7 +94,11 @@ const Profile = () => {
 
           <div className="profile-photo-container">
             <div className="profile-photo-left">
-              <img src="/assets/avatar.jpg" alt="Profile Pic" className="profile-pic"/>
+              <img
+                src="/assets/avatar.jpg"
+                alt="Profile Pic"
+                className="profile-pic"
+              />
             </div>
             <div className="profile-photo-middle">
               <span className="profile-photo-name">{name}</span>
@@ -98,13 +115,97 @@ const Profile = () => {
 
           <div className="profile-right-main">
             <div className="profile-grid">
-              <input type="text" className="profile-input" />
-              <input type="text" className="profile-input" />
+              <div className="profile-pair">
+                <label htmlFor="firstName" className="profile-label">
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  value={formData.firstName}
+                  onChange={(e) => handleInputChange(e)}
+                  className="profile-input"
+                  name="firstName"
+                  placeholder="First Name"
+                />
+              </div>
+
+              <div className="profile-pair">
+                <label htmlFor="firstName" className="profile-label">
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  value={formData.lastName}
+                  onChange={(e) => handleInputChange(e)}
+                  className="profile-input"
+                  name="lastName"
+                  placeholder="Last Name"
+                />
+              </div>
             </div>
             <div className="profile-grid">
-              <input type="text" className="profile-input" />
-              <input type="text" className="profile-input" />
+              <div className="profile-pair">
+                <label htmlFor="firstName" className="profile-label">
+                  Email
+                </label>
+                <input
+                  type="text"
+                  value={formData.email}
+                  onChange={(e) => handleInputChange(e)}
+                  className="profile-input"
+                  name="email"
+                  placeholder="Email"
+                />
+              </div>
+              <div className="profile-pair">
+                <label htmlFor="firstName" className="profile-label">
+                  Phone Number
+                </label>
+                <input
+                  type="text"
+                  value={formData.phoneNumber}
+                  onChange={(e) => handleInputChange(e)}
+                  className="profile-input"
+                  name="phoneNumber"
+                  placeholder="Phone Number"
+                />
+              </div>
             </div>
+          </div>
+
+          <div className="profile-products">
+            <div className="profile-product-text">Products</div>
+
+            <div className="profile-product-container">
+              <div className="profile-product">
+                <button>
+                  <MdProductionQuantityLimits size = {20} />
+                </button>
+                <span>Air Conditioner</span>
+              </div>
+              <div className="profile-product">
+                <button>
+                  <MdProductionQuantityLimits size = {20} />
+                </button>
+                <span>Air Freshsner</span>
+              </div>
+              <div className="profile-product">
+                <button>
+                  <MdProductionQuantityLimits size = {20} />
+                </button>
+                <span>Gift Basket</span>
+              </div>
+              <div className="profile-product">
+                <button>
+                  <MdProductionQuantityLimits size = {20} />
+                </button>
+                <span>Nothingness</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="profile-bottom">
+            <button className="profile-save-button">Save Changes</button>
           </div>
         </div>
       </div>

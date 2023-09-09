@@ -2,17 +2,24 @@
   background-image: url("assets/background-image.jpg");
   background-size: cover;
   background-position: center;
+
+  display: flex;
+  flex-direction: column;
 }
 .profile-page-main {
   display: grid;
   grid-template-columns: 1fr 3.5fr;
+  flex: 1;
 }
 
 .profile-page-left {
   background-color: white;
   width: 100%;
   padding-top: 15vh;
-  position: relative;
+
+  
+  position: sticky; /* Make it sticky */
+  top: 0; /* Stick it to the top of the container */
 }
 
 .profile-side-bar-links {
@@ -96,6 +103,9 @@
   gap: 1rem;
 
   padding: 1rem 3rem;
+
+    overflow-y: auto; /* Add overflow-y to enable scrolling */
+
 }
 
 .profile-user-text {
@@ -152,4 +162,82 @@
   color: white;
   cursor: pointer;
   /* Remove "right: 0;" as it's not needed */
+}
+
+.profile-right-main {
+  margin-top: 0.5rem;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.profile-label {
+  color: #384d6c;
+  font-weight: 400;
+  font-size: 0.8rem;
+  margin: 0;
+  padding: 0;
+}
+
+.profile-input {
+  width: 100%;
+  outline: none;
+  border: 1px solid #edf6ff;
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 0.7rem 0;
+  padding-left: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.profile-products {
+  padding: 0.2rem 0;
+  border-top: 1px solid #384d6c58;
+  border-bottom: 1px solid #384d6c58;
+}
+
+.profile-product-text {
+  font-weight: 500;
+  color: #384d6c;
+}
+
+.profile-product-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.profile-product {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.2rem;
+}
+
+.profile-product button {
+  outline: none;
+  border: none;
+  display: flex;
+  align-items: center;
+}
+
+.profile-bottom {
+  margin-top: 0.2rem;
+  display: flex;
+  justify-content: end;
+}
+
+
+.profile-save-button {
+    padding: 0.8rem 0.9rem;
+    outline: none;
+    border: none;
+    background-color: #384d6c;
+    border-radius: 0.5rem;
+    color: white;
+    cursor: pointer;
 }
