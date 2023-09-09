@@ -5,28 +5,55 @@ import { Link } from "react-router-dom";
 import NewHeader from "../../components/NewHeader/NewHeader";
 // import HeaderNew from "../../components/HeaderNew/HeaderNew";
 
-const Login = () => {
-  const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
+import { loginUser } from "../../redux/slice/userSlice";
+import { useNavigate } from "react-router-dom";
 
-  const handleSubmit = (e: any) => {
+const Login = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(email);
+
+    try {
+      const response = await dispatch(loginUser(formData));
+      console.log(response);
+
+      if (response.payload) {
+        navigate("/");
+      }
+    } catch (error : any) {
+      console.log(error.message);
+    }
+  };
+
+  const handleChange = (e: any) => {
+    const { name, value } = e.target;
+
+    setFormData({ ...formData, [name]: value });
   };
 
   return (
     <>
       <div className="login">
         <div className="innner-form">
-          <div className="new-header"><NewHeader /></div>
+          <div className="new-header">
+            <NewHeader />
+          </div>
 
           <div className="auth-form-container">
             <h2>Login</h2>
             <form className="login-form" onSubmit={handleSubmit}>
               <label htmlFor="email">Email</label>
               <input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={formData.email}
+                onChange={handleChange}
                 type="email"
                 className="login_input"
                 placeholder="Email"
@@ -35,8 +62,8 @@ const Login = () => {
               />
               <label htmlFor="password">Password</label>
               <input
-                value={pass}
-                onChange={(e) => setPass(e.target.value)}
+                value={formData.password}
+                onChange={handleChange}
                 className="login_input"
                 type="password"
                 placeholder="Password"

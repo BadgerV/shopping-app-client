@@ -1,4 +1,5 @@
 import Header from "../../components/Header/Header"
+import Spinner from "../../components/Spinner/Spinner"
 import './profile.css'
 
 
@@ -8,8 +9,7 @@ const Profile = () => {
         <Header />
 
         <div className="profile-page-main">
-            <div className="profile-page-left">Interesting</div>
-            <div className="profile-page-right">Fascianting</div>
+            <Spinner />
         </div>
     </div>
   )

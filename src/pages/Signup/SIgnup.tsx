@@ -7,10 +7,28 @@ import { Link } from "react-router-dom";
 import NewHeader from "../../components/NewHeader/NewHeader";
 import { registerUser } from "../../redux/slice/userSlice";
 import { AppDispatch } from "../../redux/store";
+import { RootState } from "../../redux/store";
+
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 // import HeaderNew from "../../components/HeaderNew/HeaderNew";
 
 export const SignUp = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
+  const isLoading = useSelector(
+    (state: RootState) => state.userSlice.isLoading
+  );
+
+  const data = useSelector(
+    (state: RootState) => state.userSlice
+  );
+
+  console.log(data)
+
+
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -25,6 +43,9 @@ export const SignUp = () => {
     try {
       const response = await dispatch(registerUser(formData));
       console.log(response);
+      if(response.payload) {
+        navigate("/")
+      }
     } catch (error) {
       console.log(error);
     }
@@ -84,7 +105,11 @@ export const SignUp = () => {
                 className="login_input"
               />
               <button className="login_button" onClick={handleSubmit}>
-                Sign Up
+                {isLoading ? (
+                  <img src="/assets/spinner.svg" alt="spinner" />
+                ) : (
+                  <span>Sign Up</span>
+                )}
               </button>
             </form>
             <Link to="/login" className="link">

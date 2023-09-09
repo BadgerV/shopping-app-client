@@ -1,8 +1,4 @@
-import {
-  BsPlus,
-} from "react-icons/bs";
 import "./cartItem.css";
-import { FcMinus } from "react-icons/fc";
 
 const demoData = [
   {
@@ -29,24 +25,29 @@ const demoData = [
 
 const CartItem = () => {
   return (
-   <div>fascinating</div>
-  )
+    <div>
+      {demoData.map((data: any) => (
+        <div className="cart-item" key={data.name}>
+          <div className="cart-item-top">
+            <div className="cart-item-left">
+              <img
+                src="/assets/image12.jpg"
+                alt="cart image"
+                className="cart-item-left-image"
+              />
+            </div>
+            <div className="cart-item-middle">
+              <div className="cart-item-middle-name">{data.name}</div>
+              <div className="cart-item-middle-price">{data.price}</div>
+            </div>
+
+
+            <button className="cart-item-right">Remove</button>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 };
 
 export default CartItem;
-
-{/* <div className="cart-item">
-      <div className="cart-item-top">
-        <div className="cart-item-left">
-          <img
-            src="/assets/image12.jpg"
-            alt="cart image"
-            className="cart-item-left-image"
-          />
-        </div>
-        <div className="cart-item-middle">
-          <div className="cart-item-middle-name">{name}</div>
-          <div className="cart-item-middle-price">{price}</div>
-        </div>
-      </div>
-    </div> */}

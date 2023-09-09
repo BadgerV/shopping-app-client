@@ -1,11 +1,19 @@
 import "./header.css";
 import { Link } from "react-router-dom";
-import { BsBell, BsBellSlash, BsCart, BsSearch } from "react-icons/bs";
+import { BsBell, BsCart, BsSearch } from "react-icons/bs";
 import CartItem from "../CartItem/CartItem";
+import { navigateToProfile } from "../../utils/utilsFunctions";
+import { RootState } from "../../redux/store";
+
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const isSignedIn = true;
   const isAVendor = true;
+
+  const data = useSelector((state: RootState) => state.userSlice);
+  const navigate = useNavigate();
 
   return (
     <div className="headerNew_container">
@@ -25,7 +33,7 @@ const Header = () => {
       {isSignedIn ? (
         <div className="header-left-component">
           <button className="header-left-button">
-            <BsBell size={27}/>
+            <BsBell size={27} />
           </button>
           <button className="header-left-button">
             <BsCart size={30} />
@@ -35,10 +43,6 @@ const Header = () => {
               <CartItem />
 
               <div className="cart-item-bottom">
-                <div className="cart-item-bottom-left">
-                  <div>Quantity</div>
-                  <div></div>
-                </div>
                 <div className="cart-item-bottom-right">
                   <div>Total</div>
                 </div>
@@ -54,7 +58,12 @@ const Header = () => {
             />
 
             <div className="hover-profile-image-links">
-              <a className="hover-profile-image-link">My Profile</a>
+              <a
+                className="hover-profile-image-link"
+                onClick={(e) => navigateToProfile({ data, navigate, e })}
+              >
+                My Profile
+              </a>
               <a className="hover-profile-image-link">Notifications</a>
               {isAVendor ? (
                 <></>

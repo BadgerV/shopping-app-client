@@ -1,4 +1,9 @@
 .cart-item {
+
+}
+
+.cart-item:hover {
+  background-color: rgba(203, 191, 191, 0.624);
 }
 
 .cart-item-top {
@@ -42,7 +47,6 @@
   width: 2rem;
 }
 
-.plus,
 .minus {
   cursor: pointer;
   font-size: 1rem;
@@ -56,4 +60,14 @@
 .amount {
   font-weight: bold;
   font-size: 0.9rem;
+}
+
+
+.cart-item-right {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: transparent;
+  font-size: 0.75rem;
+  color: red;
 }
