@@ -11,7 +11,7 @@ interface UserState {
 
 interface UserProps {
   firstName: string;
-  lastName: string;
+  lastName: string; 
   email: string;
   password: string;
 }

@@ -115,7 +115,7 @@
 .header-left-component {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1em;
 }
 
@@ -124,55 +124,54 @@
   outline: none;
   border: none;
   color: white;
-  cursor: pointer;
 
   position: relative;
 }
 
-.hover-cart-item {
+.hover-cart-items {
   display: none;
   position: absolute;
-
-  background-color: rgba(128, 128, 128, 0.873);
-  color: aliceblue;
-
-  width: 10rem !important;
-  left: 50%;
+  left: 40%;
   transform: translateX(-50%);
-  outline: 0.5px solid white;
-
-  padding: 0.5rem 0.2rem;
+  top: 2rem;
+  background-color: white;
+  color: black;
 }
 
-.header-left-button:hover .hover-cart-item {
+.cart-item-bottom {
+  outline: 1px solid red;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+}
+
+.header-left-button:hover .hover-cart-items {
   display: block;
 }
 
 .hover-cart-item-links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-  align-items: center;
+  
 }
 
 .hover-cart-item-link {
-  font-size: 0.8rem;
-  padding: 0.5rem 0.2rem;
-  width: 100%;
+ 
 }
 
 .hover-cart-item-link:hover {
-  background-color: rgba(68, 60, 60, 0.896);
 }
 
 .header-left-button span {
   position: absolute;
   left: 50%;
-  top: 39%;
+  top: 44%;
   transform: translate(-50%, -50%);
   font-size: 9px;
 }
 
+.header-left-img-container {
+  position: relative;
+}
 .header-left-image {
   height: 2.5em;
   width: 2.5em;
@@ -180,19 +179,41 @@
   border-radius: 50%;
   cursor: pointer;
 }
-
-.header-left-image:hover .hover-profile-image-links {
-  display: block;
+.header-left-img-container:hover
+.hover-profile-image-links {
+  display: flex;
 }
-
-.header-left-img-container {
-  position: relative;
-}
-
 .hover-profile-image-links {
   position: absolute;
   display: none;
+
+  right: 10rem;
+
+  flex-direction: column;
+  gap: 0.7rem;
+  align-items: center;
+
+
+  background-color: rgba(128, 128, 128, 0.873);
+  color: aliceblue;
+
+  width:  8rem;
+  transform: translateX(-50%);
+  outline: 0.5px solid white;
+
+  padding: 0.5rem 0.2rem;
 }
+.hover-profile-image-link{
+  font-size: 0.8rem;
+  padding: 0.5rem 0.2rem;
+  width: 100%;
+  cursor: pointer;
+}
+.hover-profile-image-link:hover{
+  background-color: rgba(68, 60, 60, 0.896);
+}
+
+
 
 @media (max-width: 950px) {
   .header-search {

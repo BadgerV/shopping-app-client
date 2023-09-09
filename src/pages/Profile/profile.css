@@ -1,0 +1,14 @@
+.profile-page-main {
+    display: grid;
+    grid-template-columns: 1fr 3.5fr;
+}
+
+.profile-page-left {
+    background-color: green;
+    width: 100%;
+}
+
+.profile-page-right {
+    background-color: red;
+    width: 100%;
+}

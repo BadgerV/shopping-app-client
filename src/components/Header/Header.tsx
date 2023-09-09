@@ -1,10 +1,12 @@
 import "./header.css";
 import { Link } from "react-router-dom";
-import { BsCart, BsSearch, BsSignIntersectionSideFill } from "react-icons/bs";
+import { BsBell, BsBellSlash, BsCart, BsSearch } from "react-icons/bs";
+import CartItem from "../CartItem/CartItem";
 
 const Header = () => {
   const isSignedIn = true;
-  const isAVendor = false;
+  const isAVendor = true;
+
   return (
     <div className="headerNew_container">
       <div className="newHeader_logoContainer">
@@ -23,15 +25,23 @@ const Header = () => {
       {isSignedIn ? (
         <div className="header-left-component">
           <button className="header-left-button">
+            <BsBell size={27}/>
+          </button>
+          <button className="header-left-button">
             <BsCart size={30} />
             <span>2</span>
 
-            <div className="hover-cart-item">
-              <div className="hover-cart-item-links">
-                <a className="hover-cart-item-link">My Profile</a>
+            <div className="hover-cart-items">
+              <CartItem />
 
-                <a className="hover-cart-item-link">Transaction History</a>
-                <a className="hover-cart-item-link">Settings</a>
+              <div className="cart-item-bottom">
+                <div className="cart-item-bottom-left">
+                  <div>Quantity</div>
+                  <div></div>
+                </div>
+                <div className="cart-item-bottom-right">
+                  <div>Total</div>
+                </div>
               </div>
             </div>
           </button>
@@ -44,14 +54,16 @@ const Header = () => {
             />
 
             <div className="hover-profile-image-links">
-              <a className="hover-profile-image-links">My Profile</a>
+              <a className="hover-profile-image-link">My Profile</a>
+              <a className="hover-profile-image-link">Notifications</a>
               {isAVendor ? (
                 <></>
               ) : (
-                <a className="hover-profile-image-links">Become a Vendor</a>
+                <a className="hover-profile-image-link">Become a Vendor</a>
               )}
-              <a className="hover-profile-image-links">Transaction History</a>
-              <a className="hover-profile-image-links">Settings</a>
+              <a className="hover-profile-image-link">Transaction History</a>
+              <a className="hover-profile-image-link">Settings</a>
+              <a className="hover-profile-image-link">Sign Out</a>
             </div>
           </div>
         </div>
