@@ -2,11 +2,9 @@ import "./header.css";
 import { Link } from "react-router-dom";
 import { BsBell, BsCart, BsSearch } from "react-icons/bs";
 import CartItem from "../CartItem/CartItem";
-import { navigateToProfile } from "../../utils/utilsFunctions";
 import { RootState } from "../../redux/store";
 
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 const Header = () => {
@@ -15,7 +13,6 @@ const Header = () => {
   const [user, setUser] = useState(false);
 
   const data = useSelector((state: RootState) => state.userSlice);
-  const navigate = useNavigate();
 
   const checkIfUser = () => {
     if (data.user !== null) {
@@ -74,7 +71,6 @@ const Header = () => {
             <div className="hover-profile-image-links">
               <a
                 className="hover-profile-image-link"
-                onClick={(e) => navigateToProfile({ data, navigate, e })}
               >
                 My Profile
               </a>

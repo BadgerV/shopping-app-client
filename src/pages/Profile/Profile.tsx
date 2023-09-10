@@ -2,9 +2,7 @@ import { BsBell, BsHouse } from "react-icons/bs";
 import {
   MdHistory,
   MdKeyboardArrowRight,
-  MdOutlineExitToApp,
 } from "react-icons/md";
-import { SiProducthunt } from "react-icons/si";
 import Header from "../../components/Header/Header";
 import "./profile.css";
 import { FcSettings } from "react-icons/fc";
