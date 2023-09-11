@@ -1,23 +1,34 @@
-import { BsBell, BsHouse } from "react-icons/bs";
-import {
-  MdHistory,
-  MdKeyboardArrowRight,
-} from "react-icons/md";
+import { BsBell, BsCartCheck, BsHouse } from "react-icons/bs";
+import { MdHistory, MdKeyboardArrowRight } from "react-icons/md";
 import Header from "../../components/Header/Header";
 import "./profile.css";
 import { FcSettings } from "react-icons/fc";
 import { GoSignOut } from "react-icons/go";
-import {MdProductionQuantityLimits} from "react-icons/md"
+import { MdProductionQuantityLimits } from "react-icons/md";
+import { RootState } from "../../redux/store";
+import { useSelector } from "react-redux";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Profile = () => {
+  const user = useSelector((state: RootState) => state.userSlice.user.user ? state.userSlice.user.user : state.userSlice.user.newUser);
+  //this piece of code up here, the code returned fro the backend has 2 labels, this is just to make user that if (user.user) isnt found, thenuser.newUser should be used.
+
   const [formData, setFormData] = useState({
     firstName: "John",
     lastName: "Doe",
     email: "johndoe@example.com",
     phoneNumber: "123-456-7890",
+    isVendor : false
   });
+
+  useEffect(() => {
+    console.log(user)
+    setFormData({
+      ...formData,
+      ...user,
+    });
+  }, [user]);
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -27,8 +38,6 @@ const Profile = () => {
     });
   };
 
-  const name = "Segunmaru Faozan";
-  const isAVendor = true;
 
   return (
     <div className="profile-page">
@@ -47,6 +56,19 @@ const Profile = () => {
               </button>
             </div>
 
+            {formData.isVendor ? (
+              <div className="profile-sidebar-link">
+                <button className="profile-sidebar-link-button">
+                  <BsCartCheck size={20} />
+                </button>
+                <span>My Products</span>
+                <button className="profile-sidebar-link-arrow">
+                  <MdKeyboardArrowRight size={25} />
+                </button>
+              </div>
+            ) : (
+              <></>
+            )}
             <div className="profile-sidebar-link">
               <button className="profile-sidebar-link-button">
                 <BsBell size={20} />
@@ -78,13 +100,11 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className="profile-main-left-bottom-div">
-            <div className="profile-main-left-bottom">
-              <span>Sign Out</span>
-              <button>
-                <GoSignOut size={25} />
-              </button>
-            </div>
+          <div className="profile-main-left-bottom">
+            <span>Sign Out</span>
+            <button>
+              <GoSignOut size={25} />
+            </button>
           </div>
         </div>
         <div className="profile-page-right">
@@ -99,9 +119,9 @@ const Profile = () => {
               />
             </div>
             <div className="profile-photo-middle">
-              <span className="profile-photo-name">{name}</span>
+              <span className="profile-photo-name">{`${formData.firstName} ${formData.lastName}`}</span>
               <span className="profile-photo-isVendor">
-                {isAVendor ? <>Vendor</> : <>Buyer</>}
+                {formData.isVendor ? <>Vendor</> : <>Buyer</>}
               </span>
             </div>
             <div className="profile-photo-right">
@@ -171,37 +191,40 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className="profile-products">
-            <div className="profile-product-text">Products</div>
+          {formData.isVendor ? (
+            <div className="profile-products">
+              <div className="profile-product-text">Products</div>
 
-            <div className="profile-product-container">
-              <div className="profile-product">
-                <button>
-                  <MdProductionQuantityLimits size = {20} />
-                </button>
-                <span>Air Conditioner</span>
-              </div>
-              <div className="profile-product">
-                <button>
-                  <MdProductionQuantityLimits size = {20} />
-                </button>
-                <span>Air Freshsner</span>
-              </div>
-              <div className="profile-product">
-                <button>
-                  <MdProductionQuantityLimits size = {20} />
-                </button>
-                <span>Gift Basket</span>
-              </div>
-              <div className="profile-product">
-                <button>
-                  <MdProductionQuantityLimits size = {20} />
-                </button>
-                <span>Nothingness</span>
+              <div className="profile-product-container">
+                <div className="profile-product">
+                  <button>
+                    <MdProductionQuantityLimits size={20} />
+                  </button>
+                  <span>Air Conditioner</span>
+                </div>
+                <div className="profile-product">
+                  <button>
+                    <MdProductionQuantityLimits size={20} />
+                  </button>
+                  <span>Air Freshsner</span>
+                </div>
+                <div className="profile-product">
+                  <button>
+                    <MdProductionQuantityLimits size={20} />
+                  </button>
+                  <span>Gift Basket</span>
+                </div>
+                <div className="profile-product">
+                  <button>
+                    <MdProductionQuantityLimits size={20} />
+                  </button>
+                  <span>Nothingness</span>
+                </div>
               </div>
             </div>
-          </div>
-
+          ) : (
+            <></>
+          )}
           <div className="profile-bottom">
             <button className="profile-save-button">Save Changes</button>
           </div>

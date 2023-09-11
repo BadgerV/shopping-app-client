@@ -176,6 +176,11 @@
   border-radius: 50%;
   cursor: pointer;
 }
+
+.hover-profile-image-link {
+  text-decoration: none;
+  color: inherit;
+}
 .header-left-img-container:hover .hover-profile-image-links {
   display: flex;
 }
@@ -184,6 +189,7 @@
   display: none;
 
   right: -5rem;
+  top: 2.5rem;
 
   flex-direction: column;
   gap: 0.7rem;

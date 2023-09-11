@@ -69,11 +69,10 @@ const Header = () => {
             />
 
             <div className="hover-profile-image-links">
-              <a
-                className="hover-profile-image-link"
-              >
+              <Link className="hover-profile-image-link" to="/profile">
                 My Profile
-              </a>
+              </Link>
+
               <a className="hover-profile-image-link">Notifications</a>
               {isAVendor ? (
                 <></>
