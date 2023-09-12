@@ -1,6 +1,6 @@
 import "./login.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import NewHeader from "../../components/NewHeader/NewHeader";
 import { RootState } from "../../redux/store";
@@ -18,6 +18,14 @@ const Login = () => {
   const isLoading = useSelector(
     (state: RootState) => state.userSlice.isLoading
   );
+
+  const user = useSelector((state: RootState) => state.userSlice);
+
+  useEffect(() => {
+    const userToken = JSON.stringify(user.userToken);
+
+    localStorage.setItem("token", userToken);
+  }, [user]);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -76,7 +84,11 @@ const Login = () => {
                 id="password"
                 name="password"
               />
-              <button className="login_button" disabled = {isLoading} type="submit">
+              <button
+                className="login_button"
+                disabled={isLoading}
+                type="submit"
+              >
                 {isLoading ? (
                   <img src="/assets/spinner.svg" alt="" />
                 ) : (

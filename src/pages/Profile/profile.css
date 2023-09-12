@@ -243,13 +243,16 @@
 }
 
 .profile-save-button {
-  padding: 0.8rem 0.9rem;
   outline: none;
   border: none;
   background-color: #384d6c;
   border-radius: 0.5rem;
   color: white;
   cursor: pointer;
+  min-width: 8rem;
+  max-width: 8rem;
+  min-height: 3rem;
+  max-height: 3rem;
 }
 
 @media (max-width: 1190px) {

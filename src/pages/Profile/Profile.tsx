@@ -5,25 +5,44 @@ import "./profile.css";
 import { FcSettings } from "react-icons/fc";
 import { GoSignOut } from "react-icons/go";
 import { MdProductionQuantityLimits } from "react-icons/md";
-import { RootState } from "../../redux/store";
+import { AppDispatch, RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 
 import { useState, useEffect } from "react";
+import { updateUser } from "../../redux/slice/userSlice";
+import { useDispatch } from "react-redux";
 
 const Profile = () => {
-  const user = useSelector((state: RootState) => state.userSlice.user.user ? state.userSlice.user.user : state.userSlice.user.newUser);
+  const user = useSelector((state: RootState) => {
+    let user;
+    if (state.userSlice.user.user) {
+      user = state.userSlice.user.user;
+    } else if (state.userSlice.user.newUser) {
+      user = state.userSlice.user.newUser;
+    } else {
+      user = state.userSlice.user
+    }
+    return user;
+  });
+  
   //this piece of code up here, the code returned fro the backend has 2 labels, this is just to make user that if (user.user) isnt found, thenuser.newUser should be used.
+
+  //check isLoading state in redux
+  const isLoading = useSelector(
+    (state: RootState) => state.userSlice.isLoading
+  );
+  const dispatch = useDispatch<AppDispatch>();
 
   const [formData, setFormData] = useState({
     firstName: "John",
     lastName: "Doe",
     email: "johndoe@example.com",
     phoneNumber: "123-456-7890",
-    isVendor : false
+    isVendor: false,
   });
 
   useEffect(() => {
-    console.log(user)
+    console.log(user);
     setFormData({
       ...formData,
       ...user,
@@ -38,6 +57,10 @@ const Profile = () => {
     });
   };
 
+  const handleSave = async () => {
+    const updateResult = await dispatch(updateUser(formData));
+    console.log(updateResult);
+  };
 
   return (
     <div className="profile-page">
@@ -226,7 +249,13 @@ const Profile = () => {
             <></>
           )}
           <div className="profile-bottom">
-            <button className="profile-save-button">Save Changes</button>
+            <button className="profile-save-button" onClick={handleSave}>
+              {isLoading ? (
+                <img src="/assets/spinner.svg" alt="Spinning" />
+              ) : (
+                <span>Save Changes</span>
+              )}
+            </button>
           </div>
         </div>
       </div>
