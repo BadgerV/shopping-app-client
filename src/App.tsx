@@ -4,7 +4,6 @@ import SignUp from "./pages/Signup/SIgnup";
 import Login from "./pages/Login/Login";
 import Profile from "./pages/Profile/Profile";
 import ProtectedRoutes from "./utils/utilsFunctions";
-import { SendToHomePage } from "./utils/utilsFunctions";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./redux/store";
 import { useEffect } from "react";
@@ -25,7 +24,7 @@ const App = () => {
 
   useEffect(() => {
     asyncFunction();
-  }, []);
+  });
 
   useEffect(() => {
     console.log(user);

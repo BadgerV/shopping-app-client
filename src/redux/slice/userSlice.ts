@@ -2,9 +2,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 interface UserState {
-  user: any;
+  user: UserProps | null;
   isLoading: boolean;
-  error: string | any;
+  error: string | undefined;
   isSuccess: boolean;
   userToken: string | null;
 }
@@ -32,7 +32,7 @@ interface UpdateUserProps {
 export const registerUser = createAsyncThunk(
   "user/registerUser",
   async ({ firstName, lastName, email, password }: UserProps) => {
-    try {
+
       const response = await axios.post(
         "https://shopping-app-j93p.onrender.com/v1/user/signup",
         {
@@ -44,16 +44,13 @@ export const registerUser = createAsyncThunk(
       );
 
       return response.data; // Return the data you want to store in the Redux state
-    } catch (error) {
-      throw error;
-    }
+  
   }
 );
 
 export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }: LoginProps) => {
-    try {
       const response = await axios.post(
         "https://shopping-app-j93p.onrender.com/v1/user/login",
         {
@@ -63,16 +60,13 @@ export const loginUser = createAsyncThunk(
       );
 
       return response.data;
-    } catch (error) {
-      throw error;
-    }
+
   }
 );
 
 export const updateUser = createAsyncThunk(
   "user/updateUser",
   async ({ firstName, lastName, email, phoneNumber }: UpdateUserProps) => {
-    try {
       // Retrieve the token from localStorage
       const theToken = localStorage.getItem("token");
       let theNewToken = null;
@@ -100,9 +94,7 @@ export const updateUser = createAsyncThunk(
       );
 
       return response.data;
-    } catch (error) {
-      throw error;
-    }
+
   }
 );
 
@@ -140,7 +132,7 @@ const initialState: UserState = {
   userToken: null,
   isLoading: false,
   isSuccess: false, // Initialize isSuccess as false
-  error: null,
+  error: undefined,
 };
 
 const userSlice = createSlice({

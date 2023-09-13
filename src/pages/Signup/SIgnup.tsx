@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import "./signup.css";
 import "../login/login.css";
@@ -31,7 +31,7 @@ export const SignUp = () => {
     password: "",
   });
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     console.log("Blast off");
     e.preventDefault();
     try {
@@ -45,7 +45,7 @@ export const SignUp = () => {
     }
   };
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -64,8 +64,7 @@ export const SignUp = () => {
               <input
                 value={formData.firstName}
                 name="firstName"
-                onChange={handleChange}
-                id="name"
+                onChange={(e) => handleChange(e)}
                 placeholder="First Name"
                 className="login_input"
               />
@@ -74,7 +73,6 @@ export const SignUp = () => {
                 value={formData.lastName}
                 name="lastName"
                 onChange={handleChange}
-                id="name"
                 placeholder="Last Name"
                 className="login_input"
               />
@@ -84,7 +82,6 @@ export const SignUp = () => {
                 onChange={handleChange}
                 type="email"
                 placeholder="Email"
-                id="email"
                 name="email"
                 className="login_input"
               />
@@ -94,11 +91,10 @@ export const SignUp = () => {
                 onChange={handleChange}
                 type="password"
                 placeholder="Password"
-                id="password"
                 name="password"
                 className="login_input"
               />
-              <button className="login_button" onClick={handleSubmit} disabled = {isLoading}>
+              <button className="login_button" disabled = {isLoading}>
                 {isLoading ? (
                   <img src="/assets/spinner.svg" alt="spinner" />
                 ) : (
