@@ -73,7 +73,6 @@ export const updateUser = createAsyncThunk(
       if (theToken) {
         theNewToken = JSON.parse(theToken);
       }
-      console.log(theNewToken);
 
       // Set the Axios request headers with the Authorization header
       const headers = {
@@ -105,15 +104,11 @@ export const verifyToken = createAsyncThunk("user/verifyToken", async () => {
   if (theToken) {
     theNewToken = JSON.parse(theToken);
   }
-
-  console.log(theNewToken)
-
   const headers = {
     "Content-Type": "application/json",
     Authorization: `Bearer ${theNewToken}`,
   };
 
-  try {
     const response = await axios.get(
       "https://shopping-app-j93p.onrender.com/v1/user/me",
       {
@@ -121,10 +116,6 @@ export const verifyToken = createAsyncThunk("user/verifyToken", async () => {
       }
     );
     return response.data;
-  } catch (error) {
-    console.log(error)
-    throw new Error
-  }
 });
 
 const initialState: UserState = {
@@ -146,7 +137,7 @@ const userSlice = createSlice({
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload;
+        state.user = action.payload.newUser;
         state.userToken = action.payload.token;
         state.isSuccess = true; // Update isSuccess when registration is successful
       })
@@ -162,7 +153,7 @@ const userSlice = createSlice({
 
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.user = action.payload;
+        state.user = action.payload.user;
         state.userToken = action.payload.token;
         state.isSuccess = true;
       })

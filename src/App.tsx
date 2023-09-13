@@ -6,29 +6,25 @@ import Profile from "./pages/Profile/Profile";
 import ProtectedRoutes from "./utils/utilsFunctions";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./redux/store";
-import { useEffect } from "react";
 import { verifyToken } from "./redux/slice/userSlice";
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
   const user = useSelector((state: RootState) => state.userSlice.user);
 
+  const theToken = localStorage.getItem("token");
+
   const asyncFunction = async () => {
-    console.log("first");
     try {
       await dispatch(verifyToken());
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   };
 
-  useEffect(() => {
-    asyncFunction();
-  });
-
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
+  if(!user && theToken) {
+    asyncFunction()
+  }
 
   return (
     <Router>

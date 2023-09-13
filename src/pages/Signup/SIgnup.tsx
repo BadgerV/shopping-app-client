@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import "./signup.css";
 import "../login/login.css";
@@ -23,6 +23,14 @@ export const SignUp = () => {
   );
 
 
+  
+  const user = useSelector((state: RootState) => state.userSlice);
+
+  useEffect(() => {
+    const userToken = JSON.stringify(user.userToken);
+
+    localStorage.setItem("token", userToken);
+  }, [user]);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -32,7 +40,6 @@ export const SignUp = () => {
   });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    console.log("Blast off");
     e.preventDefault();
     try {
       const response = await dispatch(registerUser(formData));

@@ -8,8 +8,3 @@ export default function ProtectedRoutes() {
   return user ? <Outlet /> : <Navigate to="/login" />;
 }
 
-export const SendToHomePage = () => {
-  const user = useSelector((state: RootState) => state.userSlice.user.token.length > 5);
-
-  return user ? <Outlet /> : <Navigate to="/" />;
-};

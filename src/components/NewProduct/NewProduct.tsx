@@ -39,7 +39,7 @@ const NewProduct = ({ name, price, description, rating } : NewProductProps) => {
 
   const handleClick = () => {
     setIsModalOpen(true)
-    console.log(isModalOpen)
+    // console.log(isModalOpen)
   }
   return (
     <>

@@ -13,19 +13,7 @@ import { updateUser } from "../../redux/slice/userSlice";
 import { useDispatch } from "react-redux";
 
 const Profile = () => {
-  const user = useSelector((state: RootState) => {
-    let user;
-    if (state.userSlice.user.user) {
-      user = state.userSlice.user.user;
-    } else if (state.userSlice.user.newUser) {
-      user = state.userSlice.user.newUser;
-    } else {
-      user = state.userSlice.user
-    }
-    return user;
-  });
-  
-  //this piece of code up here, the code returned fro the backend has 2 labels, this is just to make user that if (user.user) isnt found, thenuser.newUser should be used.
+  const user = useSelector((state: RootState) => state.userSlice.user);
 
   //check isLoading state in redux
   const isLoading = useSelector(
@@ -37,19 +25,18 @@ const Profile = () => {
     firstName: "John",
     lastName: "Doe",
     email: "johndoe@example.com",
-    phoneNumber: "123-456-7890",
+    phoneNumber: "",
     isVendor: false,
   });
 
   useEffect(() => {
-    console.log(user);
     setFormData({
       ...formData,
       ...user,
     });
   }, [user]);
 
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
