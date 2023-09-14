@@ -6,10 +6,14 @@
 
 import Header from "../../newComponents/Header/Header";
 import SplashLeft from "../../newComponents/SplashLeft/SplashLeft";
-import SplashMain from "../../newComponents/SplashMain/SPlashMain";
+import SplashMain from "../../newComponents/SplashMain/SplashMain";
+import TodaySales from "../../newComponents/TodaySales/TodaySales";
+import { useState } from "react";
 import "./home.css";
 
 const Home = () => {
+  const [menu, setMenu] = useState(false);
+
   return (
     <div className="home-style">
       {/* <Header />
@@ -21,12 +25,24 @@ const Home = () => {
       <Header />
 
       <div className="home-splash">
-        <div className="splash-left">
+        <img
+          src="/assets/menu.svg"
+          alt="menu"
+          className="home-menu-icon"
+          onClick={() => setMenu(!menu)}
+        />
+        <div
+          className="splash-left"
+          style={menu ? { left: "0" } : { left: "-100%" }}
+        >
           <SplashLeft />
         </div>
-        <SplashMain />
-        <div className="splash-right"></div>{" "}
+        <div className="splash-right">
+          <SplashMain />
+        </div>
       </div>
+
+      <TodaySales />
     </div>
   );
 };

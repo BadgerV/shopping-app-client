@@ -2,7 +2,9 @@ import "./splashmain.css";
 
 const SplashMain = () => {
   return (
-    <div>SPlashMain</div>
+    <div className="splash-main">
+        <img src="/assets/splashimage.png" alt="SPlash Image" />
+    </div>
   )
 }
 
