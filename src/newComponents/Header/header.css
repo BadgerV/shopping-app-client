@@ -1,0 +1,77 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1em 2em 1em 2em;
+}
+
+.header-left span {
+    font-size: 1.5em;
+    font-weight: 500;
+    letter-spacing: 3px;
+}
+
+.header-center ul {
+    list-style: none;
+
+    display: flex;
+    flex-direction: row;
+
+    gap: 2em;
+}
+
+.header-center ul li {
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.header-center ul li:hover {}
+
+.header-left__avatar {
+    height: 3rem;
+}
+
+.header-left__avatar img {
+    max-height: 100%;
+}
+
+.header-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-right__searchbar {
+    position: relative;
+}
+
+.header-right__searchbar input {
+    outline: none;
+    border: none;
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 0.5rem 2.5rem 0.5rem 0.7rem;
+    border-radius: 0.3rem;
+
+    background-color: #D9D9D9;
+
+}
+
+.header-right__searchbar img {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.header-right__heart-icon, .header-left__avatar, .header-right__cart-icon {
+    display: flex;
+    align-items: center;
+}
+
+.header-right__heart-icon:hover, .header-left__avatar:hover, .header-right__cart-icon:hover {
+    cursor: pointer;
+}

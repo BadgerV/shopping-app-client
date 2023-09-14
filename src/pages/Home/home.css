@@ -1,4 +1,4 @@
-.home-style {
+/* .home-style {
     background-image: url('assets/background-image.jpg');
     background-size: cover;
     background-position: center;
@@ -6,4 +6,18 @@
     flex-direction: column;
     position: relative;
   }
-  
+   */
+
+.home-splash {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.splash-left {
+  width: 100%;
+}
+
+
+.splash-right {
+  width: 100%;
+}
