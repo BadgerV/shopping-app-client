@@ -7,7 +7,7 @@ const TodaySales = () => {
             name : "Game Pad",
             price : 405,
             discount : 20,
-            rating : 2,
+            rating : 4,
             inStock : 80,
             isLiked : false,
             image : "/assets/image100.png"
@@ -16,7 +16,7 @@ const TodaySales = () => {
             name : "Keyboard",
             price : 4002,
             discount : 20,
-            rating : 2,
+            rating : 3,
             inStock : 80,
             isLiked : false,
             image : "/assets/image101.png"
@@ -25,7 +25,7 @@ const TodaySales = () => {
             name : "Monitor",
             price : 4003,
             discount : 20,
-            rating : 2,
+            rating : 1,
             inStock : 80,
             isLiked : false,
             image : "/assets/image102.png"
@@ -34,11 +34,46 @@ const TodaySales = () => {
             name : "Chair",
             price : 4004,
             discount : 20,
-            rating : 2,
+            rating : 4,
             inStock : 80,
             isLiked : false,
             image : "/assets/image103.png"
-        }
+        },{
+          name : "Chair",
+          price : 8000,
+          discount : 20,
+          rating : 4,
+          inStock : 80,
+          isLiked : true,
+          image : "/assets/image103.png"
+      },
+        {
+          name : "Chair",
+          price : 8000,
+          discount : 20,
+          rating : 4,
+          inStock : 80,
+          isLiked : true,
+          image : "/assets/image103.png"
+      },
+        {
+          name : "Chair",
+          price : 8000,
+          discount : 20,
+          rating : 4,
+          inStock : 80,
+          isLiked : true,
+          image : "/assets/image103.png"
+      },
+        {
+          name : "Chair",
+          price : 8000,
+          discount : 20,
+          rating : 4,
+          inStock : 80,
+          isLiked : true,
+          image : "/assets/image103.png"
+      },
     ]
   return (
     <div className="today-sales">

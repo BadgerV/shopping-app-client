@@ -13,6 +13,8 @@ const App = () => {
   const user = useSelector((state: RootState) => state.userSlice.user);
 
   const theToken = localStorage.getItem("token");
+  const notAString = "";
+  notAString.endsWith("");
 
   const asyncFunction = async () => {
     try {

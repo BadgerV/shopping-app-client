@@ -61,6 +61,7 @@
 
     display: none;
     cursor: pointer;
+    transition: 0.2s all ease-in-out;
 }
 
 .product-top:hover  .product-hover {
