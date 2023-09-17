@@ -2,79 +2,89 @@ import Product from "../Product/Product";
 import "./todaySales.css";
 
 const TodaySales = () => {
-    const products = [
-        {
-            name : "Game Pad",
-            price : 405,
-            discount : 20,
-            rating : 4,
-            inStock : 80,
-            isLiked : false,
-            image : "/assets/image100.png"
-        },
-        {
-            name : "Keyboard",
-            price : 4002,
-            discount : 20,
-            rating : 3,
-            inStock : 80,
-            isLiked : false,
-            image : "/assets/image101.png"
-        },
-        {
-            name : "Monitor",
-            price : 4003,
-            discount : 20,
-            rating : 1,
-            inStock : 80,
-            isLiked : false,
-            image : "/assets/image102.png"
-        },
-        {
-            name : "Chair",
-            price : 4004,
-            discount : 20,
-            rating : 4,
-            inStock : 80,
-            isLiked : false,
-            image : "/assets/image103.png"
-        },{
-          name : "Chair",
-          price : 8000,
-          discount : 20,
-          rating : 4,
-          inStock : 80,
-          isLiked : true,
-          image : "/assets/image103.png"
-      },
-        {
-          name : "Chair",
-          price : 8000,
-          discount : 20,
-          rating : 4,
-          inStock : 80,
-          isLiked : true,
-          image : "/assets/image103.png"
-      },
-        {
-          name : "Chair",
-          price : 8000,
-          discount : 20,
-          rating : 4,
-          inStock : 80,
-          isLiked : true,
-          image : "/assets/image103.png"
-      },
-        {
-          name : "Chair",
-          price : 8000,
-          discount : 20,
-          rating : 4,
-          inStock : 80,
-          isLiked : true,
-          image : "/assets/image103.png"
-      },
-    ]
+  const products = [
+    {
+      name: "Game Pad",
+      price: 405,
+      discount: 20,
+      rating: 4,
+      inStock: 80,
+      isLiked: false,
+      image: "/assets/image100.png",
+    },
+    {
+      name: "Keyboard",
+      price: 4002,
+      discount: 20,
+      rating: 3,
+      inStock: 80,
+      isLiked: false,
+      image: "/assets/image101.png",
+    },
+    {
+      name: "Monitor",
+      price: 4003,
+      discount: 20,
+      rating: 1,
+      inStock: 80,
+      isLiked: false,
+      image: "/assets/image102.png",
+    },
+    {
+      name: "Chair",
+      price: 4004,
+      discount: 20,
+      rating: 4,
+      inStock: 80,
+      isLiked: false,
+      image: "/assets/image103.png",
+    },
+    {
+      name: "Chair",
+      price: 8000,
+      discount: 20,
+      rating: 4,
+      inStock: 80,
+      isLiked: true,
+      image: "/assets/image103.png",
+    },
+    {
+      name: "Chair",
+      price: 8000,
+      discount: 20,
+      rating: 4,
+      inStock: 80,
+      isLiked: true,
+      image: "/assets/image103.png",
+    },
+    {
+      name: "Chair",
+      price: 8000,
+      discount: 20,
+      rating: 4,
+      inStock: 80,
+      isLiked: true,
+      image: "/assets/image103.png",
+    },
+    {
+      name: "Chair",
+      price: 8000,
+      discount: 20,
+      rating: 4,
+      inStock: 80,
+      isLiked: true,
+      image: "/assets/image103.png",
+    },
+    {
+      name: "Chair",
+      price: 8000,
+      discount: 20,
+      rating: 4,
+      inStock: 80,
+      isLiked: true,
+      image: "/assets/image103.png",
+    },
+  ];
   return (
     <div className="today-sales">
       <div className="today-sales-header">
@@ -115,13 +125,9 @@ const TodaySales = () => {
       </div>
 
       <div className="today-sales__products">
-        {
-            products.map((product, index) => {
-                return (
-                    <Product key={index} {...product} />
-                )
-            })
-        }
+        {products.map((product, index) => {
+          return <Product key={index} {...product} />;
+        })}
       </div>
     </div>
   );
