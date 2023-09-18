@@ -1,7 +1,32 @@
+import { useState } from "react";
+
 import Product from "../Product/Product";
 import "./todaySales.css";
 
 const TodaySales = () => {
+  const [scrollNumber, setScrollNumber] = useState(0);
+
+  const scrollRight = () => {
+    console.log(scrollNumber);
+    if (scrollNumber == -60) {
+      return;
+    } else {
+      setScrollNumber(scrollNumber - 15);
+    }
+  };
+
+  const scrollLeft = () => {
+    if (scrollNumber == 0) {
+      return;
+    } else {
+      setScrollNumber(scrollNumber + 15);
+    }
+  };
+
+  const style = {
+    transform: `translateX(${scrollNumber}rem)`,
+  };
+
   const products = [
     {
       name: "Game Pad",
@@ -84,6 +109,15 @@ const TodaySales = () => {
       isLiked: true,
       image: "/assets/image103.png",
     },
+    {
+      name: "Monitor",
+      price: 4003,
+      discount: 20,
+      rating: 1,
+      inStock: 80,
+      isLiked: false,
+      image: "/assets/image102.png",
+    },
   ];
   return (
     <div className="today-sales">
@@ -93,42 +127,58 @@ const TodaySales = () => {
       </div>
 
       <div className="todays-sales__middle-container">
-        <span className="sales__middle-text">Flash Sales</span>
+        <div className="todays-sales__middle-container-left">
+          <span className="sales__middle-text">Flash Sales</span>
 
-        <div className="sales-timing">
-          <div className="sales-timing__mini">
-            <span className="text">Days</span>
-            <span className="number">03</span>
+          <div className="sales-timing">
+            <div className="sales-timing__mini">
+              <span className="text">Days</span>
+              <span className="number">03</span>
+            </div>
+
+            <img src="/assets/semicolon.png" alt="colon" />
+
+            <div className="sales-timing__mini">
+              <span className="text">hours</span>
+              <span className="number">23</span>
+            </div>
+
+            <img src="/assets/semicolon.png" alt="colon" />
+
+            <div className="sales-timing__mini">
+              <span className="text">Minutes</span>
+              <span className="number">19</span>
+            </div>
+
+            <img src="/assets/semicolon.png" alt="colon" />
+
+            <div className="sales-timing__mini">
+              <span className="text">Seconds</span>
+              <span className="number">56</span>
+            </div>
           </div>
+        </div>
 
-          <img src="/assets/semicolon.png" alt="colon" />
+        <div className="navi-button-containers">
+          <button className="todays-left_button button" onClick={scrollLeft}>
+          <img src="/assets/left-arrow.svg" alt="left" />
 
-          <div className="sales-timing__mini">
-            <span className="text">hours</span>
-            <span className="number">23</span>
-          </div>
-
-          <img src="/assets/semicolon.png" alt="colon" />
-
-          <div className="sales-timing__mini">
-            <span className="text">Minutes</span>
-            <span className="number">19</span>
-          </div>
-
-          <img src="/assets/semicolon.png" alt="colon" />
-
-          <div className="sales-timing__mini">
-            <span className="text">Seconds</span>
-            <span className="number">56</span>
-          </div>
+          </button>
+          <button className="todays-right_button button" onClick={scrollRight}>
+            <img src="/assets/right-arrow.svg" alt="right" />
+          </button>
         </div>
       </div>
 
-      <div className="today-sales__products">
+      <div className="today-sales__products" style={style}>
         {products.map((product, index) => {
           return <Product key={index} {...product} />;
         })}
       </div>
+
+      <button className="todays-sales_view-more">
+        View All Products
+      </button>
     </div>
   );
 };

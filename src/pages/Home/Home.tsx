@@ -8,6 +8,7 @@ import Header from "../../newComponents/Header/Header";
 import SplashLeft from "../../newComponents/SplashLeft/SplashLeft";
 import SplashMain from "../../newComponents/SplashMain/SplashMain";
 import TodaySales from "../../newComponents/TodaySales/TodaySales";
+import Categories from "../../newComponents/Categories/Categories";
 import { useState } from "react";
 import "./home.css";
 
@@ -43,6 +44,7 @@ const Home = () => {
       </div>
 
       <TodaySales />
+      <Categories />
     </div>
   );
 };

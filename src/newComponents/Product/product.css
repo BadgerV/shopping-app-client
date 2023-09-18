@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
 }
 
 .product-top {
@@ -74,6 +75,8 @@
     flex-direction: column;
     gap: 0.3rem;
     margin-top: 0.5rem;
+
+    cursor: pointer;
 }
 
 .product_name {
