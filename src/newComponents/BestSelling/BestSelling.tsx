@@ -6,7 +6,6 @@ const BestSelling = () => {
     {
       name: "Game Pad",
       price: 405,
-      discount: 20,
       rating: 4,
       inStock: 80,
       isLiked: false,
@@ -15,7 +14,6 @@ const BestSelling = () => {
     {
       name: "Keyboard",
       price: 4002,
-      discount: 20,
       rating: 3,
       inStock: 80,
       isLiked: false,
@@ -24,7 +22,6 @@ const BestSelling = () => {
     {
       name: "Monitor",
       price: 4003,
-      discount: 20,
       rating: 1,
       inStock: 80,
       isLiked: false,
@@ -33,7 +30,6 @@ const BestSelling = () => {
     {
       name: "Chair",
       price: 4004,
-      discount: 20,
       rating: 4,
       inStock: 80,
       isLiked: false,
@@ -42,7 +38,6 @@ const BestSelling = () => {
     {
       name: "Chair",
       price: 8000,
-      discount: 20,
       rating: 4,
       inStock: 80,
       isLiked: true,
@@ -59,7 +54,7 @@ const BestSelling = () => {
       <div className="best-selling_mini__container">
         <span className="best-selling_large_text">Best Selling Products </span>
 
-        <button>View More</button>
+        <button>View All</button>
       </div>
 
       <div className="best-selling_products_cont">

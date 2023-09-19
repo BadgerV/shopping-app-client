@@ -13,7 +13,7 @@ import { useState } from "react";
 interface ProductProps {
   name: string;
   price: number;
-  discount: number;
+  discount?: number;
   rating: number;
   inStock: number;
   isLiked: boolean;
@@ -37,7 +37,9 @@ const Product = ({
   return (
     <div className="product">
       <div className="product-top">
-        <span className="product_discount">-{discount}%</span>
+        {
+          discount ? <span className="product_discount">-{discount}%</span> : <></>
+        }
         <img src={image} alt="Product" className="product-image__main" />
         <img
           src={likedSrc}
@@ -51,7 +53,7 @@ const Product = ({
 
       <div className="product-bottom">
         <span className="product_name">{name}</span>
-        <span className="product_price">N {price}</span>
+        <span className="product_price">N{price}</span>
 
         <div className="product-rating__container">
           <StarRatingComponent
@@ -61,7 +63,6 @@ const Product = ({
             value={rating}
             starColor={`#FFAD33`}
             emptyStarColor={`grey`}
-            
           />
 
           <span className="product-instock">({inStock})</span>
