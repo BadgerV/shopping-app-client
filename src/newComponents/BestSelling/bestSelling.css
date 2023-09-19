@@ -1,0 +1,51 @@
+.best-selling {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    padding: 2rem;
+    font-size: 0.9rem;
+
+}
+
+.Best-selling_header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.Best-selling_header span {
+    font-weight: 600;
+    color: #DB4444;
+}
+
+.best-selling_mini__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.best-selling_large_text {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.best-selling_mini__container button {
+    outline: none;
+    border: none;
+
+    background-color: #DB4444;
+    padding: 0.5rem 1.8rem;
+    border-radius: 2px;
+    color: white;
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+.best-selling_products_cont {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

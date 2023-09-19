@@ -74,14 +74,21 @@
     gap: 1.5rem;
     max-width: 100vw;
     transition: 0.6s ease-in-out;
-    
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    max-width: 100vw;
+    transition: 0.6s ease-in-out;
 }
 
 .today-sales__products::-webkit-scrollbar {
     display: none;
-  }
+}
 
-  .button {
+.button {
     outline: none;
     border: none;
     background-color: antiquewhite;
@@ -93,21 +100,21 @@
     height: fit-content;
 
     cursor: pointer;
-  }
+}
 
-  .button img {
+.button img {
     aspect-ratio: 1;
     height: 2rem;
-  }
+}
 
-  .navi-button-containers {
+.navi-button-containers {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 2rem;
-  }
+}
 
-  .todays-sales_view-more {
+.todays-sales_view-more {
     max-width: fit-content;
     margin: auto;
     margin-top: 2rem;
@@ -121,4 +128,5 @@
     color: white;
     font-weight: 400;
     letter-spacing: 1px;
-  }
+}
+

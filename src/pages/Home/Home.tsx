@@ -11,6 +11,7 @@ import TodaySales from "../../newComponents/TodaySales/TodaySales";
 import Categories from "../../newComponents/Categories/Categories";
 import { useState } from "react";
 import "./home.css";
+import BestSelling from "../../newComponents/BestSelling/BestSelling";
 
 const Home = () => {
   const [menu, setMenu] = useState(false);
@@ -45,6 +46,7 @@ const Home = () => {
 
       <TodaySales />
       <Categories />
+      <BestSelling />
     </div>
   );
 };

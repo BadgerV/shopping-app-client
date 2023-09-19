@@ -5,6 +5,8 @@
 
     padding: 2rem;
     font-size: 0.9rem;
+
+    overflow: hidden;
 }
 
 .categories-header {
@@ -46,42 +48,47 @@
     display: flex;
     align-items: center;
     height: fit-content;
+    transition: 0.2s all ease-in-out;
 
     cursor: pointer;
 }
 
 .categories-middle_container {
     display: flex;
-    justify-content: space-between;
-  }
-  
-  .categories-category {
+    flex-direction: row;
+    gap: 1rem;
+
+    transition: 0.5s all ease-in-out;
+}
+
+.categories-category {
     border: 1px solid grey;
+    min-width: 8rem;
     width: 8rem;
     height: 8rem;
     border-radius: 4px;
     position: relative;
-    cursor: pointer; /* Add cursor pointer to indicate interactivity */
-    transition: background-color 0.3s; /* Add smooth transition effect */
-  }
-  
-  .categories-category:hover {
+    cursor: pointer;
+
+    transition: 0.2s all ease-in-out;
+}
+
+.categories-category:hover {
     background-color: #DB4444;
     border: none;
-  }
-  
-  .categories-category span {
+}
+
+.categories-category span {
     position: absolute;
-    top: 90%;
+    top: 80%;
     left: 50%;
     transform: translate(-50%, -50%);
+    z-index: 2;
     color: black;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 300;
-  }
-  
-  .categories-category:hover span {
-    color: white !important; /* Change the color only when the parent is hovered */
+}
 
-  }
-  
+.categories-category:hover span {
+    color: white;
+}
