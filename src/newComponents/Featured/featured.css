@@ -29,7 +29,8 @@
   display: flex;
   width: 100%;
   background-color: black;
-  outline: 1px solid red;
+
+  position: relative;
 }
 
 .featured-right {
@@ -40,6 +41,7 @@
 }
 .featured-right_top {
   background-color: black;
+  position: relative;
 }
 
 .featured-right_bottom {
@@ -56,4 +58,118 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  position: relative;
+}
+
+.featured-last-image img {
+  scale: 0.8;
+}
+
+.featured-left_text-container {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  gap: 0.5rem;
+
+  position: absolute;
+  bottom: 2rem;
+  left: 1rem;
+
+  max-width: 50%;
+}
+
+.featured-left_text-container button {
+  text-decoration: underline;
+  padding: 0.3rem 0.1rem;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+
+  max-width: fit-content;
+  font-size: 1rem;
+}
+.featured-left_text-container-big-text {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.featured-left_text-container-small-text {
+  font-size: 1rem;
+}
+
+.featured-right_text-container {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  gap: 0.1rem;
+
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+}
+
+.featured-right_text-container-big-text {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.featured-right_text-container-small-text {
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.featured-right_text-container button {
+  text-decoration: underline;
+  padding: 0.3rem 0.1rem;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-weight: 500;
+  color: white;
+
+  max-width: fit-content;
+  font-size: 1rem;
+
+  cursor: pointer;
+}
+
+.featured-right_bottom_text-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    max-width: 80%;
+}
+
+.featured-right_bottom_text-container-big-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.featured-right_bottom_text-container span {
+    color: white;
+}
+
+.featured-right_bottom_text-container-small-text {
+    font-weight: 300;
+}
+
+.featured-right_bottom_text-container button {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: white;
+    text-decoration: underline;
+
+    max-width: fit-content;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
 }
