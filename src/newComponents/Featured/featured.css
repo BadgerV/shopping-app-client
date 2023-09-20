@@ -29,6 +29,7 @@
   display: flex;
   width: 100%;
   background-color: black;
+  outline: 1px solid red;
 }
 
 .featured-right {
