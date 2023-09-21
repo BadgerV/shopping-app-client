@@ -14,6 +14,7 @@ import "./home.css";
 import BestSelling from "../../newComponents/BestSelling/BestSelling";
 import ExploreProducts from "../../newComponents/ExploreProducts/ExploreProducts";
 import Featured from "../../newComponents/Featured/Featured";
+import Footer from "../../newComponents/Footer/Footer";
 
 const Home = () => {
   const [menu, setMenu] = useState(false);
@@ -51,6 +52,7 @@ const Home = () => {
       <BestSelling />
       <ExploreProducts />
       <Featured />
+      <Footer />
     </div>
   );
 };
