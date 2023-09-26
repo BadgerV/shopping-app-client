@@ -35,7 +35,7 @@ const Footer = () => {
             111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.
           </span>
           <span className="footer-text_text">segunfaozan112@gmail.com</span>
-          <span className="footer-text_text">08078754215</span>
+          <span className="footer-text_text">09078754215</span>
         </div>
       </div>
       <div className="footer_left">
