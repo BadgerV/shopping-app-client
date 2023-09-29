@@ -39,7 +39,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer_left">
-        <span className="footer-text_header">Support</span>
+        <span className="footer-text_header">Suppport</span>
       </div>
     </div>
   );
