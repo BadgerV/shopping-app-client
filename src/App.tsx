@@ -1,4 +1,4 @@
-import Home from "./pages/Home/Home";
+// import Home from "./pages/Home/Home";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SignUp from "./pages/Signup/SIgnup";
 import Login from "./pages/Login/Login";
@@ -7,6 +7,7 @@ import ProtectedRoutes from "./utils/utilsFunctions";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./redux/store";
 import { verifyToken } from "./redux/slice/userSlice";
+import Signup from "./newPages/SignUp/Signup";
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -31,7 +32,7 @@ const App = () => {
     <Router>
       <div>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Signup />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route element={<ProtectedRoutes />}>

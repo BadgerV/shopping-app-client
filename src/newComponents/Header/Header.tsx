@@ -1,6 +1,13 @@
 import "./header.css";
+import { useState, useEffect } from "react";
 
 const Header = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    setIsLoggedIn(false);
+  }),
+    [];
   return (
     <div className="header">
       <div className="header-left">
@@ -15,23 +22,32 @@ const Header = () => {
           <li className="header-center_link">Sign in</li>
         </ul>
       </div>
-      <div className="header-right">
+      <div
+        className="header-right"
+        style={!isLoggedIn ? { marginRight: "8rem" } : {}}
+      >
         <div className="header-right__searchbar">
           <input type="text" placeholder="What are you looking for?" />
           <img src="/assets/searchicon.png" alt="icon" />
         </div>
 
-        <div className="header-right__heart-icon">
-          <img src="/assets/hearticon.svg" alt="icon" />
-        </div>
+        {isLoggedIn ? (
+          <>
+            <div className="header-right__heart-icon">
+              <img src="/assets/hearticon.svg" alt="icon" />
+            </div>
 
-        <div className="header-right__cart-icon">
-          <img src="/assets/carticon.svg" alt="icon" />
-        </div>
+            <div className="header-right__cart-icon">
+              <img src="/assets/carticon.svg" alt="icon" />
+            </div>
 
-        <div className="header-left__avatar">
-          <img src="/assets/avatar.jpg" alt="avatar" />
-        </div>
+            <div className="header-left__avatar">
+              <img src="/assets/avatar.jpg" alt="avatar" />
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

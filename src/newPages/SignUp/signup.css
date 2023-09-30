@@ -1,0 +1,28 @@
+.signup {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+
+.signup-left img {
+    height: 100%;
+}
+
+.signup-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup-right_inner {
+    display: flex;
+    flex-direction: column;
+
+    outline: 1px solid red;
+}
+
+.signup-big-text {
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
