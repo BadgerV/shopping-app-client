@@ -1,13 +1,16 @@
-// import Home from "./pages/Home/Home";
+import Home from "./pages/Home/Home";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import SignUp from "./pages/Signup/SIgnup";
-import Login from "./pages/Login/Login";
+// import SignUp from "./pages/Signup/SIgnup";
+// import Login from "./pages/Login/Login";
 import Profile from "./pages/Profile/Profile";
 import ProtectedRoutes from "./utils/utilsFunctions";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./redux/store";
 import { verifyToken } from "./redux/slice/userSlice";
 import Signup from "./newPages/SignUp/Signup";
+import Login from "./newPages/Login/Login";
+// import Signup from "./newPages/SignUp/Signup";
+// import Login from "./newPages/Login/Login";
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -15,26 +18,25 @@ const App = () => {
 
   const theToken = localStorage.getItem("token");
 
-
   const asyncFunction = async () => {
     try {
       await dispatch(verifyToken());
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
-  if(!user && theToken) {
-    asyncFunction()
+  if (!user && theToken) {
+    asyncFunction();
   }
 
   return (
     <Router>
       <div>
         <Routes>
-          <Route path="/" element={<Signup />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/signin" element={<Login />} />
           <Route element={<ProtectedRoutes />}>
             <Route path="/profile" element={<Profile />} />
           </Route>

@@ -1,6 +1,8 @@
 import "./header.css";
 import { useState, useEffect } from "react";
 
+import { Link } from "react-router-dom";
+
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -15,11 +17,25 @@ const Header = () => {
       </div>
       <div className="header-center">
         <ul className="header-center__links">
-          <li className="header-center_link">Home</li>
+          <li className="header-center_link">
+            <Link to="/" className="header-link">
+              Home
+            </Link>
+          </li>
           <li className="header-center_link">Categories</li>
           <li className="header-center_link">Vendors</li>
-          <li className="header-center_link">Sign up</li>
-          <li className="header-center_link">Sign in</li>
+
+          <li className="header-center_link">
+            <Link to="/signup" className="header-link">
+              Sign up
+            </Link>
+          </li>
+
+          <li className="header-center_link">
+            <Link to="/signin" className="header-link">
+              Sign in
+            </Link>
+          </li>
         </ul>
       </div>
       <div
