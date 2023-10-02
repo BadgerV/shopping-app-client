@@ -3,13 +3,27 @@ import { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 
+import { RootState } from "../../redux/store";
+
+import { useSelector } from "react-redux";
+
 const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const [user, setUser] = useState(false);
+
+  const data = useSelector((state: RootState) => state.userSlice);
+
+  const checkIfUser = () => {
+    if (data.user !== null) {
+      setUser(true);
+    } else {
+      setUser(false);
+    }
+  };
 
   useEffect(() => {
-    setIsLoggedIn(false);
-  }),
-    [];
+    checkIfUser();
+  }, [data]);
   return (
     <div className="header">
       <div className="header-left">
@@ -40,14 +54,14 @@ const Header = () => {
       </div>
       <div
         className="header-right"
-        style={!isLoggedIn ? { marginRight: "8rem" } : {}}
+        style={!user ? { marginRight: "8rem" } : {}}
       >
         <div className="header-right__searchbar">
           <input type="text" placeholder="What are you looking for?" />
           <img src="/assets/searchicon.png" alt="icon" />
         </div>
 
-        {isLoggedIn ? (
+        {user ? (
           <>
             <div className="header-right__heart-icon">
               <img src="/assets/hearticon.svg" alt="icon" />

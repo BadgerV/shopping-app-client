@@ -32,68 +32,65 @@ interface UpdateUserProps {
 export const registerUser = createAsyncThunk(
   "user/registerUser",
   async ({ firstName, lastName, email, password }: UserProps) => {
+    const response = await axios.post(
+      "https://shopping-app-j93p.onrender.com/v1/user/signup",
+      {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+      }
+    );
+    console.log(response.data);
 
-      const response = await axios.post(
-        "https://shopping-app-j93p.onrender.com/v1/user/signup",
-        {
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          password: password,
-        }
-      );
-
-      return response.data; // Return the data you want to store in the Redux state
-  
+    return response.data; // Return the data you want to store in the Redux state
   }
 );
 
 export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }: LoginProps) => {
-      const response = await axios.post(
-        "https://shopping-app-j93p.onrender.com/v1/user/login",
-        {
-          email: email,
-          password: password,
-        }
-      );
+    const response = await axios.post(
+      "https://shopping-app-j93p.onrender.com/v1/user/login",
+      {
+        email: email,
+        password: password,
+      }
+    );
 
-      return response.data;
-
+    return response.data;
   }
 );
 
 export const updateUser = createAsyncThunk(
   "user/updateUser",
   async ({ firstName, lastName, email, phoneNumber }: UpdateUserProps) => {
-      // Retrieve the token from localStorage
-      const theToken = localStorage.getItem("token");
-      let theNewToken = null;
-      if (theToken) {
-        theNewToken = JSON.parse(theToken);
-      }
+    // Retrieve the token from localStorage
+    const theToken = localStorage.getItem("token");
+    let theNewToken = null;
+    if (theToken) {
+      theNewToken = JSON.parse(theToken);
+    }
 
-      // Set the Axios request headers with the Authorization header
-      const headers = {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${theNewToken}`,
-      };
+    // Set the Axios request headers with the Authorization header
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${theNewToken}`,
+    };
 
-      // Make the Axios request with the configured headers
-      const response = await axios.post(
-        "https://shopping-app-j93p.onrender.com/v1/user/patch",
-        {
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          phoneNumber: phoneNumber,
-        },
-        { headers: headers }
-      );
+    // Make the Axios request with the configured headers
+    const response = await axios.post(
+      "https://shopping-app-j93p.onrender.com/v1/user/patch",
+      {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phoneNumber: phoneNumber,
+      },
+      { headers: headers }
+    );
 
-      return response.data;
-
+    return response.data;
   }
 );
 
@@ -109,14 +106,25 @@ export const verifyToken = createAsyncThunk("user/verifyToken", async () => {
     Authorization: `Bearer ${theNewToken}`,
   };
 
-    const response = await axios.get(
-      "https://shopping-app-j93p.onrender.com/v1/user/me",
-      {
-        headers: headers,
-      }
-    );
-    return response.data;
+  const response = await axios.get(
+    "https://shopping-app-j93p.onrender.com/v1/user/me",
+    {
+      headers: headers,
+    }
+  );
+  return response.data;
 });
+
+export const verifyIfToken = createAsyncThunk(
+  "user/veryfyIfToken",
+  async () => {
+    const theToken = localStorage.getItem("token");
+
+    if (!(theToken === null)) {
+      console.log("The token is there");
+    }
+  }
+);
 
 const initialState: UserState = {
   user: null,
@@ -186,6 +194,9 @@ const userSlice = createSlice({
       .addCase(verifyToken.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message;
+      })
+      .addCase(verifyIfToken.fulfilled, (state) => {
+        state.isSuccess = true;
       })
   },
 });

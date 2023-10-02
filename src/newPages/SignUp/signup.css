@@ -74,3 +74,8 @@
   color: black;
   margin-left: 0.5rem;
 }
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+}

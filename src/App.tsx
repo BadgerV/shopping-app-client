@@ -6,7 +6,7 @@ import Profile from "./pages/Profile/Profile";
 import ProtectedRoutes from "./utils/utilsFunctions";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./redux/store";
-import { verifyToken } from "./redux/slice/userSlice";
+import { verifyToken, verifyIfToken } from "./redux/slice/userSlice";
 import Signup from "./newPages/SignUp/Signup";
 import Login from "./newPages/Login/Login";
 // import Signup from "./newPages/SignUp/Signup";
@@ -18,8 +18,11 @@ const App = () => {
 
   const theToken = localStorage.getItem("token");
 
+  dispatch(verifyToken);
+
   const asyncFunction = async () => {
     try {
+
       await dispatch(verifyToken());
     } catch (error) {
       console.log(error);

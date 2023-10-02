@@ -36,7 +36,7 @@
   margin-bottom: 1rem;
 }
 
-.signup-right input {
+.login-input {
   outline: none;
   border: none;
   border-bottom: 1px solid rgb(173, 166, 166);
@@ -44,8 +44,13 @@
   padding-left: 0;
   margin-bottom: 1rem;
   width: 25rem;
+  display: block;
 }
 
+.signup-form {
+  display: flex;
+  flex-direction: column;
+}
 .create-account_button {
   background-color: #db4444e5;
   outline: none;
