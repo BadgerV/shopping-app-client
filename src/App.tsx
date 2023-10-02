@@ -9,6 +9,7 @@ import { AppDispatch, RootState } from "./redux/store";
 import { verifyToken, verifyIfToken } from "./redux/slice/userSlice";
 import Signup from "./newPages/SignUp/Signup";
 import Login from "./newPages/Login/Login";
+import { useEffect, useState } from "react";
 // import Signup from "./newPages/SignUp/Signup";
 // import Login from "./newPages/Login/Login";
 
@@ -16,14 +17,16 @@ const App = () => {
   const dispatch = useDispatch<AppDispatch>();
   const user = useSelector((state: RootState) => state.userSlice.user);
 
+  const [isVerified, setIsVerified] = useState(1);
+
   const theToken = localStorage.getItem("token");
 
-  dispatch(verifyToken);
+  dispatch(verifyIfToken());
 
   const asyncFunction = async () => {
     try {
-
-      await dispatch(verifyToken());
+      const verified = await dispatch(verifyToken());
+      setIsVerified(verified.payload);
     } catch (error) {
       console.log(error);
     }
@@ -32,6 +35,13 @@ const App = () => {
   if (!user && theToken) {
     asyncFunction();
   }
+
+  useEffect(() => {
+    if(!isVerified) {
+      const removedToken = localStorage.removeItem("token");
+      console.log(removedToken)
+    }
+  }, [isVerified])
 
   return (
     <Router>

@@ -13,7 +13,7 @@ const Categories = () => {
   const [scrollNumber, setScrollNumber] = useState(0);
 
   const scrollRight = () => {
-    console.log(scrollNumber);
+    // console.log(scrollNumber);
     if (scrollNumber == -8) {
       return;
     } else {

@@ -8,22 +8,15 @@ import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 
 const Header = () => {
-
   const [user, setUser] = useState(false);
-
-  const data = useSelector((state: RootState) => state.userSlice);
-
-  const checkIfUser = () => {
-    if (data.user !== null) {
-      setUser(true);
-    } else {
-      setUser(false);
-    }
-  };
+  const fakeVerify = useSelector(
+    (state: RootState) => state.userSlice.fakeVerify
+  );
 
   useEffect(() => {
-    checkIfUser();
-  }, [data]);
+    setUser(fakeVerify);
+  }, [fakeVerify]);
+
   return (
     <div className="header">
       <div className="header-left">
@@ -73,6 +66,31 @@ const Header = () => {
 
             <div className="header-left__avatar">
               <img src="/assets/avatar.jpg" alt="avatar" />
+
+              <div className="avatar-hoverable">
+                <div className="avatar-hoverable-comp">
+                  <img src="/assets/user-mini.svg" alt="icon" />
+                  <span>
+                    <Link className="header-link-white" to="/profile">Manage My Account</Link>
+                  </span>
+                </div>
+                <div className="avatar-hoverable-comp">
+                  <img src="/assets/mallbag.svg" alt="icon" />
+                  <span>My Orders</span>
+                </div>
+                <div className="avatar-hoverable-comp">
+                  <img src="/assets/cancel.svg" alt="icon" />
+                  <span>My Cancellations</span>
+                </div>
+                <div className="avatar-hoverable-comp">
+                  <img src="/assets/reviews.svg" alt="icon" />
+                  <span>My Reviews</span>
+                </div>
+                <div className="avatar-hoverable-comp">
+                  <img src="/assets/logout.svg" alt="icon" />
+                  <span>Logout</span>
+                </div>
+              </div>
             </div>
           </>
         ) : (

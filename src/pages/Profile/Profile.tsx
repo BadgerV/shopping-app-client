@@ -1,6 +1,5 @@
 import { BsBell, BsCartCheck, BsHouse } from "react-icons/bs";
 import { MdHistory, MdKeyboardArrowRight } from "react-icons/md";
-import Header from "../../components/Header/Header";
 import "./profile.css";
 import { FcSettings } from "react-icons/fc";
 import { GoSignOut } from "react-icons/go";
@@ -11,6 +10,8 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { updateUser } from "../../redux/slice/userSlice";
 import { useDispatch } from "react-redux";
+import Header from "../../newComponents/Header/Header";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const user = useSelector((state: RootState) => state.userSlice.user);
@@ -56,7 +57,7 @@ const Profile = () => {
       <div className="profile-page-main">
         <div className="profile-page-left">
           <div className="profile-side-bar-links">
-            <div className="profile-sidebar-link">
+            <Link to = "/" className="profile-sidebar-link">
               <button className="profile-sidebar-link-button">
                 <BsHouse size={20} />
               </button>
@@ -64,7 +65,7 @@ const Profile = () => {
               <button className="profile-sidebar-link-arrow">
                 <MdKeyboardArrowRight size={25} />
               </button>
-            </div>
+            </Link>
 
             {formData.isVendor ? (
               <div className="profile-sidebar-link">
@@ -110,12 +111,12 @@ const Profile = () => {
             </div>
           </div>
 
-          <div className="profile-main-left-bottom">
+          <button className="profile-main-left-bottom">
             <span>Sign Out</span>
-            <button>
-              <GoSignOut size={25} />
-            </button>
-          </div>
+            <span>
+              <GoSignOut size={25} color="#DB4444" />
+            </span>
+          </button>
         </div>
         <div className="profile-page-right">
           <span className="profile-user-text">User Profile</span>

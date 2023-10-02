@@ -43,7 +43,7 @@ export const SignUp = () => {
     e.preventDefault();
     try {
       const response = await dispatch(registerUser(formData));
-      console.log(response);
+      // console.log(response);
       if (response.payload) {
         navigate("/");
       }

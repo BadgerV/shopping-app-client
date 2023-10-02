@@ -28,7 +28,6 @@
   font-size: 0.9rem;
 }
 
-
 .header-link {
   color: black;
   text-decoration: none;
@@ -86,6 +85,60 @@
 .header-left__avatar:hover,
 .header-right__cart-icon:hover {
   cursor: pointer;
+}
+
+.header-left__avatar {
+  position: relative;
+}
+
+.avatar-hoverable {
+  position: absolute;
+  top: 100%;
+  padding-bottom: 0.5rem;
+  right: 0;
+
+  z-index: 999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999;
+
+  background: linear-gradient(rgba(0, 0, 0, 0.697), rgba(0, 0, 0, 0.911));
+  background-blend-mode: darken;
+
+  display: flex;
+  flex-direction: column;
+
+  border-radius: 0.3rem;
+
+  display: none;
+}
+
+.header-left__avatar:hover .avatar-hoverable {
+  display: flex;
+}
+
+.avatar-hoverable-comp {
+  min-width: max-content;
+  padding: 0.4rem 1rem;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.avatar-hoverable-comp:hover {
+  background-color: rgba(0, 0, 0, 0.96);
+}
+
+.avatar-hoverable-comp img {
+  margin-right: 0.5rem;
+}
+
+.avatar-hoverable-comp span {
+  font-size: 0.8rem;
+  color: white;
+}
+
+.header-link-white {
+  color: white;
+  text-decoration: none;
 }
 
 @media (max-width: 965px) {

@@ -7,6 +7,7 @@ interface UserState {
   error: string | undefined;
   isSuccess: boolean;
   userToken: string | null;
+  fakeVerify: boolean;
 }
 
 interface UserProps {
@@ -41,7 +42,7 @@ export const registerUser = createAsyncThunk(
         password: password,
       }
     );
-    console.log(response.data);
+    // console.log(response.data);
 
     return response.data; // Return the data you want to store in the Redux state
   }
@@ -95,24 +96,28 @@ export const updateUser = createAsyncThunk(
 );
 
 export const verifyToken = createAsyncThunk("user/verifyToken", async () => {
-  // Retrieve the token from localStorage
-  const theToken = localStorage.getItem("token");
-  let theNewToken = null;
-  if (theToken) {
-    theNewToken = JSON.parse(theToken);
-  }
-  const headers = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${theNewToken}`,
-  };
-
-  const response = await axios.get(
-    "https://shopping-app-j93p.onrender.com/v1/user/me",
-    {
-      headers: headers,
+  try {
+    // Retrieve the token from localStorage
+    const theToken = localStorage.getItem("token");
+    let theNewToken = null;
+    if (theToken) {
+      theNewToken = JSON.parse(theToken);
     }
-  );
-  return response.data;
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${theNewToken}`,
+    };
+
+    const response = await axios.get(
+      "https://shopping-app-j93p.onrender.com/v1/user/me",
+      {
+        headers: headers,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 export const verifyIfToken = createAsyncThunk(
@@ -120,15 +125,18 @@ export const verifyIfToken = createAsyncThunk(
   async () => {
     const theToken = localStorage.getItem("token");
 
-    if (!(theToken === null)) {
-      console.log("The token is there");
+
+    if (theToken === null) {
+      throw new Error("Please Login");
     }
+    return true;
   }
 );
 
 const initialState: UserState = {
   user: null,
   userToken: null,
+  fakeVerify: false,
   isLoading: false,
   isSuccess: false, // Initialize isSuccess as false
   error: undefined,
@@ -197,7 +205,8 @@ const userSlice = createSlice({
       })
       .addCase(verifyIfToken.fulfilled, (state) => {
         state.isSuccess = true;
-      })
+        state.fakeVerify = true;
+      });
   },
 });
 

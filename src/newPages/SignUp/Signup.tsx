@@ -39,7 +39,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       const response = await dispatch(registerUser(formData));
-      console.log(response);
+      // console.log(response);
       if (response.payload) {
         navigate("/");
       }
@@ -52,7 +52,7 @@ const Signup = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
-    console.log(`${name} : ${value}`)
+    // console.log(`${name} : ${value}`)
   };
 
   return (
