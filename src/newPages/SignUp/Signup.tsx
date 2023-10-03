@@ -20,6 +20,8 @@ const Signup = () => {
     (state: RootState) => state.userSlice.isLoading
   );
 
+
+  console.log(isLoading);
   const user = useSelector((state: RootState) => state.userSlice);
 
   useEffect(() => {
@@ -27,6 +29,10 @@ const Signup = () => {
 
     localStorage.setItem("token", userToken);
   }, [user]);
+
+  useEffect(() => {
+    console.log(isLoading)
+  }, [isLoading]);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -37,6 +43,7 @@ const Signup = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(isLoading)
     try {
       const response = await dispatch(registerUser(formData));
       // console.log(response);
@@ -113,7 +120,7 @@ const Signup = () => {
                 disabled={isLoading}
               >
                 {isLoading ? (
-                  <img src="/assets/spinner.svg" alt="spinner" />
+                  <img src="/assets/spinner.svg" alt="spinner"  className="spinner"/>
                 ) : (
                   <span>Create Account</span>
                 )}

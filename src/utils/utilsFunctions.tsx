@@ -8,3 +8,18 @@ export default function ProtectedRoutes() {
   return user ? <Outlet /> : <Navigate to="/login" />;
 }
 
+export const DenyLoginPage = () => {
+  const user = useSelector((state: RootState) => state.userSlice.user);
+
+
+
+  return !user ? <Outlet /> : <Navigate to="/" />;
+};
+
+export const DenySignUpPage = () => {
+  const user = useSelector((state: RootState) => state.userSlice.user);
+
+  console.log(user)
+
+  return !user ? <Outlet /> : <Navigate to="/" />;
+};

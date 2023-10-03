@@ -21,8 +21,6 @@ export const SignUp = () => {
   const isLoading = useSelector(
     (state: RootState) => state.userSlice.isLoading
   );
-
-
   
   const user = useSelector((state: RootState) => state.userSlice);
 
@@ -31,6 +29,10 @@ export const SignUp = () => {
 
     localStorage.setItem("token", userToken);
   }, [user]);
+
+  useEffect(() => {
+    console.log(isLoading)
+  }, [isLoading])
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -41,6 +43,8 @@ export const SignUp = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    console.log("Started already")
     try {
       const response = await dispatch(registerUser(formData));
       // console.log(response);

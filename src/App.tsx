@@ -3,7 +3,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // import SignUp from "./pages/Signup/SIgnup";
 // import Login from "./pages/Login/Login";
 import Profile from "./pages/Profile/Profile";
-import ProtectedRoutes from "./utils/utilsFunctions";
+import ProtectedRoutes, {
+  DenyLoginPage,
+  DenySignUpPage,
+} from "./utils/utilsFunctions";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./redux/store";
 import { verifyToken, verifyIfToken } from "./redux/slice/userSlice";
@@ -17,7 +20,7 @@ const App = () => {
   const dispatch = useDispatch<AppDispatch>();
   const user = useSelector((state: RootState) => state.userSlice.user);
 
-  const [isVerified, setIsVerified] = useState(1);
+  const [isVerified, setIsVerified] = useState(true);
 
   const theToken = localStorage.getItem("token");
 
@@ -27,31 +30,41 @@ const App = () => {
     try {
       const verified = await dispatch(verifyToken());
       setIsVerified(verified.payload);
+
+      console.log(verified.payload)
     } catch (error) {
       console.log(error);
     }
   };
 
   if (!user && theToken) {
+    console.log("blast off")
     asyncFunction();
   }
 
   useEffect(() => {
-    if(!isVerified) {
+    if (!isVerified) {
       const removedToken = localStorage.removeItem("token");
-      console.log(removedToken)
+      console.log(removedToken);
     }
-  }, [isVerified])
+  }, [isVerified]);
 
   return (
     <Router>
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/signin" element={<Login />} />
+
           <Route element={<ProtectedRoutes />}>
             <Route path="/profile" element={<Profile />} />
+          </Route>
+
+          <Route element={<DenyLoginPage />}>
+            <Route path="/signin" element={<Login />} />
+          </Route>
+
+          <Route element={<DenySignUpPage />}>
+            <Route path="/signup" element={<Signup />} />
           </Route>
         </Routes>
       </div>

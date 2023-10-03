@@ -32,17 +32,23 @@ const Header = () => {
           <li className="header-center_link">Categories</li>
           <li className="header-center_link">Vendors</li>
 
-          <li className="header-center_link">
-            <Link to="/signup" className="header-link">
-              Sign up
-            </Link>
-          </li>
+          {!user ? (
+            <>
+              <li className="header-center_link">
+                <Link to="/signup" className="header-link">
+                  Sign up
+                </Link>
+              </li>
 
-          <li className="header-center_link">
-            <Link to="/signin" className="header-link">
-              Sign in
-            </Link>
-          </li>
+              <li className="header-center_link">
+                <Link to="/signin" className="header-link">
+                  Sign in
+                </Link>
+              </li>
+            </>
+          ) : (
+            <></>
+          )}
         </ul>
       </div>
       <div
@@ -71,7 +77,9 @@ const Header = () => {
                 <div className="avatar-hoverable-comp">
                   <img src="/assets/user-mini.svg" alt="icon" />
                   <span>
-                    <Link className="header-link-white" to="/profile">Manage My Account</Link>
+                    <Link className="header-link-white" to="/profile">
+                      Manage My Account
+                    </Link>
                   </span>
                 </div>
                 <div className="avatar-hoverable-comp">

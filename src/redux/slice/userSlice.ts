@@ -1,4 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk,Dispatch } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 import axios from "axios";
 
 interface UserState {
@@ -50,16 +51,25 @@ export const registerUser = createAsyncThunk(
 
 export const loginUser = createAsyncThunk(
   "user/loginUser",
-  async ({ email, password }: LoginProps) => {
-    const response = await axios.post(
-      "https://shopping-app-j93p.onrender.com/v1/user/login",
-      {
-        email: email,
-        password: password,
-      }
-    );
+  async (
+    { email, password }: LoginProps,
+    { getState, dispatch }: { getState: () => RootState; dispatch: Dispatch }
+  ) => {
+    try {
+      const response = await axios.post(
+        "https://shopping-app-j93p.onrender.com/v1/user/login",
+        {
+          email: email,
+          password: password,
+        }
+      );
 
-    return response.data;
+      const state = getState();
+
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
@@ -124,7 +134,6 @@ export const verifyIfToken = createAsyncThunk(
   "user/veryfyIfToken",
   async () => {
     const theToken = localStorage.getItem("token");
-
 
     if (theToken === null) {
       throw new Error("Please Login");

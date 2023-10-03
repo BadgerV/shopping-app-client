@@ -25,6 +25,8 @@ const Login = () => {
     const userToken = JSON.stringify(user.userToken);
 
     localStorage.setItem("token", userToken);
+
+    console.log(user);
   }, [user]);
 
   const [formData, setFormData] = useState({
@@ -72,19 +74,21 @@ const Login = () => {
             >
               <input
                 value={formData.email}
+                onChange={handleChange}
                 type="email"
-                name="name"
-                placeholder="Email"
                 className="login-input"
-                onChange={(e) => handleChange(e)}
+                placeholder="Email"
+                id="email"
+                name="email"
               />
               <input
                 value={formData.password}
-                type="password"
-                name="password"
-                placeholder="Password"
+                onChange={handleChange}
                 className="login-input"
-                onChange={(e) => handleChange(e)}
+                type="password"
+                placeholder="Password"
+                id="password"
+                name="password"
               />
               <button
                 className="create-account_button"
