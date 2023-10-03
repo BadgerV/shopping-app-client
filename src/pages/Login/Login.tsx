@@ -39,6 +39,7 @@ const Login = () => {
       const response = await dispatch(loginUser(formData));
       // console.log(response);
       if (response.payload) {
+        console.log(response.payload);
         navigate("/");
       }
     } catch (error) {

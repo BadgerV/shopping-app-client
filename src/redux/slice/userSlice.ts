@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk,Dispatch } from "@reduxjs/toolkit";
-import { RootState } from "../store";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+// import { RootState } from "../store";
 import axios from "axios";
 
 interface UserState {
@@ -43,6 +43,12 @@ export const registerUser = createAsyncThunk(
         password: password,
       }
     );
+
+    if (response.data) {
+      const userToken = JSON.stringify(response.data.token);
+
+      localStorage.setItem("token", userToken);
+    }
     // console.log(response.data);
 
     return response.data; // Return the data you want to store in the Redux state
@@ -51,10 +57,7 @@ export const registerUser = createAsyncThunk(
 
 export const loginUser = createAsyncThunk(
   "user/loginUser",
-  async (
-    { email, password }: LoginProps,
-    { getState, dispatch }: { getState: () => RootState; dispatch: Dispatch }
-  ) => {
+  async ({ email, password }: LoginProps) => {
     try {
       const response = await axios.post(
         "https://shopping-app-j93p.onrender.com/v1/user/login",
@@ -64,8 +67,11 @@ export const loginUser = createAsyncThunk(
         }
       );
 
-      const state = getState();
+      if (response.data) {
+        const userToken = JSON.stringify(response.data.token);
 
+        localStorage.setItem("token", userToken);
+      }
       return response.data;
     } catch (error) {
       console.log(error);
@@ -124,6 +130,10 @@ export const verifyToken = createAsyncThunk("user/verifyToken", async () => {
         headers: headers,
       }
     );
+
+    if (!response.data) {
+      localStorage.removeItem("token");
+    }
     return response.data;
   } catch (error) {
     console.log(error);

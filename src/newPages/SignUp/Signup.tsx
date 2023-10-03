@@ -3,7 +3,7 @@ import Header from "../../newComponents/Header/Header";
 import "./signup.css";
 import { Link } from "react-router-dom";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { registerUser } from "../../redux/slice/userSlice";
@@ -21,19 +21,6 @@ const Signup = () => {
   );
 
 
-  console.log(isLoading);
-  const user = useSelector((state: RootState) => state.userSlice);
-
-  useEffect(() => {
-    const userToken = JSON.stringify(user.userToken);
-
-    localStorage.setItem("token", userToken);
-  }, [user]);
-
-  useEffect(() => {
-    console.log(isLoading)
-  }, [isLoading]);
-
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -43,7 +30,6 @@ const Signup = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(isLoading)
     try {
       const response = await dispatch(registerUser(formData));
       // console.log(response);

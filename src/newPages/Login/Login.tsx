@@ -4,7 +4,7 @@ import "./login.css";
 import { Link } from "react-router-dom";
 
 import { RootState } from "../../redux/store";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../redux/store";
@@ -18,16 +18,6 @@ const Login = () => {
   const isLoading = useSelector(
     (state: RootState) => state.userSlice.isLoading
   );
-
-  const user = useSelector((state: RootState) => state.userSlice);
-
-  useEffect(() => {
-    const userToken = JSON.stringify(user.userToken);
-
-    localStorage.setItem("token", userToken);
-
-    console.log(user);
-  }, [user]);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -45,7 +35,6 @@ const Login = () => {
 
     try {
       const response = await dispatch(loginUser(formData));
-      // console.log(response);
       if (response.payload) {
         navigate("/");
       }
