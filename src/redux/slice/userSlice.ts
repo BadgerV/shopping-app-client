@@ -114,6 +114,7 @@ export const updateUser = createAsyncThunk(
 export const verifyToken = createAsyncThunk("user/verifyToken", async () => {
   try {
     // Retrieve the token from localStorage
+
     const theToken = localStorage.getItem("token");
     let theNewToken = null;
     if (theToken) {
@@ -140,6 +141,7 @@ export const verifyToken = createAsyncThunk("user/verifyToken", async () => {
   }
 });
 
+//staeted commendting my code today
 export const verifyIfToken = createAsyncThunk(
   "user/veryfyIfToken",
   async () => {
