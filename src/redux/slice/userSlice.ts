@@ -55,6 +55,7 @@ export const registerUser = createAsyncThunk(
   }
 );
 
+//outlet that allows users to login
 export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }: LoginProps) => {
