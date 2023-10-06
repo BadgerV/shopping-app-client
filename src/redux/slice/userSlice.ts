@@ -55,7 +55,7 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-//outlet that allows users to login
+//outlet that allows users to loginkj
 export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }: LoginProps) => {
