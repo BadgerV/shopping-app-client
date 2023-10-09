@@ -55,7 +55,7 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-//outlet that allows users to logink nonsense
+//outlet that allows users to logink nonse
 export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }: LoginProps) => {
