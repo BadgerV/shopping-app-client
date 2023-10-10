@@ -23,6 +23,8 @@ interface LoginProps {
   password: string;
 }
 
+//rubbish code
+
 interface UpdateUserProps {
   email: string;
   firstName: string;
