@@ -23,7 +23,6 @@ interface LoginProps {
   password: string;
 }
 
-//rubbish code
 
 interface UpdateUserProps {
   email: string;
@@ -32,7 +31,7 @@ interface UpdateUserProps {
   phoneNumber: string;
 }
 
-// Define an async thunk to make the API call
+// Define an async thunk to make the API call nonsese
 export const registerUser = createAsyncThunk(
   "user/registerUser",
   async ({ firstName, lastName, email, password }: UserProps) => {
