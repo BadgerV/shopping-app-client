@@ -1,0 +1,159 @@
+.profile-page-new {
+  display: flex;
+  flex-direction: column;
+  padding: 0 5em;
+}
+
+.profile-page_left-and-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 0.9em;
+
+  margin-bottom: 4em;
+}
+
+.profile-page-min-home-text {
+  font-size: 0.9em;
+  color: gray;
+}
+
+.profile-page-min-account-text {
+  font-size: 0.9em;
+}
+
+.profile-page_welcome-text {
+  font-size: 0.9em;
+}
+
+.profile-page_name-text {
+  font-size: 0.9em;
+  color: #db4444;
+}
+
+.profile-page_main-left-and-right {
+  display: grid;
+  grid-template-columns: 1fr 3.5fr;
+}
+
+.profile-page_main-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  padding: 1em;
+}
+
+.profile-page_left-heading-and-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.profile-page-heading {
+  font-size: 0.9em;
+  font-weight: 500;
+  margin-bottom: 0.5em;
+}
+
+.profile-page-regular-link {
+  font-size: 0.85em;
+  font-weight: 400;
+  color: gray;
+
+  margin-left: 3em;
+  cursor: pointer;
+}
+
+.profile-page_main-right {
+  padding: 2em;
+
+  display: flex;
+  justify-content: center;
+}
+
+.profile-page_centerized {
+}
+
+.active {
+  color: #db4444;
+}
+
+.profile-page_edit-profile-text {
+  font-size: 1.3em;
+  color: #db4444;
+  font-weight: 500;
+}
+
+.profile-page_input-pair {
+  display: flex;
+  flex-direction: row;
+  gap: 3em;
+  margin-bottom: 0.5em;
+}
+
+.profile-page_input-and-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+}
+
+.profile-page_label {
+  font-size: 0.8em;
+  font-weight: 400;
+  margin: 0;
+}
+
+.profile-page-input {
+  font-size: 0.9em;
+  background-color: #f5f5f5;
+  padding: 0.8em 1em;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  margin: 0;
+  width: 25em;
+}
+
+.profile-page_extra-input {
+    width: 100%;
+}
+.profile-page_lower-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.profile-page_botton-container {
+  width: 100%;
+  margin-top: 2em;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 1.5em;
+}
+
+.profile-page_cancel-button,
+.profile-save-button {
+  padding: 1em 2em;
+  font-size: 0.9em;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  border-radius: 5px;
+
+}
+
+.profile-save-button {
+  color: white;
+  background-color: #db4444;
+}
+
+.profile-save-button:hover {
+  background-color: #d13434;
+}
+.profile-page_cancel-button:hover {
+  background-color: #f5f5f5;
+}

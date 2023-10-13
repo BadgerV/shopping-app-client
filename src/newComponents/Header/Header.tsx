@@ -29,8 +29,16 @@ const Header = () => {
               Home
             </Link>
           </li>
-          <li className="header-center_link">Categories</li>
-          <li className="header-center_link">Vendors</li>
+          <li className="header-center_link">
+            <Link to="/categories" className="header-link">
+              Categories
+            </Link>
+          </li>
+          <li className="header-center_link">
+            <Link to="/" className="header-link">
+              Vendors
+            </Link>
+          </li>
 
           {!user ? (
             <>
@@ -75,7 +83,7 @@ const Header = () => {
 
               <div className="avatar-hoverable">
                 <div className="avatar-hoverable-comp">
-                  <img src="/assets/user-mini.svg" alt="icon" />
+                  <img src="/assets/user-icon.svg" alt="icon" />
                   <span>
                     <Link className="header-link-white" to="/profile">
                       Manage My Account
@@ -83,20 +91,22 @@ const Header = () => {
                   </span>
                 </div>
                 <div className="avatar-hoverable-comp">
-                  <img src="/assets/mallbag.svg" alt="icon" />
-                  <span>My Orders</span>
+                  <img src="/assets/package-icon.svg" alt="icon" />
+                  <Link className="header-link-white" to="/orders">
+                    My Orders
+                  </Link>
                 </div>
                 <div className="avatar-hoverable-comp">
-                  <img src="/assets/cancel.svg" alt="icon" />
-                  <span>My Cancellations</span>
+                  <img src="/assets/star-icon.svg" alt="icon" />
+                  <Link className="header-link-white" to="/reviews">
+                    My Reviews
+                  </Link>
                 </div>
                 <div className="avatar-hoverable-comp">
-                  <img src="/assets/reviews.svg" alt="icon" />
-                  <span>My Reviews</span>
-                </div>
-                <div className="avatar-hoverable-comp">
-                  <img src="/assets/logout.svg" alt="icon" />
-                  <span>Logout</span>
+                  <img src="/assets/logout-icon.svg" alt="icon" />
+                  <Link className="header-link-white" to="/signin">
+                    Logout
+                  </Link>
                 </div>
               </div>
             </div>

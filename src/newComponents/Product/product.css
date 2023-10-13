@@ -1,16 +1,16 @@
 .product {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  width: 15rem;
+  gap: 0.5em;
+  width: 15em;
 
-  margin-bottom: 2rem;
+  margin-bottom: 2em;
 }
 
 .product-top {
   position: relative;
   background-color: #f5f5f5;
-  padding: 1rem;
+  padding: 1em;
   height: 230px;
   width: 100%;
   border-radius: 5px;
@@ -27,8 +27,8 @@
 .product_discount {
   position: absolute;
   background-color: #db4444;
-  padding: 0.1rem 0.7rem;
-  font-size: 0.75rem;
+  padding: 0.1em 0.7em;
+  font-size: 0.75em;
   font-weight: 300;
   color: white;
   border-radius: 3px;
@@ -36,7 +36,7 @@
 
 .product-like {
   position: absolute;
-  right: 0.5rem;
+  right: 0.5em;
 
   padding: 2px;
   cursor: pointer;
@@ -44,65 +44,64 @@
 
 .product-eye {
   position: absolute;
-  top: 3rem;
-  right: 0.5rem;
+  top: 3em;
+  right: 0.5em;
 
   padding: 2px;
   cursor: pointer;
 }
 
 .product-hover {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    background-color: black;
-    color: white;
-    text-align: center;
-    font-size: 0.9rem;
-    padding: 0.4rem 0;
-    left : 0;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background-color: black;
+  color: white;
+  text-align: center;
+  font-size: 0.9em;
+  padding: 0.4em 0;
+  left: 0;
 
-    display: none;
-    cursor: pointer;
-    transition: 0.2s all ease-in-out;
+  display: none;
+  cursor: pointer;
+  transition: 0.2s all ease-in-out;
 }
 
-.product-top:hover  .product-hover {
-    display: block !important;
+.product-top:hover .product-hover {
+  display: block !important;
 }
-
 
 .product-bottom {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  margin-top: 0.5em;
 
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .product_name {
-    font-size: 0.8rem;
-    font-weight: 600; 
+  font-size: 0.8em;
+  font-weight: 600;
 }
 
 .product_price {
-    color: #DB4444;
-    font-size: 0.8rem;
-    font-weight: 600; 
+  color: #db4444;
+  font-size: 0.8em;
+  font-weight: 600;
 }
 
 .product-rating__container {
-    font-size: 1.2rem;
+  font-size: 1.2em;
 
-    display: flex;
-    flex-direction: row;
-    gap: 0.3rem;
-    align-items: center;
-    margin-top: -0.4rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.3em;
+  align-items: center;
+  margin-top: -0.4em;
 }
 
 .product-instock {
-    font-size: 0.8rem;
-    color: grey;
+  font-size: 0.8em;
+  color: grey;
 }
