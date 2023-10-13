@@ -29,6 +29,8 @@ interface UpdateUserProps {
   firstName: string;
   lastName: string;
   phoneNumber: string;
+  password : string;
+  newPassword : string;
 }
 
 // Define an async thunk to make the API call nonsese
@@ -83,7 +85,7 @@ export const loginUser = createAsyncThunk(
 
 export const updateUser = createAsyncThunk(
   "user/updateUser",
-  async ({ firstName, lastName, email, phoneNumber }: UpdateUserProps) => {
+  async ({ firstName, lastName, email, phoneNumber, password, newPassword }: UpdateUserProps) => {
     // Retrieve the token from localStorage
     const theToken = localStorage.getItem("token");
     let theNewToken = null;
@@ -105,6 +107,8 @@ export const updateUser = createAsyncThunk(
         lastName: lastName,
         email: email,
         phoneNumber: phoneNumber,
+        password : password,
+        newPassword : newPassword
       },
       { headers: headers }
     );

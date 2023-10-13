@@ -1,22 +1,21 @@
-// import Home from "./pages/Home/Home";
-// import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home/Home";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // import SignUp from "./pages/Signup/SIgnup";
 // import Login from "./pages/Login/Login";
 // import Profile from "./pages/Profile/Profile";
-// import ProtectedRoutes, {
-//   DenyLoginPage,
-//   DenySignUpPage,
-// } from "./utils/utilsFunctions";
+import Profile from "./newPages/Profile/Profile";
+import ProtectedRoutes, {
+  DenyLoginPage,
+  DenySignUpPage,
+} from "./utils/utilsFunctions";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./redux/store";
 import { verifyToken, verifyIfToken } from "./redux/slice/userSlice";
-// import Signup from "./newPages/SignUp/Signup";
-// import Login from "./newPages/Login/Login";
+import Signup from "./newPages/SignUp/Signup";
+import Login from "./newPages/Login/Login";
 import { useEffect, useState } from "react";
 // import Signup from "./newPages/SignUp/Signup";
 // import Login from "./newPages/Login/Login";
-
-import Profile from "./newPages/Profile/Profile";
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -33,14 +32,14 @@ const App = () => {
       const verified = await dispatch(verifyToken());
       setIsVerified(verified.payload);
 
-      console.log(verified.payload);
+      console.log(verified.payload)
     } catch (error) {
       console.log(error);
     }
   };
 
   if (!user && theToken) {
-    console.log("blast off");
+    console.log("blast off")
     asyncFunction();
   }
 
@@ -52,9 +51,9 @@ const App = () => {
   }, [isVerified]);
 
   return (
-    // <Router>
+    <Router>
       <div>
-        {/* <Routes>
+        <Routes>
           <Route path="/" element={<Home />} />
 
           <Route element={<ProtectedRoutes />}>
@@ -68,11 +67,9 @@ const App = () => {
           <Route element={<DenySignUpPage />}>
             <Route path="/signup" element={<Signup />} />
           </Route>
-        </Routes> */}
-
-        <Profile />
+        </Routes>
       </div>
-    // </Router>
+    </Router>
   );
 };
 
