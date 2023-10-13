@@ -1,132 +1,131 @@
 .category {
-    width: 100%;
-    position: relative;
-    border-radius: 10px;
-  }
-  
-  .categories_header {
-    font-size: 2rem;
-    font-weight: bold;
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    margin-bottom: 0.5rem;
-    display: block;
-    width: 100%;
-  }
-  
-  .categoryImageContainer {
-    width: 100%;
-    height: 15rem;
-  }
-  
+  width: 100%;
+  position: relative;
+  border-radius: 10px;
+}
+
+.categories_header {
+  font-size: 2em;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  margin-bottom: 0.5em;
+  display: block;
+  width: 100%;
+}
+
+.categoryImageContainer {
+  width: 100%;
+  height: 15em;
+}
+
+.categoryImage {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  aspect-ratio: 1;
+
+  border-radius: 5px;
+}
+
+@media only screen and (max-width: 1116px) {
   .categoryImage {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    object-position: center;
-    aspect-ratio: 1;
-  
-    border-radius: 5px;
+    max-height: 20em;
+    aspect-ratio: 0;
   }
-  
-  @media only screen and (max-width: 1116px) {
-    .categoryImage {
-      max-height: 20em;
-      aspect-ratio: 0;
-    }
-  }
-  
-  .absoluteBackground {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-image: linear-gradient(
-      to bottom,
-      hsla(0, 0%, 0%, 0.594),
-      hsla(0, 0%, 100%, 0.233)
-    );
-    z-index: 10;
-  }
-  
-  .categoryName {
-    width: 100%;
-    text-align: center;
-    color: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2rem;
-    font-weight: bold;
-    z-index: 11;
-    transition: 0.2s all;
-    text-shadow: 1px 1px 3px hsla(0, 0%, 100%, 0.356);
-  }
-  
-  .categoryDescription {
-    display: none;
-    color: white;
-    z-index: 11;
-    font-size: 0.9rem;
-  
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    padding: 1rem;
-    transition: 0.2s all;
-    text-shadow: 1px 1px 3px hsla(0, 0%, 100%, 0.356);
-  }
-  
-  .categoryButton {
-    width: 70%;
-    outline: none;
-    border: 1px solid white;
-    color: white;
-    background: transparent;
-    position: absolute;
-    bottom: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 0.8rem;
-    cursor: pointer;
-    border-radius: 5px;
-    z-index: 11;
-    display: none;
-    font-size: 0.9rem;
-    font-weight: bold;
-  
-    transition: 0.2s all ease-in-out;
-    text-shadow: 1px 1px 3px hsla(0, 0%, 100%, 0.356);
-    box-shadow: 1px 1px 3px hsla(0, 0%, 100%, 0.356);
-  }
-  
-  .categoryButton:hover {
-    background-color: white;
-    color: black;
-  }
-  
-  .categoryButton:active {
-    scale: 0.95;
-  }
-  
-  .category:hover .absoluteBackground {
-    background-image: linear-gradient(
-      to bottom,
-      hsla(0, 0%, 0%, 0.812),
-      hsla(0, 0%, 100%, 0.307)
-    );
-  }
-  
-  .category:hover .categoryName {
-    top: 20%;
-  }
-  
-  .category:hover .categoryDescription {
-    display: block;
-  }
-  .category:hover .categoryButton {
-    display: block;
-  }
-  
+}
+
+.absoluteBackground {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(
+    to bottom,
+    hsla(0, 0%, 0%, 0.594),
+    hsla(0, 0%, 100%, 0.233)
+  );
+  z-index: 10;
+}
+
+.categoryName {
+  width: 100%;
+  text-align: center;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2em;
+  font-weight: bold;
+  z-index: 11;
+  transition: 0.2s all;
+  text-shadow: 1px 1px 3px hsla(0, 0%, 100%, 0.356);
+}
+
+.categoryDescription {
+  display: none;
+  color: white;
+  z-index: 11;
+  font-size: 0.9em;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  padding: 1em;
+  transition: 0.2s all;
+  text-shadow: 1px 1px 3px hsla(0, 0%, 100%, 0.356);
+}
+
+.categoryButton {
+  width: 70%;
+  outline: none;
+  border: 1px solid white;
+  color: white;
+  background: transparent;
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.8em;
+  cursor: pointer;
+  border-radius: 5px;
+  z-index: 11;
+  display: none;
+  font-size: 0.9em;
+  font-weight: bold;
+
+  transition: 0.2s all ease-in-out;
+  text-shadow: 1px 1px 3px hsla(0, 0%, 100%, 0.356);
+  box-shadow: 1px 1px 3px hsla(0, 0%, 100%, 0.356);
+}
+
+.categoryButton:hover {
+  background-color: white;
+  color: black;
+}
+
+.categoryButton:active {
+  scale: 0.95;
+}
+
+.category:hover .absoluteBackground {
+  background-image: linear-gradient(
+    to bottom,
+    hsla(0, 0%, 0%, 0.812),
+    hsla(0, 0%, 100%, 0.307)
+  );
+}
+
+.category:hover .categoryName {
+  top: 20%;
+}
+
+.category:hover .categoryDescription {
+  display: block;
+}
+.category:hover .categoryButton {
+  display: block;
+}

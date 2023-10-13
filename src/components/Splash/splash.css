@@ -1,120 +1,117 @@
 .SplashAlpha {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    background-color: hsla(0, 0%, 0%, 0.484);
-  
-    justify-content: center;
-    padding: 0rem 1.5rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-color: hsla(0, 0%, 0%, 0.484);
+
+  justify-content: center;
+  padding: 0em 1.5em;
+}
+.SplashContainer {
+  width: 100%;
+}
+
+.large_image {
+  width: 100%;
+  border-radius: 2px;
+  height: 85vh;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+
+.largeImage_container {
+  position: absolute;
+  top: 65%;
+  left: 2%;
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+}
+
+.largeImage_text {
+  font-size: 1.5em;
+  font-weight: 500;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.largeImage_subText {
+  color: white;
+  margin-bottom: 1em;
+  font-weight: 500;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+.buttonNew {
+  max-width: fit-content;
+  padding: 0.5em 1.5em;
+  background-color: transparent;
+  font-size: 0.9em;
+  border-radius: 5px;
+  border: none;
+  outline: 1px solid white;
+  font-weight: 400;
+  color: white;
+  z-index: 999999999999999999;
+  cursor: pointer;
+
+  position: relative;
+
+  transition: 0.2s all ease-in-out;
+}
+.buttonNew span {
+  z-index: 1;
+  position: relative;
+  border-radius: 5px;
+}
+
+.buttonNew::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background-color: hsla(0, 0%, 100%, 0.548);
+  color: white;
+  opacity: 1;
+
+  border-radius: 5px;
+
+  transition: 0.2s all ease-in-out;
+  z-index: 0;
+}
+
+.buttonNew:hover::before {
+  width: 100%;
+}
+
+.buttonNew:hover {
+  box-shadow: rgba(255, 253, 253, 0.24) 0px 3px 8px;
+  outline: none;
+}
+
+.buttonNew:active {
+  scale: 0.95;
+  box-shadow: rgba(240, 240, 240, 0.24) 0px 5px 15px;
+}
+
+@media only screen and (max-width: 572px) {
+  .SplashAlpha {
+    padding: 0 0.5em;
   }
-  .SplashContainer {
-    width: 100%;
-  }
-  
-  .large_image {
-    width: 100%;
-    border-radius: 2px;
-    height: 85vh;
-    background-position: center;
-    background-size: cover;
-    position: relative;
-  }
-  
+}
+@media only screen and (max-width: 758px) {
   .largeImage_container {
-    position: absolute;
-    top: 65%;
-    left: 2%;
-    padding: 2em;
-    display: flex;
-    flex-direction: column;
+    top: 50%;
   }
-  
   .largeImage_text {
-    font-size: 1.5em;
-    font-weight: 500;
-    color: white;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    font-size: 1.3em;
   }
-  
+
   .largeImage_subText {
-    color: white;
-    margin-bottom: 1em;
-    font-weight: 500;
-    text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+    font-size: 0.9em;
   }
-  
-
-
-  .buttonNew {
-    max-width: fit-content;
-    padding: 0.5rem 1.5rem;
-    background-color: transparent;
-    font-size: 0.9rem;
-    border-radius: 5px;
-    border: none;
-    outline: 1px solid white;
-    font-weight: 400;
-    color: white;
-    z-index: 999999999999999999;
-    cursor: pointer;
-  
-    position: relative;
-  
-    transition: 0.2s all ease-in-out;
-  }
-  .buttonNew span {
-    z-index: 1;
-    position: relative;
-    border-radius: 5px;
-  }
-  
-  .buttonNew::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 0;
-    background-color: hsla(0, 0%, 100%, 0.548);
-    color: white;
-    opacity: 1;
-  
-    border-radius: 5px;
-  
-    transition: 0.2s all ease-in-out;
-    z-index: 0;
-  }
-  
-  .buttonNew:hover::before {
-    width: 100%;
-  }
-  
-  .buttonNew:hover {
-    box-shadow: rgba(255, 253, 253, 0.24) 0px 3px 8px;
-    outline: none;
-  }
-  
-  .buttonNew:active {
-    scale: 0.95;
-    box-shadow: rgba(240, 240, 240, 0.24) 0px 5px 15px;
-  }
-  
-  @media only screen and (max-width: 572px) {
-    .SplashAlpha {
-      padding: 0 0.5rem;
-    }
-  }
-  @media only screen and (max-width: 758px) {
-    .largeImage_container {
-      top: 50%;
-    }
-    .largeImage_text {
-      font-size: 1.3em;
-    }
-  
-    .largeImage_subText {
-      font-size: 0.9em;
-    }
-  }
-  
+}

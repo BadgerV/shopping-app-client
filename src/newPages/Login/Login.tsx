@@ -33,13 +33,9 @@ const Login = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    try {
-      const response = await dispatch(loginUser(formData));
-      if (response.payload) {
-        navigate("/");
-      }
-    } catch (error) {
-      console.log(error);
+    const response = await dispatch(loginUser(formData));
+    if (response.payload) {
+      navigate("/");
     }
   };
 

@@ -72,6 +72,7 @@ const Signup = () => {
                 placeholder="First name"
                 name="firstName"
                 onChange={(e) => handleChange(e)}
+                className="signup-form-input"
               />
               <input
                 value={formData.lastName}
@@ -79,6 +80,7 @@ const Signup = () => {
                 placeholder="Last name"
                 name="lastName"
                 onChange={(e) => handleChange(e)}
+                className="signup-form-input"
               />
               <input
                 value={formData.email}
@@ -86,6 +88,7 @@ const Signup = () => {
                 placeholder="Email"
                 name="email"
                 onChange={(e) => handleChange(e)}
+                className="signup-form-input"
               />
 
               <input
@@ -94,11 +97,13 @@ const Signup = () => {
                 placeholder="Password"
                 name="password"
                 onChange={(e) => handleChange(e)}
+                className="signup-form-input"
               />
               <input
                 type="password"
                 placeholder="Confirm Password"
                 name="password"
+                className="signup-form-input"
               />
               <button
                 className="create-account_button"
@@ -106,7 +111,11 @@ const Signup = () => {
                 disabled={isLoading}
               >
                 {isLoading ? (
-                  <img src="/assets/spinner.svg" alt="spinner"  className="spinner"/>
+                  <img
+                    src="/assets/spinner.svg"
+                    alt="spinner"
+                    className="spinner"
+                  />
                 ) : (
                   <span>Create Account</span>
                 )}

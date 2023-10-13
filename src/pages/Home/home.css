@@ -18,9 +18,9 @@
 .home-menu-icon {
   display: none;
   position: absolute;
-  height: 1.8rem;
-  top: 0.5rem;
-  left: 2rem;
+  height: 1.8em;
+  top: 0.5em;
+  left: 2em;
   z-index: 999999999;
 
   cursor: pointer;
@@ -32,14 +32,12 @@
   transition: 0.2s all ease-in-out;
 }
 
-
 .splash-right {
   width: 100%;
   height: 100%;
-
 }
 
-@media (max-width : 900px) {
+@media (max-width: 900px) {
   .home-splash {
     grid-template-columns: 1fr;
   }
@@ -48,14 +46,13 @@
     position: absolute;
     background-color: white;
     max-width: fit-content;
-    padding: 2rem 1rem 0 0;
+    padding: 2em 1em 0 0;
   }
 
   .splash-right {
-    padding-top: 2rem;
+    padding-top: 2em;
   }
   .home-menu-icon {
     display: block;
-    
   }
 }

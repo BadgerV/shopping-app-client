@@ -19,29 +19,29 @@
 }
 
 .signup-big-text {
-  font-size: 2rem;
+  font-size: 2em;
   font-weight: 500;
   letter-spacing: 1px;
 
   display: block;
-  margin-bottom: 2rem;
+  margin-bottom: 2em;
   margin: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.5em;
 }
 
 .signup-small-text {
-  font-size: 0.85rem;
+  font-size: 0.85em;
   font-weight: 400;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.5em;
 }
 
 .signup-right input {
   outline: none;
   border: none;
   border-bottom: 1px solid rgb(173, 166, 166);
-  padding: 0.5rem 1rem;
+  padding: 0.5em 1em;
   padding-left: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 1em;
 }
 
 .create-account_button {
@@ -52,11 +52,13 @@
   font-weight: 300;
 
   border-radius: 5px;
-  height: 3.5rem;
-  margin-top: 1rem;
+  height: 3.5em;
+  width: 100%;
+  margin-top: 1em;
   transition: 0.2s ease-in-out;
   cursor: pointer;
-  position: relative;
+  font-size: 0.9em;
+  text-align: center;
 }
 
 .create-account_button:disabled {
@@ -67,27 +69,28 @@
   background-color: #db4444;
 }
 
-.create-account_button img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
 
 .already-have_account {
-  font-size: 0.9rem;
+  font-size: 0.9em;
   text-align: center;
   display: block;
-  margin-top: 0.5rem;
+  margin-top: 0.5em;
 }
 
 .link {
   text-decoration: none;
   color: black;
-  margin-left: 0.5rem;
+  margin-left: 0.5em;
+  font-size: 0.9em;
 }
 
 .signup-form {
   display: flex;
   flex-direction: column;
+  gap: 0.2em;
+}
+
+.signup-form-input {
+  font-size: 0.9em;
+  width: 25em;
 }

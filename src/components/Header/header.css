@@ -6,7 +6,7 @@
 
   position: sticky;
 
-  padding: 1.5rem;
+  padding: 1.5em;
   background-color: hsla(0, 0%, 0%, 0.484);
   z-index: 9999999999999999;
 }
@@ -15,17 +15,17 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 1rem;
+  gap: 1em;
 }
 
 .newHeaderLogImg {
-  max-height: 3rem;
+  max-height: 3em;
   aspect-ratio: 1;
 }
 
 .newHeader_logoText {
   font-weight: bold;
-  font-size: 0.9rem;
+  font-size: 0.9em;
   color: white;
 }
 
@@ -34,16 +34,16 @@
 }
 
 .header-search {
-  border-radius: 0.2rem;
-  padding: 0.5rem 1rem;
+  border-radius: 0.2em;
+  padding: 0.5em 1em;
   border: none;
   outline: none;
-  width: 30rem;
+  width: 30em;
 }
 
 .header-search_icon {
   position: absolute;
-  right: 0.7rem;
+  right: 0.7em;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
@@ -51,13 +51,13 @@
 
 .newHeaderButtonContainer {
   display: flex;
-  gap: 1.2rem;
+  gap: 1.2em;
 }
 
 .buttonNew {
-  padding: 0.5rem 1.5rem;
+  padding: 0.5em 1.5em;
   background-color: transparent;
-  font-size: 0.9rem;
+  font-size: 0.9em;
   border-radius: 5px;
   border: none;
   outline: 1px solid white;
@@ -132,7 +132,7 @@
   display: none;
   position: absolute;
   right: 0;
-  top: 2rem;
+  top: 2em;
   background-color: white;
   color: black;
 }
@@ -141,7 +141,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0.5rem 1rem;
+  padding: 0.5em 1em;
   font-weight: bold;
 }
 
@@ -188,25 +188,25 @@
   position: absolute;
   display: none;
 
-  right: -5rem;
-  top: 2.5rem;
+  right: -5em;
+  top: 2.5em;
 
   flex-direction: column;
-  gap: 0.7rem;
+  gap: 0.7em;
   align-items: center;
 
   background-color: rgba(128, 128, 128, 0.873);
   color: aliceblue;
 
-  width: 10rem;
+  width: 10em;
   transform: translateX(-50%);
   outline: 0.5px solid white;
 
-  padding: 0.5rem 0.2rem;
+  padding: 0.5em 0.2em;
 }
 .hover-profile-image-link {
-  font-size: 0.8rem;
-  padding: 0.5rem 0.2rem;
+  font-size: 0.8em;
+  padding: 0.5em 0.2em;
   width: 100%;
   cursor: pointer;
 }
@@ -216,7 +216,7 @@
 
 @media (max-width: 950px) {
   .header-search {
-    width: 20rem;
+    width: 20em;
   }
 }
 @media (max-width: 700px) {
@@ -229,7 +229,7 @@
     display: none;
   }
   .buttonNew {
-    padding: 0.5rem 1rem;
+    padding: 0.5em 1em;
   }
 }
 
@@ -241,12 +241,12 @@
 
 @media (max-width: 483px) {
   .headerNew_container {
-    padding: 1rem;
+    padding: 1em;
   }
   .newHeaderLogImg {
     scale: 1.2;
   }
   .buttonNew {
-    padding: 0.5rem 1rem;
+    padding: 0.5em 1em;
   }
 }

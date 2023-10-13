@@ -59,10 +59,7 @@ const Header = () => {
           )}
         </ul>
       </div>
-      <div
-        className="header-right"
-        style={!user ? { marginRight: "8rem" } : {}}
-      >
+      <div className="header-right" style={!user ? { marginRight: "8em" } : {}}>
         <div className="header-right__searchbar">
           <input type="text" placeholder="What are you looking for?" />
           <img src="/assets/searchicon.png" alt="icon" />

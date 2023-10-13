@@ -32,21 +32,21 @@ const App = () => {
       const verified = await dispatch(verifyToken());
       setIsVerified(verified.payload);
 
-      console.log(verified.payload)
+      console.log(verified.payload);
     } catch (error) {
       console.log(error);
     }
   };
 
   if (!user && theToken) {
-    console.log("blast off")
+    console.log("blast off");
     asyncFunction();
   }
 
   useEffect(() => {
     if (!isVerified) {
-      const removedToken = localStorage.removeItem("token");
-      console.log(removedToken);
+      const emovedToken = localStorage.emoveItem("token");
+      console.log(emovedToken);
     }
   }, [isVerified]);
 

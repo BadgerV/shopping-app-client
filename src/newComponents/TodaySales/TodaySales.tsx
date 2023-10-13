@@ -24,7 +24,7 @@ const TodaySales = () => {
   };
 
   const style = {
-    transform: `translateX(${scrollNumber}rem)`,
+    transform: `translateX(${scrollNumber}em)`,
   };
 
   const products = [
@@ -161,8 +161,7 @@ const TodaySales = () => {
 
         <div className="navi-button-containers">
           <button className="todays-left_button button" onClick={scrollLeft}>
-          <img src="/assets/left-arrow.svg" alt="left" />
-
+            <img src="/assets/left-arrow.svg" alt="left" />
           </button>
           <button className="todays-right_button button" onClick={scrollRight}>
             <img src="/assets/right-arrow.svg" alt="right" />
@@ -176,9 +175,7 @@ const TodaySales = () => {
         })}
       </div>
 
-      <button className="todays-sales_view-more">
-        View All Products
-      </button>
+      <button className="todays-sales_view-more">View All Products</button>
     </div>
   );
 };

@@ -1,117 +1,112 @@
 .Recently {
-    background-color: hsla(0, 0%, 0%, 0.484);
-  
-    padding: 2rem 1.5rem;
+  background-color: hsla(0, 0%, 0%, 0.484);
+
+  padding: 2em 1.5em;
+}
+
+.RecentlyAdded {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1em;
+}
+
+.recentlyAdded_header {
+  font-size: 2em;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  margin-bottom: 1em;
+  display: block;
+}
+
+.reacently-added-more {
+}
+
+.reacently-added-more-inner {
+  display: flex;
+  align-items: center;
+  position: relative;
+  top: 50%;
+  justify-content: center;
+  gap: 0.4em;
+}
+
+.more-button {
+  cursor: pointer;
+  color: white;
+  font-size: 1.1em;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.icon-button {
+  display: flex;
+  align-items: center;
+  animation: moveRightAndBack 1s infinite ease-in-out;
+}
+
+.icon-button:hover {
+  text-shadow: 1px 1px 1px white;
+  scale: 1.1;
+}
+@keyframes moveRightAndBack {
+  0%,
+  100% {
+    transform: translateX(0); /* Initial position */
   }
-  
+  50% {
+    transform: translateX(10px); /* Move to the right by 5 pixels */
+  }
+}
+
+.link {
+  text-decoration: none;
+}
+
+.react-icon {
+  color: white;
+}
+
+@media only screen and (max-width: 1158px) {
   .RecentlyAdded {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 1rem;
+    grid-template-columns: 1fr 1fr 1fr;
   }
-  
-  .recentlyAdded_header {
-    font-size: 2rem;
-    font-weight: bold;
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    margin-bottom: 1rem;
-    display: block;
-  }
+}
 
+@media only screen and (max-width: 875px) {
+  .Recently {
+    padding: 2em 3em;
+  }
+  .RecentlyAdded {
+    grid-template-columns: 1fr 1fr;
+    gap: 2em;
+  }
+}
 
-  .reacently-added-more {
-    
+@media only screen and (max-width: 736px) {
+  .Recently {
+    padding: 2em 1.5em;
   }
+  .RecentlyAdded {
+    gap: 1em;
+  }
+}
 
-  .reacently-added-more-inner {
-    display: flex;
-    align-items: center;
-    position : relative;
-    top: 50%;
-    justify-content: center;
-    gap: 0.4rem;
+@media only screen and (max-width: 607px) {
+  .Recently {
+    padding: 2em 3em;
   }
+  .RecentlyAdded {
+    grid-template-columns: 1fr;
+    gap: 2em;
+  }
+}
 
-  .more-button {
-    cursor: pointer;
-    color: white;
-    font-size: 1.1rem;
-    font-weight: 500;
-    transition: 0.2s;
+@media only screen and (max-width: 420px) {
+  .Recently {
+    padding: 2em 1.5em;
   }
-
-
-  .icon-button {
-    display: flex;
-    align-items: center;
-    animation: moveRightAndBack 1s infinite ease-in-out;
+  .RecentlyAdded {
+    gap: 1em;
   }
-  
-  .icon-button:hover {
-    text-shadow: 1px 1px 1px white;
-    scale: 1.1;
-
-  } 
-  @keyframes moveRightAndBack {
-    0%, 100% {
-      transform: translateX(0); /* Initial position */
-    }
-    50% {
-      transform: translateX(10px); /* Move to the right by 5 pixels */
-    }
-  }
-
-  .link {
-    text-decoration: none;
-  }
-  
-  .react-icon {
-    color: white;
-  }
-
-
-  @media only screen and (max-width: 1158px) {
-    .RecentlyAdded {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-  }
-  
-  @media only screen and (max-width: 875px) {
-    .Recently {
-      padding: 2rem 3rem;
-    }
-    .RecentlyAdded {
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-    }
-  }
-  
-  @media only screen and (max-width: 736px) {
-    .Recently {
-      padding: 2rem 1.5rem;
-    }
-    .RecentlyAdded {
-      gap: 1rem;
-    }
-  }
-  
-  @media only screen and (max-width: 607px) {
-    .Recently {
-      padding: 2rem 3rem;
-    }
-    .RecentlyAdded {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-  }
-  
-  @media only screen and (max-width: 420px) {
-    .Recently {
-      padding: 2rem 1.5rem;
-    }
-    .RecentlyAdded {
-      gap: 1rem;
-    }
-  }
-  
+}

@@ -23,14 +23,13 @@ interface LoginProps {
   password: string;
 }
 
-
 interface UpdateUserProps {
   email: string;
   firstName: string;
   lastName: string;
   phoneNumber: string;
-  password : string;
-  newPassword : string;
+  password: string;
+  newPassword: string;
 }
 
 // Define an async thunk to make the API call nonsese
@@ -62,30 +61,33 @@ export const registerUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }: LoginProps) => {
-    try {
-      const response = await axios.post(
-        "https://shopping-app-j93p.onrender.com/v1/user/login",
-        {
-          email: email,
-          password: password,
-        }
-      );
-
-      if (response.data) {
-        const userToken = JSON.stringify(response.data.token);
-
-        localStorage.setItem("token", userToken);
+    const response = await axios.post(
+      "https://shopping-app-j93p.onrender.com/v1/user/login",
+      {
+        email: email,
+        password: password,
       }
-      return response.data;
-    } catch (error) {
-      console.log(error);
+    );
+
+    if (response.data) {
+      const userToken = JSON.stringify(response.data.token);
+
+      localStorage.setItem("token", userToken);
     }
+    return response.data;
   }
 );
 
 export const updateUser = createAsyncThunk(
   "user/updateUser",
-  async ({ firstName, lastName, email, phoneNumber, password, newPassword }: UpdateUserProps) => {
+  async ({
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    password,
+    newPassword,
+  }: UpdateUserProps) => {
     // Retrieve the token from localStorage
     const theToken = localStorage.getItem("token");
     let theNewToken = null;
@@ -107,8 +109,8 @@ export const updateUser = createAsyncThunk(
         lastName: lastName,
         email: email,
         phoneNumber: phoneNumber,
-        password : password,
-        newPassword : newPassword
+        password: password,
+        newPassword: newPassword,
       },
       { headers: headers }
     );
@@ -139,7 +141,7 @@ export const verifyToken = createAsyncThunk("user/verifyToken", async () => {
     );
 
     if (!response.data) {
-      localStorage.removeItem("token");
+      localStorage.emoveItem("token");
     }
     return response.data;
   } catch (error) {

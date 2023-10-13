@@ -52,7 +52,7 @@ const Profile = () => {
       updateUser({
         firstName: formData.firstName,
         lastName: formData.lastName,
-        email: formData.email,
+        email: user?.email ? user.email : "",
         password: formData.formerPassword,
         newPassword: formData.confirmPassword,
         phoneNumber: formData.phoneNumber,
@@ -67,7 +67,7 @@ const Profile = () => {
     thirdArgument: string
   ) => {
     console.log(firstArgument, secondArgument, thirdArgument);
-    if (firstArgument === secondArgument && secondArgument === thirdArgument) {
+    if (secondArgument === thirdArgument) {
       return false;
     } else {
       return true;
@@ -97,7 +97,7 @@ const Profile = () => {
           </div>
           <div className="profile-page_min-right">
             <span className="profile-page_welcome-text">Welcome </span>
-            <span className="profile-page_name-text">Segunmaru Faozan</span>
+            <span className="profile-page_name-text">{`${user?.firstName} ${user?.lastName}`}</span>
           </div>
         </div>
 
@@ -226,7 +226,10 @@ const Profile = () => {
                   onClick={handleSave}
                 >
                   {isLoading ? (
-                    <img src="/assets/spinner.svg" className="profile-page_spinner"/>
+                    <img
+                      src="/assets/spinner.svg"
+                      className="profile-page_spinner"
+                    />
                   ) : (
                     "Save Changes"
                   )}

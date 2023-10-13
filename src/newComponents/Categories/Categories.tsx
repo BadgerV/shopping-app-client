@@ -30,7 +30,7 @@ const Categories = () => {
   };
 
   const style = {
-    transform: `translateX(${scrollNumber}rem)`,
+    transform: `translateX(${scrollNumber}em)`,
   };
 
   return (
@@ -55,11 +55,15 @@ const Categories = () => {
           >
             <img src="/assets/left-arrow.svg" alt="left" />
           </button>
-          <button className="categories-right_button" onClick={scrollRight} style={
+          <button
+            className="categories-right_button"
+            onClick={scrollRight}
+            style={
               scrollNumber === -8
                 ? { backgroundColor: "rgba(250, 234, 214, 0.246)" }
                 : {}
-            }>
+            }
+          >
             <img src="/assets/right-arrow.svg" alt="right" />
           </button>
         </div>
