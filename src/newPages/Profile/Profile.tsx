@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../redux/store";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { updateUser } from "../../redux/slice/userSlice";
 
 const Profile = () => {
