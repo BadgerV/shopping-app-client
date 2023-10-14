@@ -5,10 +5,10 @@ import axios from "axios";
 interface UserState {
   user: UserProps | null;
   isLoading: boolean;
+  isSpecialLoading : boolean;
   error: string | undefined;
   isSuccess: boolean;
   userToken: string | null;
-  fakeVerify: boolean;
 }
 
 interface UserProps {
@@ -36,6 +36,7 @@ interface UpdateUserProps {
 export const registerUser = createAsyncThunk(
   "user/registerUser",
   async ({ firstName, lastName, email, password }: UserProps) => {
+    console.log("register user function Working");
     const response = await axios.post(
       "https://shopping-app-j93p.onrender.com/v1/user/signup",
       {
@@ -61,6 +62,7 @@ export const registerUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }: LoginProps) => {
+    console.log("login user function Working");
     const response = await axios.post(
       "https://shopping-app-j93p.onrender.com/v1/user/login",
       {
@@ -88,6 +90,7 @@ export const updateUser = createAsyncThunk(
     password,
     newPassword,
   }: UpdateUserProps) => {
+    console.log("Update user function Working");
     // Retrieve the token from localStorage
     const theToken = localStorage.getItem("token");
     let theNewToken = null;
@@ -120,6 +123,7 @@ export const updateUser = createAsyncThunk(
 );
 
 export const verifyToken = createAsyncThunk("user/verifyToken", async () => {
+  console.log("Verify Token Working")
   try {
     // Retrieve the token from localStorage nonsese
 
@@ -141,7 +145,7 @@ export const verifyToken = createAsyncThunk("user/verifyToken", async () => {
     );
 
     if (!response.data) {
-      localStorage.emoveItem("token");
+      localStorage.removeItem("token");
     }
     return response.data;
   } catch (error) {
@@ -149,26 +153,15 @@ export const verifyToken = createAsyncThunk("user/verifyToken", async () => {
   }
 });
 
-//staeted commendting my code today
-export const verifyIfToken = createAsyncThunk(
-  "user/veryfyIfToken",
-  async () => {
-    const theToken = localStorage.getItem("token");
 
-    if (theToken === null) {
-      throw new Error("Please Login");
-    }
-    return true;
-  }
-);
 
 const initialState: UserState = {
   user: null,
   userToken: null,
-  fakeVerify: false,
   isLoading: false,
   isSuccess: false, // Initialize isSuccess as false
   error: undefined,
+  isSpecialLoading : false
 };
 
 const userSlice = createSlice({
@@ -221,21 +214,17 @@ const userSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(verifyToken.pending, (state) => {
-        state.isLoading = true;
+        state.isSpecialLoading = true;
       })
       .addCase(verifyToken.fulfilled, (state, action) => {
-        state.isLoading = false;
+        state.isSpecialLoading = false;
         state.user = action.payload;
         state.isSuccess = true;
       })
       .addCase(verifyToken.rejected, (state, action) => {
-        state.isLoading = false;
+        state.isSpecialLoading = false;
         state.error = action.error.message;
       })
-      .addCase(verifyIfToken.fulfilled, (state) => {
-        state.isSuccess = true;
-        state.fakeVerify = true;
-      });
   },
 });
 

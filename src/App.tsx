@@ -10,10 +10,11 @@ import ProtectedRoutes, {
 } from "./utils/utilsFunctions";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./redux/store";
-import { verifyToken, verifyIfToken } from "./redux/slice/userSlice";
+import { verifyToken } from "./redux/slice/userSlice";
 import Signup from "./newPages/SignUp/Signup";
 import Login from "./newPages/Login/Login";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+import BecomeVendor from "./newPages/BecomeVendor/BecomeVendor";
 // import Signup from "./newPages/SignUp/Signup";
 // import Login from "./newPages/Login/Login";
 
@@ -21,34 +22,16 @@ const App = () => {
   const dispatch = useDispatch<AppDispatch>();
   const user = useSelector((state: RootState) => state.userSlice.user);
 
-  const [isVerified, setIsVerified] = useState(true);
-
   const theToken = localStorage.getItem("token");
 
-  dispatch(verifyIfToken());
-
   const asyncFunction = async () => {
-    try {
-      const verified = await dispatch(verifyToken());
-      setIsVerified(verified.payload);
-
-      console.log(verified.payload);
-    } catch (error) {
-      console.log(error);
-    }
+    await dispatch(verifyToken());
   };
 
   if (!user && theToken) {
     console.log("blast off");
     asyncFunction();
   }
-
-  useEffect(() => {
-    if (!isVerified) {
-      const emovedToken = localStorage.emoveItem("token");
-      console.log(emovedToken);
-    }
-  }, [isVerified]);
 
   return (
     <Router>
@@ -58,6 +41,7 @@ const App = () => {
 
           <Route element={<ProtectedRoutes />}>
             <Route path="/profile" element={<Profile />} />
+            <Route path="/become-vendor" element={<BecomeVendor />} />
           </Route>
 
           <Route element={<DenyLoginPage />}>

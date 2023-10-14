@@ -1,0 +1,33 @@
+.loading-component {
+  height: 100vh;
+  width: 100vw;
+  outline: 1px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-container {
+  width: 50%;
+  height: 20em;
+  overflow: hidden;
+  position: relative
+}
+
+.cart {
+  position: absolute;
+  animation: moveCart 1s linear infinite;
+  width: 5em;
+  height: 5em; /* Adjust the height as needed */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@keyframes moveCart {
+  0% {
+    left: -32px;
+  }
+  100% {
+    left: 100%; /* Move the cart to the right edge of the container */
+  }
+}

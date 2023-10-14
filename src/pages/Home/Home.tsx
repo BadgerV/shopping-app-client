@@ -15,45 +15,57 @@ import BestSelling from "../../newComponents/BestSelling/BestSelling";
 import ExploreProducts from "../../newComponents/ExploreProducts/ExploreProducts";
 import Featured from "../../newComponents/Featured/Featured";
 import Footer from "../../newComponents/Footer/Footer";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import LoadingComponent from "../../newComponents/LoadingComponent/LoadingComponent";
 
 const Home = () => {
   const [menu, setMenu] = useState(false);
+  const isSpecialLoading = useSelector(
+    (state: RootState) => state.userSlice.isSpecialLoading
+  );
 
   return (
-    <div className="home-style">
-      {/* <Header />
+    <>
+      {isSpecialLoading ? (
+        <LoadingComponent />
+      ) : (
+        <div className="home-style">
+          {/* <Header />
       <Splash />
       <RecentlyAdded />
       <PopularProducts />
       <Categories /> */}
 
-      <Header />
+          <Header />
 
-      <div className="home-splash">
-        <img
-          src="/assets/menu.svg"
-          alt="menu"
-          className="home-menu-icon"
-          onClick={() => setMenu(!menu)}
-        />
-        <div
-          className="splash-left"
-          style={menu ? { left: "0" } : { left: "-100%" }}
-        >
-          <SplashLeft />
-        </div>
-        <div className="splash-right">
-          <SplashMain />
-        </div>
-      </div>
+          <div className="home-splash">
+            <img
+              src="/assets/menu.svg"
+              alt="menu"
+              className="home-menu-icon"
+              onClick={() => setMenu(!menu)}
+            />
+            <div
+              className="splash-left"
+              style={menu ? { left: "0" } : { left: "-100%" }}
+            >
+              <SplashLeft />
+            </div>
+            <div className="splash-right">
+              <SplashMain />
+            </div>
+          </div>
 
-      <TodaySales />
-      <Categories />
-      <BestSelling />
-      <ExploreProducts />
-      <Featured />
-      <Footer />
-    </div>
+          <TodaySales />
+          <Categories />
+          <BestSelling />
+          <ExploreProducts />
+          <Featured />
+          <Footer />
+        </div>
+      )}
+    </>
   );
 };
 

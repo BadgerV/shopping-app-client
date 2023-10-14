@@ -8,14 +8,18 @@ import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 
 const Header = () => {
-  const [user, setUser] = useState(false);
-  const fakeVerify = useSelector(
-    (state: RootState) => state.userSlice.fakeVerify
-  );
+  interface UserProps {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+  }
+  const [theUser, setUser] = useState<null | UserProps>(null);
+  const user = useSelector((state: RootState) => state.userSlice.user);
 
   useEffect(() => {
-    setUser(fakeVerify);
-  }, [fakeVerify]);
+    setUser(user);
+  }, [user]);
 
   return (
     <div className="header">
@@ -40,7 +44,7 @@ const Header = () => {
             </Link>
           </li>
 
-          {!user ? (
+          {!theUser ? (
             <>
               <li className="header-center_link">
                 <Link to="/signup" className="header-link">
