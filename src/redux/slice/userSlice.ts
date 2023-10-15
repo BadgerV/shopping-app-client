@@ -16,7 +16,7 @@ interface UserProps {
   lastName: string;
   email: string;
   password: string;
-  isVendor: string;
+  isVendor?: string;
 }
 
 interface LoginProps {

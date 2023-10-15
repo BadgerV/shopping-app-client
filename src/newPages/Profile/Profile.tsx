@@ -139,12 +139,16 @@ const Profile = () => {
                 <div className="profile-page_left-heading-and-text">
                   <span className="profile-page-heading">Vendor</span>
                   <span className="profile-page-regular-link">Vendors</span>
-                  <Link
-                    to="/become-vendor"
-                    className="profile-page-regular-link"
-                  >
-                    Become a Vendor
-                  </Link>
+                  {user?.isVendor === "true" ? (
+                    <></>
+                  ) : (
+                    <Link
+                      to="/become-vendor"
+                      className="profile-page-regular-link"
+                    >
+                      Become a Vendor
+                    </Link>
+                  )}
                 </div>
               </div>
 

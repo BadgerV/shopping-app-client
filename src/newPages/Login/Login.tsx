@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { loginUser } from "../../redux/slice/userSlice";
 import { useNavigate } from "react-router-dom";
+import LoadingComponent from "../../newComponents/LoadingComponent/LoadingComponent";
 
 const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -17,6 +18,10 @@ const Login = () => {
 
   const isLoading = useSelector(
     (state: RootState) => state.userSlice.isLoading
+  );
+
+  const specialIsLoading = useSelector(
+    (state: RootState) => state.userSlice.isSpecialLoading
   );
 
   const [formData, setFormData] = useState({
@@ -41,64 +46,71 @@ const Login = () => {
 
   return (
     <>
-      <Header />
+      {specialIsLoading ? (
+        <LoadingComponent />
+      ) : (
+        <>
+          {" "}
+          <Header />
+          <div className="signup">
+            <div className="signup-left">
+              <img src="/assets/SideImage.png" alt="Image" />
+            </div>
+            <div className="signup-right">
+              <div className="signup-right_inner">
+                <span className="signup-big-text">Login to LagShop</span>
+                <span className="signup-small-text">
+                  Enter your details below
+                </span>
 
-      <div className="signup">
-        <div className="signup-left">
-          <img src="/assets/SideImage.png" alt="Image" />
-        </div>
-        <div className="signup-right">
-          <div className="signup-right_inner">
-            <span className="signup-big-text">Login to LagShop</span>
-            <span className="signup-small-text">Enter your details below</span>
+                <form
+                  action="submit"
+                  className="signup-form"
+                  onSubmit={handleSubmit}
+                >
+                  <input
+                    value={formData.email}
+                    onChange={handleChange}
+                    type="email"
+                    className="login-input"
+                    placeholder="Email"
+                    id="email"
+                    name="email"
+                  />
+                  <input
+                    value={formData.password}
+                    onChange={handleChange}
+                    className="login-input"
+                    type="password"
+                    placeholder="Password"
+                    id="password"
+                    name="password"
+                  />
+                  <button
+                    className="create-account_button"
+                    disabled={isLoading}
+                    type="submit"
+                  >
+                    {isLoading ? (
+                      <img src="/assets/spinner.svg" alt="" />
+                    ) : (
+                      <span>Login</span>
+                    )}
+                  </button>
+                </form>
 
-            <form
-              action="submit"
-              className="signup-form"
-              onSubmit={handleSubmit}
-            >
-              <input
-                value={formData.email}
-                onChange={handleChange}
-                type="email"
-                className="login-input"
-                placeholder="Email"
-                id="email"
-                name="email"
-              />
-              <input
-                value={formData.password}
-                onChange={handleChange}
-                className="login-input"
-                type="password"
-                placeholder="Password"
-                id="password"
-                name="password"
-              />
-              <button
-                className="create-account_button"
-                disabled={isLoading}
-                type="submit"
-              >
-                {isLoading ? (
-                  <img src="/assets/spinner.svg" alt="" />
-                ) : (
-                  <span>Login</span>
-                )}
-              </button>
-            </form>
-
-            <span className="already-have_account">
-              Don't have an account?{" "}
-              <Link to="/signup" className="link">
-                Sign up
-              </Link>
-            </span>
+                <span className="already-have_account">
+                  Don't have an account?{" "}
+                  <Link to="/signup" className="link">
+                    Sign up
+                  </Link>
+                </span>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-
-      <Footer />
+          <Footer />
+        </>
+      )}
     </>
   );
 };
