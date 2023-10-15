@@ -28,7 +28,7 @@ const Profile = () => {
     lastName: "",
     email: "",
     phoneNumber: "",
-    isVendor: false,
+    isVendor: "",
     formerPassword: "",
     newPassword: "",
     confirmPassword: "",

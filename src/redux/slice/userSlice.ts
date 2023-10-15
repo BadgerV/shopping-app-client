@@ -5,7 +5,7 @@ import axios from "axios";
 interface UserState {
   user: UserProps | null;
   isLoading: boolean;
-  isSpecialLoading : boolean;
+  isSpecialLoading: boolean;
   error: string | undefined;
   isSuccess: boolean;
   userToken: string | null;
@@ -16,6 +16,7 @@ interface UserProps {
   lastName: string;
   email: string;
   password: string;
+  isVendor: string;
 }
 
 interface LoginProps {
@@ -30,6 +31,18 @@ interface UpdateUserProps {
   phoneNumber: string;
   password: string;
   newPassword: string;
+}
+
+interface BecomeVendorProps {
+  matricNumber: string;
+  DOB: any;
+  gender: string | undefined;
+  motto: string;
+  department: string;
+  avatar: any;
+  firstCategory: string;
+  secondCategory: string;
+  thirdCategory: string;
 }
 
 // Define an async thunk to make the API call nonsese
@@ -58,11 +71,10 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-//outlet that allows users to logink 
+//outlet that allows users to logink
 export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }: LoginProps) => {
-    console.log("login user function Working");
     const response = await axios.post(
       "https://shopping-app-j93p.onrender.com/v1/user/login",
       {
@@ -90,7 +102,6 @@ export const updateUser = createAsyncThunk(
     password,
     newPassword,
   }: UpdateUserProps) => {
-    console.log("Update user function Working");
     // Retrieve the token from localStorage
     const theToken = localStorage.getItem("token");
     let theNewToken = null;
@@ -123,7 +134,6 @@ export const updateUser = createAsyncThunk(
 );
 
 export const verifyToken = createAsyncThunk("user/verifyToken", async () => {
-  console.log("Verify Token Working")
   try {
     // Retrieve the token from localStorage nonsese
 
@@ -153,15 +163,58 @@ export const verifyToken = createAsyncThunk("user/verifyToken", async () => {
   }
 });
 
+export const becomeVendor = createAsyncThunk(
+  "user/becomeVendor",
+  async ({
+    matricNumber,
+    DOB,
+    gender,
+    motto,
+    department,
+    avatar,
+    thirdCategory,
+    secondCategory,
+    firstCategory,
+  }: BecomeVendorProps) => {
+    // Retrieve the token from localStorage
+    const theToken = localStorage.getItem("token");
+    let theNewToken = null;
+    if (theToken) {
+      theNewToken = JSON.parse(theToken);
+    }
 
+    // Set the Axios request headers with the Authorization header
+    const headers = {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${theNewToken}`,
+    };
 
+    const response = await axios.post(
+      "https://shopping-app-j93p.onrender.com/v1/user/be-vendor/",
+      {
+        matricNumber: matricNumber,
+        DOB: DOB,
+        gender: gender,
+        motto: motto,
+        department: department,
+        avatar: avatar,
+        firstCategory: firstCategory,
+        secondCategory: secondCategory,
+        thirdCategory: thirdCategory,
+      },
+      { headers: headers }
+    );
+
+    return response.data;
+  }
+);
 const initialState: UserState = {
   user: null,
   userToken: null,
   isLoading: false,
   isSuccess: false, // Initialize isSuccess as false
   error: undefined,
-  isSpecialLoading : false
+  isSpecialLoading: false,
 };
 
 const userSlice = createSlice({
@@ -225,6 +278,18 @@ const userSlice = createSlice({
         state.isSpecialLoading = false;
         state.error = action.error.message;
       })
+      .addCase(becomeVendor.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(becomeVendor.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload;
+        state.isSuccess = true;
+      })
+      .addCase(becomeVendor.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message || "An error occured";
+      });
   },
 });
 

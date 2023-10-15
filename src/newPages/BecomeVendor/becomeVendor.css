@@ -39,6 +39,9 @@
   border: 1px solid #ccc;
 }
 
+.become-vendor-image {
+  object-fit: cover; /* Fit the image, cropping if necessary */
+}
 /* DateOfBirthPicker.css */
 
 .date-of-birth-container {
@@ -112,4 +115,8 @@
   border-radius: 5px;
   margin-top: 1.5em;
   font-size: 0.9em;
+}
+
+.become-vendor_submit-button:disabled {
+  background-color: green;
 }

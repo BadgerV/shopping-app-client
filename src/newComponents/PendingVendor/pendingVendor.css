@@ -1,0 +1,40 @@
+.pending-page {
+  height: 100vh;
+  width: 100vw;
+}
+
+.pending-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.pending-text {
+  font-size: 3em;
+  font-weight: 500;
+}
+
+
+.pending-link {
+    font-size: 1em;
+    font-weight: 400;
+    text-decoration: none;
+    color: white;
+    height: 4em;
+    width: 12em;
+    cursor: pointer;
+    background-color: #db4444;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s all ease-in-out;
+}
+
+.pending-link:hover {
+    background-color: #db4444e4;
+
+}

@@ -85,11 +85,9 @@ const Header = () => {
               <div className="avatar-hoverable">
                 <div className="avatar-hoverable-comp">
                   <img src="/assets/user-icon.svg" alt="icon" />
-                  <span>
                     <Link className="header-link-white" to="/profile">
                       Manage My Account
                     </Link>
-                  </span>
                 </div>
                 <div className="avatar-hoverable-comp">
                   <img src="/assets/package-icon.svg" alt="icon" />
