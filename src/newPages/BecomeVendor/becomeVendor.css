@@ -72,18 +72,19 @@
 }
 
 .extra-label {
-  background-color: #0056b3;
-  padding: 0.5em;
+  background-color: #db4444;
+  padding: 1em;
   margin-bottom: 2em;
   display: block;
   width: fit-content;
   border-radius: 5px;
   transition: 0.2s all ease-in-out;
   color: white;
+  font-size: 0.9em;
 }
 
 .extra-label:hover {
-  background-color: #2689f2;
+  background-color: #db4444ee;
 }
 
 .image-upload {
@@ -98,4 +99,17 @@
   height: 10em;
   width: 10em;
   border-radius: 50%;
+}
+
+.become-vendor_submit-button {
+  outline: none;
+  border: none;
+  height: 4em;
+  width: 12em;
+  background-color: #db4444;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 1.5em;
+  font-size: 0.9em;
 }

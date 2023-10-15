@@ -168,6 +168,8 @@ const BecomeVendor = () => {
             menuPlacement="top"
           />
         </div>
+
+        <button className="become-vendor_submit-button">Submit</button>
       </div>
     </div>
   );
