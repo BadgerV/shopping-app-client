@@ -13,6 +13,8 @@ import LoadingComponent from "../../newComponents/LoadingComponent/LoadingCompon
 const Profile = () => {
   const user = useSelector((state: RootState) => state.userSlice.user);
 
+  const isVendor = useSelector((state : RootState) => state.userSlice.user?.isVendor);
+
   //check isLoading state in redux
   const isLoading = useSelector(
     (state: RootState) => state.userSlice.isLoading
@@ -28,7 +30,6 @@ const Profile = () => {
     lastName: "",
     email: "",
     phoneNumber: "",
-    isVendor: "",
     formerPassword: "",
     newPassword: "",
     confirmPassword: "",
@@ -65,7 +66,6 @@ const Profile = () => {
   };
 
   const checkIfPasswordsMatch = (
-    firstArgument: string,
     secondArgument: string,
     thirdArgument: string
   ) => {
@@ -80,7 +80,6 @@ const Profile = () => {
     // Perform actions after state update
     setPasswordsMatch(
       checkIfPasswordsMatch(
-        formData.formerPassword,
         formData.newPassword,
         formData.confirmPassword
       )
@@ -139,7 +138,7 @@ const Profile = () => {
                 <div className="profile-page_left-heading-and-text">
                   <span className="profile-page-heading">Vendor</span>
                   <span className="profile-page-regular-link">Vendors</span>
-                  {user?.isVendor === "true" ? (
+                  {isVendor === "true" ? (
                     <></>
                   ) : (
                     <Link
