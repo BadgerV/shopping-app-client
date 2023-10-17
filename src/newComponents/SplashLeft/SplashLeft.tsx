@@ -1,8 +1,22 @@
 import "./splashLeft.css";
+import { Link } from "react-router-dom";
 
 const SplashLeft = () => {
   return (
     <div className="splash-left__container">
+      <ul className="splash-left_header_links">
+        <li className="header-center_link">
+          <Link to="/signup" className="header-link">
+            Sign up
+          </Link>
+        </li>
+
+        <li className="header-center_link">
+          <Link to="/signin" className="header-link">
+            Sign in
+          </Link>
+        </li>
+      </ul>
       <div className="splash-left__category">
         <span>Women's Fashion</span>
         <img src="/assets/dropdown.svg" alt="icon" />

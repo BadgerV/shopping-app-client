@@ -6,6 +6,8 @@
   padding: 2em;
   font-size: 0.9em;
   overflow: hidden;
+  z-index: -1;
+  
 }
 
 .today-sales-header {

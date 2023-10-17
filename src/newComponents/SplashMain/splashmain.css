@@ -9,6 +9,7 @@
   width: 100%;
 }
 
+
 @media (max-width: 800px) {
   .splash-main {
     padding: 1em;
@@ -16,7 +17,11 @@
 }
 
 @media (max-width: 680px) {
-  .splash-main {
-    display: none;
+  .splash-main img {
+    object-fit: cover;
+    min-height: 20em;
   }
 }
+
+
+
