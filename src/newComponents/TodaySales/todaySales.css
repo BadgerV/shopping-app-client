@@ -130,3 +130,10 @@
   font-weight: 400;
   letter-spacing: 1px;
 }
+
+@media (max-width : 690px) {
+  .todays-sales__middle-container-left {
+    flex-direction: column; 
+    gap: 1em;
+  }
+}

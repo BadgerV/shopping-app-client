@@ -1,31 +1,31 @@
-import { useState } from "react";
+// import { useState } from "react";
 
 import Product from "../Product/Product";
 import "./todaySales.css";
 
 const TodaySales = () => {
-  const [scrollNumber, setScrollNumber] = useState(0);
+  // const [scrollNumber, setScrollNumber] = useState(0);
 
-  const scrollRight = () => {
-    // console.log(scrollNumber);
-    if (scrollNumber == -60) {
-      return;
-    } else {
-      setScrollNumber(scrollNumber - 15);
-    }
-  };
+  // const scrollRight = () => {
+  //   // console.log(scrollNumber);
+  //   if (scrollNumber == -60) {
+  //     return;
+  //   } else {
+  //     setScrollNumber(scrollNumber - 15);
+  //   }
+  // };
 
-  const scrollLeft = () => {
-    if (scrollNumber == 0) {
-      return;
-    } else {
-      setScrollNumber(scrollNumber + 15);
-    }
-  };
+  // const scrollLeft = () => {
+  //   if (scrollNumber == 0) {
+  //     return;
+  //   } else {
+  //     setScrollNumber(scrollNumber + 15);
+  //   }
+  // };
 
-  const style = {
-    transform: `translateX(${scrollNumber}em)`,
-  };
+  // const style = {
+  //   transform: `translateX(${scrollNumber}em)`,
+  // };
 
   const products = [
     {
@@ -159,17 +159,10 @@ const TodaySales = () => {
           </div>
         </div>
 
-        <div className="navi-button-containers">
-          <button className="todays-left_button button" onClick={scrollLeft}>
-            <img src="/assets/left-arrow.svg" alt="left" />
-          </button>
-          <button className="todays-right_button button" onClick={scrollRight}>
-            <img src="/assets/right-arrow.svg" alt="right" />
-          </button>
-        </div>
+       
       </div>
 
-      <div className="today-sales__products" style={style}>
+      <div className="today-sales__products" >
         {products.map((product, index) => {
           return <Product key={index} {...product} />;
         })}
