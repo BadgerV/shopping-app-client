@@ -2,12 +2,14 @@
   background-color: black;
   color: white;
 
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-  gap: 2em;
-  width: 100%; /* Make the grid container take the full width of the page */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1.5em;
 
   padding: 2em 4em;
+  max-width: 100vw;
+  overflow: hidden;
 }
 
 .footer-left {
@@ -98,4 +100,36 @@
   display: flex;
   flex-direction: row;
   gap: 1.5em;
+}
+
+
+@media(max-width : 1270px) {
+  .footer {
+    padding: 2em;
+  }
+  .footer-middle {
+    min-width: fit-content;
+  }
+}
+
+@media (max-width : 1060px) {
+  .footer-left {
+    flex-direction: column;
+    gap: 1em;
+  }
+}
+
+@media (max-width : 875px) {
+  .footer-right {
+    flex-direction: column;
+    gap: 1em;
+  }
+}
+
+@media (max-width : 643px) {
+  .footer {
+    flex-direction: column;
+    gap: 2em;
+    align-items: center;
+  }
 }

@@ -5,6 +5,8 @@
 
   padding: 2em;
   font-size: 0.9em;
+  max-width: 100vw;
+  overflow: hidden;
 }
 
 .featured_header {
@@ -172,4 +174,25 @@
   font-size: 1em;
   font-weight: 600;
   cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  object-fit: contain;
+}
+
+
+@media (max-width : 1050px) {
+  .featured-bottom {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+
+@media(max-width : 560px) {
+  .featured-right_bottom {
+    display: flex;
+    flex-direction: column;
+  }
 }

@@ -48,8 +48,17 @@
 }
 
 .best-selling_products_cont {
-  display: flex;
+   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 1em;
+}
+
+
+@media screen and (max-width : 450px) {
+  .best-selling_large_text {
+    font-size: 1.5em;
+  }
 }
