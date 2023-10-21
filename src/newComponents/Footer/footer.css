@@ -17,6 +17,7 @@
   flex-direction: row;
   gap: 2em;
   outline: 1px solid yellow;
+  outline: 1px solid red;
 }
 
 .footer-right {
