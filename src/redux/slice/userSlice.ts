@@ -17,6 +17,7 @@ interface UserProps {
   email: string;
   password: string;
   isVendor?: string;
+  avatar: null | string | ArrayBufferLike | any;
 }
 
 interface LoginProps {
@@ -153,13 +154,15 @@ export const verifyToken = createAsyncThunk("user/verifyToken", async () => {
         headers: headers,
       }
     );
-
+    
     if (!response.data) {
       localStorage.removeItem("token");
     }
+
     return response.data;
   } catch (error) {
-    console.log(error);
+      localStorage.removeItem("token");
+    return error;
   }
 });
 

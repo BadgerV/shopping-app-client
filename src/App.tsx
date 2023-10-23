@@ -15,6 +15,7 @@ import Signup from "./newPages/SignUp/Signup";
 import Login from "./newPages/Login/Login";
 // import { useEffect, useState } from "react";
 import BecomeVendor from "./newPages/BecomeVendor/BecomeVendor";
+import MyVendorPage from "./newPages/MyVendorPage/MyVendorPage";
 // import Signup from "./newPages/SignUp/Signup";
 // import Login from "./newPages/Login/Login";
 
@@ -42,6 +43,7 @@ const App = () => {
           <Route element={<ProtectedRoutes />}>
             <Route path="/profile" element={<Profile />} />
             <Route path="/become-vendor" element={<BecomeVendor />} />
+            <Route path = "my-vendor-page" element= {<MyVendorPage />} />
           </Route>
 
           <Route element={<DenyLoginPage />}>

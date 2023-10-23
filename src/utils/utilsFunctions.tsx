@@ -17,7 +17,5 @@ export const DenyLoginPage = () => {
 export const DenySignUpPage = () => {
   const user = useSelector((state: RootState) => state.userSlice.user);
 
-  console.log(user);
-
   return !user ? <Outlet /> : <Navigate to="/" />;
 };

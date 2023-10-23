@@ -21,6 +21,11 @@ const Header = () => {
     setUser(user);
   }, [user]);
 
+  const base64String = String.fromCharCode(...new Uint8Array(user?.avatar));
+
+  console.log(user);
+  console.log(base64String);
+
   return (
     <div className="header">
       <div className="header-left">
@@ -43,6 +48,16 @@ const Header = () => {
               Vendors
             </Link>
           </li>
+
+          {user?.isVendor == "true" ? (
+            <li className="header-center_link">
+              <Link to="/my-vendor-page" className="header-link">
+                My Page
+              </Link>
+            </li>
+          ) : (
+            <></>
+          )}
 
           {!theUser ? (
             <>
@@ -80,14 +95,22 @@ const Header = () => {
             </div>
 
             <div className="header-left__avatar">
-              <img src="/assets/avatar.jpg" alt="avatar" />
+              <img
+                style={user.avatar ? { borderRadius: "50%" } : {}}
+                src={
+                  user.avatar
+                    ? `data:image/png;base64,${user.avatar}`
+                    : "/assets/avatar.jpg"
+                }
+                alt="Avatar Image"
+              />
 
               <div className="avatar-hoverable">
                 <div className="avatar-hoverable-comp">
                   <img src="/assets/user-icon.svg" alt="icon" />
-                    <Link className="header-link-white" to="/profile">
-                      Manage My Account
-                    </Link>
+                  <Link className="header-link-white" to="/profile">
+                    Manage My Account
+                  </Link>
                 </div>
                 <div className="avatar-hoverable-comp">
                   <img src="/assets/package-icon.svg" alt="icon" />

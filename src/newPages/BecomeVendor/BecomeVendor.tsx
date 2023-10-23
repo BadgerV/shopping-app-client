@@ -12,6 +12,7 @@ import { RootState } from "../../redux/store";
 import PendingVendor from "../../newComponents/PendingVendor/PendingVendor";
 import LoadingComponent from "../../newComponents/LoadingComponent/LoadingComponent";
 import Header from "../../newComponents/Header/Header";
+import { useNavigate } from "react-router-dom";
 
 interface Option {
   value: string;
@@ -36,7 +37,15 @@ const CategoryOptions: Option[] = [
 const maxSelections = 3;
 
 const BecomeVendor = () => {
+  const navigate = useNavigate();
+
   const user = useSelector((state: RootState) => state.userSlice.user);
+
+  if (user?.isVendor == "true") {
+    navigate("/my-vendor-page");
+    console.log("working");
+  }
+
   const isSpecialLoading = useSelector(
     (state: RootState) => state.userSlice.isSpecialLoading
   );
