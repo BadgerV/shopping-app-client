@@ -2,7 +2,7 @@ import './myVendorPage.css';
 
 const MyVendorPage = () => {
   return (
-    <div>MyVendorPage</div>
+    <div>Interesting shit</div>
   )
 }
 
