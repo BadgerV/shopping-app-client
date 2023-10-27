@@ -1,6 +1,5 @@
 import './myVendorPage.css';
 
-//Comment
 
 const MyVendorPage = () => {
   return (
