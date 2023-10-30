@@ -1,6 +1,6 @@
 import './myVendorPage.css';
 
-//commenting rubbish in my code
+//commenting rubbish 
 const MyVendorPage = () => {
   return (
     <div>Interesting shit</div>
