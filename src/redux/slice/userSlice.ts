@@ -2,6 +2,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // import { RootState } from "../store";
 import axios from "axios";
 
+const development = "http://localhost:3000";
+// const production = "https://shopping-app-j93p.onrender.com";
+
 interface UserState {
   user: UserProps | null;
   isLoading: boolean;
@@ -61,15 +64,12 @@ export const registerUser = createAsyncThunk(
   "user/registerUser",
   async ({ firstName, lastName, email, password }: UserProps) => {
     console.log("register user function Working");
-    const response = await axios.post(
-      "https://shopping-app-j93p.onrender.com/v1/user/signup",
-      {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password,
-      }
-    );
+    const response = await axios.post(`${development}/v1/user/signup`, {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+    });
 
     if (response.data) {
       const userToken = JSON.stringify(response.data.token);
@@ -86,13 +86,10 @@ export const registerUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }: LoginProps) => {
-    const response = await axios.post(
-      "https://shopping-app-j93p.onrender.com/v1/user/login",
-      {
-        email: email,
-        password: password,
-      }
-    );
+    const response = await axios.post(`${development}/v1/user/login`, {
+      email: email,
+      password: password,
+    });
 
     if (response.data) {
       const userToken = JSON.stringify(response.data.token);
@@ -128,7 +125,7 @@ export const updateUser = createAsyncThunk(
 
     // Make the Axios request with the configured headers
     const response = await axios.post(
-      "https://shopping-app-j93p.onrender.com/v1/user/patch",
+      `${development}/v1/user/patch`,
       {
         firstName: firstName,
         lastName: lastName,
@@ -158,12 +155,9 @@ export const verifyToken = createAsyncThunk("user/verifyToken", async () => {
       Authorization: `Bearer ${theNewToken}`,
     };
 
-    const response = await axios.get(
-      "https://shopping-app-j93p.onrender.com/v1/user/me",
-      {
-        headers: headers,
-      }
-    );
+    const response = await axios.get(`${development}/v1/user/me`, {
+      headers: headers,
+    });
 
     if (!response.data) {
       localStorage.removeItem("token");
@@ -203,7 +197,7 @@ export const becomeVendor = createAsyncThunk(
     };
 
     const response = await axios.post(
-      "https://shopping-app-j93p.onrender.com/v1/user/be-vendor/",
+      `${development}/v1/user/be-vendor/`,
       {
         matricNumber: matricNumber,
         DOB: DOB,
@@ -247,7 +241,7 @@ export const postProduct = createAsyncThunk(
     };
 
     const response = await axios.post(
-      "https://shopping-app-j93p.onrender.com/v1/product/post-product",
+      `${development}/v1/product/post-product`,
       {
         name: productName,
         description: productDescription,
@@ -264,6 +258,7 @@ export const postProduct = createAsyncThunk(
     return response.data;
   }
 );
+
 
 const initialState: UserState = {
   user: null,

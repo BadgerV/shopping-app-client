@@ -2,7 +2,10 @@ import Header from "../../newComponents/Header/Header";
 import "./myVendorPage.css";
 import { useState } from "react";
 import { RootState } from "../../redux/store";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { postProduct } from "../../redux/slice/userSlice";
+import { AppDispatch } from "../../redux/store";
+import { useNavigate } from "react-router-dom";
 
 //commenting rubbish to keep up with the kardashians
 
@@ -42,8 +45,11 @@ const PostProduct = () => {
     productStock: 0,
     productDiscount: 0,
     shippingCost: 0,
-    productImage: "",
+    productImage: null,
   });
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
 
   const isLoading = useSelector(
     (state: RootState) => state.userSlice.isLoading
@@ -101,8 +107,24 @@ const PostProduct = () => {
     setProductInfo({ ...productInfo, [name]: value });
   };
 
-  const handleSubmit = () => {
-    console.log("Working");
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const response = await dispatch(
+      postProduct({
+        productName: productInfo.productName,
+        productDescription: productInfo.prodcuDescription,
+        productStock: productInfo.productStock,
+        productDiscount: productInfo.productDiscount,
+        productImage: productInfo.productImage,
+        productPrice: productInfo.productPrice,
+        shippingCost: productInfo.shippingCost,
+      })
+    );
+
+    console.log(response);
+    if (response.payload) {
+      navigate("/success-page");
+    }
   };
 
   const onFileChange = (e: any) => {
@@ -113,7 +135,11 @@ const PostProduct = () => {
   return (
     <>
       <div>
-        <div className={`input-container ${isFocused1 ? "focused" : ""}`}>
+        <div
+          className={`input-container ${
+            isFocused1 || productInfo.productName ? "focused" : ""
+          }`}
+        >
           <label htmlFor="floating-label1" className="floating-label">
             Product Name
           </label>
@@ -128,7 +154,11 @@ const PostProduct = () => {
         </div>
 
         <div className="vendor-page-two-inputs">
-          <div className={`input-container ${isFocused3 ? "focused" : ""}`}>
+          <div
+            className={`input-container ${
+              isFocused3 || productInfo.productPrice ? "focused" : ""
+            }`}
+          >
             <label htmlFor="floating-label3" className="floating-label">
               Price
             </label>
@@ -141,7 +171,11 @@ const PostProduct = () => {
               name="productPrice"
             />
           </div>
-          <div className={`input-container ${isFocused4 ? "focused" : ""}`}>
+          <div
+            className={`input-container ${
+              isFocused4 || productInfo.productStock ? "focused" : ""
+            }`}
+          >
             <label htmlFor="floating-label4" className="floating-label">
               Stock
             </label>
@@ -156,7 +190,11 @@ const PostProduct = () => {
           </div>
         </div>
         <div className="vendor-page-two-inputs">
-          <div className={`input-container ${isFocused5 ? "focused" : ""}`}>
+          <div
+            className={`input-container ${
+              isFocused5 || productInfo.productDiscount ? "focused" : ""
+            }`}
+          >
             <label htmlFor="floating-label3" className="floating-label">
               Product Discount
             </label>
@@ -169,7 +207,11 @@ const PostProduct = () => {
               name="productDiscount"
             />
           </div>
-          <div className={`input-container ${isFocused6 ? "focused" : ""}`}>
+          <div
+            className={`input-container ${
+              isFocused6 || productInfo.shippingCost ? "focused" : ""
+            }`}
+          >
             <label htmlFor="floating-label4" className="floating-label">
               Shipping Cost
             </label>
@@ -184,7 +226,11 @@ const PostProduct = () => {
           </div>
         </div>
 
-        <div className={`input-container ${isFocused2 ? "focused" : ""}`}>
+        <div
+          className={`input-container ${
+            isFocused2 || productInfo.prodcuDescription ? "focused" : ""
+          }`}
+        >
           <label htmlFor="floating-label2" className="floating-label">
             Desciption
           </label>

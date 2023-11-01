@@ -2,45 +2,47 @@ import "./product.css";
 import StarRatingComponent from "react-star-rating-component";
 import { useState } from "react";
 
-// name : "Chair",
-// price : 4004,
-// discount : 20,
-// rating : 2,
-// inStock : 80,
-// isLiked : false,
-// image : "/assets/image104"
-
 interface ProductProps {
+  description: string;
+  inStock: boolean;
   name: string;
   price: number;
-  discount?: number;
-  rating: number;
-  inStock: number;
-  isLiked: boolean;
-  image: string;
+  owner: number;
+  productImage: any;
+  stock: number;
+  productDiscount?: number;
+  shippingCost: number;
+  createdAt: any;
+  _id: number;
+  rating: number; // Add the rating property to the interface
 }
 
 const Product = ({
+  inStock,
   name,
   price,
-  discount,
-  rating,
-  inStock,
-  isLiked,
-  image,
+  productImage,
+  stock,
+  productDiscount,
+  rating, // Add the rating property to the component's props
 }: ProductProps) => {
-  const [hasBeenLiked, setHasBeenLiked] = useState(isLiked);
+  const [hasBeenLiked, setHasBeenLiked] = useState(false);
 
   const likedSrc = hasBeenLiked
     ? "/assets/miniheart1.svg"
     : "/assets/miniheart.svg";
+
   return (
     <div className="product">
       <div className="product-top">
-        {
-          discount ? <span className="product_discount">-{discount}%</span> : <></>
-        }
-        <img src={image} alt="Product" className="product-image__main" />
+        {productDiscount ? (
+          <span className="product_discount">-{productDiscount}%</span>
+        ) : null}
+        <img
+          src={`data:image/png;base64,${productImage}`}
+          alt="Product"
+          className="product-image__main"
+        />
         <img
           src={likedSrc}
           alt="like"
@@ -60,12 +62,14 @@ const Product = ({
             name="rate2"
             editing={false}
             starCount={5}
-            value={rating}
-            starColor={`#FFAD33`}
-            emptyStarColor={`grey`}
+            value={rating} // Use the provided rating value
+            starColor="#FFAD33"
+            emptyStarColor="grey"
           />
 
-          <span className="product-instock">({inStock})</span>
+          <span className="product-instock">
+            {inStock ? stock : "(Out of Stock)"}
+          </span>
         </div>
       </div>
     </div>

@@ -116,7 +116,8 @@ const BecomeVendor = () => {
     setTheRealDOB(dateOfBirth.toString());
   }, [dateOfBirth]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
     await dispatch(
       becomeVendor({
         matricNumber: formData.matricNumber,

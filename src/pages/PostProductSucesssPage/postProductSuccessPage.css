@@ -1,0 +1,42 @@
+.post-product-success-page {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+
+  flex-direction: column;
+  gap: 1.5em;
+  align-items: center;
+  justify-content: center;
+}
+
+.post-product-success-page_span1 {
+  font-size: 2em;
+  font-weight: 600;
+  color: #32cd32;
+}
+
+.post-product-success-page_span2 {
+  font-weight: 500;
+  font-size: 1em;
+  color: #228b22;
+}
+
+.post-product-success-page-link {
+  color: white;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #008000;
+  padding: 1em 2em;
+  border-radius: 5px;
+  text-decoration: none;
+  gap: 0.5em;
+
+  transition: 0.2s all ease-in-out;
+}
+
+.post-product-success-page-link:hover {
+  gap: 1.5em;
+  background-color: #228b22;
+}

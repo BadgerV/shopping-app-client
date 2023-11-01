@@ -37,6 +37,7 @@ input {
   border: none;
   outline: none;
   background-color: transparent;
+  font-weight: 300;
 }
 
 label {

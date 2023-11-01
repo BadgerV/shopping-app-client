@@ -1,99 +1,106 @@
 import Product from "../Product/Product";
 import "./exploreProducts.css";
+import { RootState } from "../../redux/store";
+import { useSelector } from "react-redux";
 
 const ExploreProducts = () => {
-  const products = [
-    {
-      name: "Game Pad",
-      price: 405,
-      discount: 20,
-      rating: 4,
-      inStock: 80,
-      isLiked: false,
-      image: "/assets/image100.png",
-    },
-    {
-      name: "Keyboard",
-      price: 4002,
-      discount: 20,
-      rating: 3,
-      inStock: 80,
-      isLiked: false,
-      image: "/assets/image101.png",
-    },
-    {
-      name: "Monitor",
-      price: 4003,
-      discount: 20,
-      rating: 1,
-      inStock: 80,
-      isLiked: false,
-      image: "/assets/image102.png",
-    },
-    {
-      name: "Chair",
-      price: 4004,
-      discount: 20,
-      rating: 4,
-      inStock: 80,
-      isLiked: false,
-      image: "/assets/image103.png",
-    },
-    {
-      name: "Chair",
-      price: 8000,
-      discount: 20,
-      rating: 4,
-      inStock: 80,
-      isLiked: true,
-      image: "/assets/image103.png",
-    },
-    {
-      name: "Chair",
-      price: 8000,
-      discount: 20,
-      rating: 4,
-      inStock: 80,
-      isLiked: true,
-      image: "/assets/image103.png",
-    },
-    {
-      name: "Chair",
-      price: 8000,
-      discount: 20,
-      rating: 4,
-      inStock: 80,
-      isLiked: true,
-      image: "/assets/image103.png",
-    },
-    {
-      name: "Chair",
-      price: 8000,
-      discount: 20,
-      rating: 4,
-      inStock: 80,
-      isLiked: true,
-      image: "/assets/image103.png",
-    },
-    {
-      name: "Chair",
-      price: 8000,
-      discount: 20,
-      rating: 4,
-      inStock: 80,
-      isLiked: true,
-      image: "/assets/image103.png",
-    },
-    {
-      name: "Monitor",
-      price: 4003,
-      discount: 20,
-      rating: 1,
-      inStock: 80,
-      isLiked: false,
-      image: "/assets/image102.png",
-    },
-  ];
+  const listOfProducts = useSelector(
+    (state: RootState) => state.productSlice.products
+  );
+
+  console.log(listOfProducts)
+  // const products = [
+  //   {
+  //     name: "Game Pad",
+  //     price: 405,
+  //     discount: 20,
+  //     rating: 4,
+  //     inStock: 80,
+  //     isLiked: false,
+  //     image: "/assets/image100.png",
+  //   },
+  //   {
+  //     name: "Keyboard",
+  //     price: 4002,
+  //     discount: 20,
+  //     rating: 3,
+  //     inStock: 80,
+  //     isLiked: false,
+  //     image: "/assets/image101.png",
+  //   },
+  //   {
+  //     name: "Monitor",
+  //     price: 4003,
+  //     discount: 20,
+  //     rating: 1,
+  //     inStock: 80,
+  //     isLiked: false,
+  //     image: "/assets/image102.png",
+  //   },
+  //   {
+  //     name: "Chair",
+  //     price: 4004,
+  //     discount: 20,
+  //     rating: 4,
+  //     inStock: 80,
+  //     isLiked: false,
+  //     image: "/assets/image103.png",
+  //   },
+  //   {
+  //     name: "Chair",
+  //     price: 8000,
+  //     discount: 20,
+  //     rating: 4,
+  //     inStock: 80,
+  //     isLiked: true,
+  //     image: "/assets/image103.png",
+  //   },
+  //   {
+  //     name: "Chair",
+  //     price: 8000,
+  //     discount: 20,
+  //     rating: 4,
+  //     inStock: 80,
+  //     isLiked: true,
+  //     image: "/assets/image103.png",
+  //   },
+  //   {
+  //     name: "Chair",
+  //     price: 8000,
+  //     discount: 20,
+  //     rating: 4,
+  //     inStock: 80,
+  //     isLiked: true,
+  //     image: "/assets/image103.png",
+  //   },
+  //   {
+  //     name: "Chair",
+  //     price: 8000,
+  //     discount: 20,
+  //     rating: 4,
+  //     inStock: 80,
+  //     isLiked: true,
+  //     image: "/assets/image103.png",
+  //   },
+  //   {
+  //     name: "Chair",
+  //     price: 8000,
+  //     discount: 20,
+  //     rating: 4,
+  //     inStock: 80,
+  //     isLiked: true,
+  //     image: "/assets/image103.png",
+  //   },
+  //   {
+  //     name: "Monitor",
+  //     price: 4003,
+  //     discount: 20,
+  //     rating: 1,
+  //     inStock: 80,
+  //     isLiked: false,
+  //     image: "/assets/image102.png",
+  //   },
+  // ];
   return (
     <div className="exploreProduct">
       <div className="explore-products_header">
@@ -106,7 +113,8 @@ const ExploreProducts = () => {
       </div>
 
       <div className="explore-products_product__container">
-        {products.map((product, index) => {
+        {listOfProducts.map((product : any, index : number) => {
+          // console.log(product)
           return <Product key={index} {...product} />;
         })}
       </div>

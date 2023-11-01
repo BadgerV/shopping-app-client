@@ -16,6 +16,9 @@ import Login from "./newPages/Login/Login";
 // import { useEffect, useState } from "react";
 import BecomeVendor from "./newPages/BecomeVendor/BecomeVendor";
 import MyVendorPage from "./newPages/MyVendorPage/MyVendorPage";
+import PostProductSucessPage from "./pages/PostProductSucesssPage/PostProductSucessPage";
+import { useEffect } from "react";
+import { getRandomProducts } from "./redux/slice/productSlice";
 // import Signup from "./newPages/SignUp/Signup";
 // import Login from "./newPages/Login/Login";
 
@@ -33,6 +36,12 @@ const App = () => {
     console.log("blast off");
     asyncFunction();
   }
+  useEffect(() => {
+    const func = async () => {
+      await dispatch(getRandomProducts());
+    };
+    func();
+  }, []);
 
   return (
     <Router>
@@ -43,7 +52,8 @@ const App = () => {
           <Route element={<ProtectedRoutes />}>
             <Route path="/profile" element={<Profile />} />
             <Route path="/become-vendor" element={<BecomeVendor />} />
-            <Route path = "my-vendor-page" element= {<MyVendorPage />} />
+            <Route path="my-vendor-page" element={<MyVendorPage />} />
+            <Route path="/success-page" element={<PostProductSucessPage />} />
           </Route>
 
           <Route element={<DenyLoginPage />}>
