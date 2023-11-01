@@ -6,7 +6,7 @@ interface UserState {
   user: UserProps | null;
   isLoading: boolean;
   isSpecialLoading: boolean;
-  error: string | undefined;
+  error: string | undefined | any;
   isSuccess: boolean;
   userToken: string | null;
 }
@@ -44,6 +44,16 @@ interface BecomeVendorProps {
   firstCategory: string;
   secondCategory: string;
   thirdCategory: string;
+}
+
+interface PostProductProps {
+  productName: string;
+  productPrice: number;
+  productDescription: string;
+  productStock: number;
+  productDiscount: number;
+  shippingCost: number;
+  productImage: any;
 }
 
 // Define an async thunk to make the API call nonsese
@@ -154,14 +164,14 @@ export const verifyToken = createAsyncThunk("user/verifyToken", async () => {
         headers: headers,
       }
     );
-    
+
     if (!response.data) {
       localStorage.removeItem("token");
     }
 
     return response.data;
   } catch (error) {
-      localStorage.removeItem("token");
+    localStorage.removeItem("token");
     return error;
   }
 });
@@ -211,6 +221,50 @@ export const becomeVendor = createAsyncThunk(
     return response.data;
   }
 );
+
+export const postProduct = createAsyncThunk(
+  "user/postProduct",
+  async ({
+    productName,
+    productPrice,
+    productDescription,
+    productStock,
+    shippingCost,
+    productDiscount,
+    productImage,
+  }: PostProductProps) => {
+    // Retrieve the token from localStorage
+    const theToken = localStorage.getItem("token");
+    let theNewToken = null;
+    if (theToken) {
+      theNewToken = JSON.parse(theToken);
+    }
+
+    // Set the Axios request headers with the Authorization header
+    const headers = {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${theNewToken}`,
+    };
+
+    const response = await axios.post(
+      "https://shopping-app-j93p.onrender.com/v1/product/post-product",
+      {
+        name: productName,
+        description: productDescription,
+        originalProductPrice: productPrice,
+        stock: productStock,
+        productDiscount: productDiscount,
+        shippingCost: shippingCost,
+        productImage: productImage,
+      },
+
+      { headers: headers }
+    );
+
+    return response.data;
+  }
+);
+
 const initialState: UserState = {
   user: null,
   userToken: null,
@@ -292,6 +346,16 @@ const userSlice = createSlice({
       .addCase(becomeVendor.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message || "An error occured";
+      })
+      .addCase(postProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(postProduct.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+      })
+      .addCase(postProduct.rejected, (state, action) => {
+        state.error = action.payload;
       });
   },
 });

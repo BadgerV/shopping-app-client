@@ -15,7 +15,6 @@ const initialState  :ProductState = {
     products : []
 }
 
-
 const productSlice = createSlice({
     name : "product",
     initialState,

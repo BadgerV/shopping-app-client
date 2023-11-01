@@ -7,7 +7,11 @@ import { RootState } from "../../redux/store";
 
 import { useSelector } from "react-redux";
 
-const Header = () => {
+interface MyComponentProps {
+  showElement?: boolean; // Prop is optional and defaults to true
+}
+
+const Header: React.FC<MyComponentProps> = ({ showElement = true }) => {
   interface UserProps {
     firstName: string;
     lastName: string;
@@ -20,11 +24,6 @@ const Header = () => {
   useEffect(() => {
     setUser(user);
   }, [user]);
-
-  const base64String = String.fromCharCode(...new Uint8Array(user?.avatar));
-
-  console.log(user);
-  console.log(base64String);
 
   return (
     <div className="header">
@@ -50,11 +49,13 @@ const Header = () => {
           </li>
 
           {user?.isVendor == "true" ? (
-            <li className="header-center_link">
-              <Link to="/my-vendor-page" className="header-link">
-                My Page
-              </Link>
-            </li>
+            showElement && (
+              <li className="header-center_link">
+                <Link to="/my-vendor-page" className="header-link">
+                  My Page
+                </Link>
+              </li>
+            )
           ) : (
             <></>
           )}

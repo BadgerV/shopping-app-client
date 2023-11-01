@@ -1,1 +1,85 @@
- 
+.myvendor-page {
+  padding: 2rem;
+}
+
+.myvendor-page {
+  display: grid;
+  grid-template-columns: 1fr 4.5fr;
+}
+
+.vendor-page_right-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.vendor-page_right-option {
+  font-size: 1em;
+  cursor: pointer;
+  padding: 1.5em 0.5em;
+  transition: 0.2s all ease-in-out;
+}
+
+.vendor-page_right-option:hover {
+  background-color: #f2f2f2;
+}
+
+.input-container {
+  position: relative;
+  margin: 0.8em 0;
+  border: 2px solid #ccc;
+  border-radius: 0.2em;
+  width: 100%;
+}
+
+input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+label {
+  color: grey;
+}
+
+.floating-label {
+  position: absolute;
+  pointer-events: none;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10px;
+  transition: 0.2s ease-in-out;
+  background-color: white;
+  z-index: 1;
+  padding: 0 5px;
+}
+
+.focused .floating-label {
+  top: -0.1em;
+  font-size: 12px;
+  color: #666;
+}
+
+.vendor-page_textarea {
+  resize: none;
+  outline: none;
+  border: none;
+  max-height: 7em;
+  min-height: 100%;
+  min-width: 100%;
+}
+
+.vendor-input {
+  padding: 0.8em;
+  font-size: 0.9em;
+}
+label {
+  font-size: 0.9em;
+}
+
+.vendor-page-two-inputs {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+}
