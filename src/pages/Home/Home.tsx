@@ -24,10 +24,13 @@ const Home = () => {
   const isSpecialLoading = useSelector(
     (state: RootState) => state.userSlice.isSpecialLoading
   );
+  const isLoadingProduct = useSelector(
+    (state: RootState) => state.productSlice.isLoadingProduct
+  );
 
   return (
     <>
-      {isSpecialLoading ? (
+      {isSpecialLoading || isLoadingProduct ? (
         <LoadingComponent />
       ) : (
         <div className="home-style">

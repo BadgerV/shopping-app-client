@@ -32,6 +32,7 @@ const Product = ({
     ? "/assets/miniheart1.svg"
     : "/assets/miniheart.svg";
 
+
   return (
     <div className="product">
       <div className="product-top">
@@ -43,13 +44,16 @@ const Product = ({
           alt="Product"
           className="product-image__main"
         />
-        <img
-          src={likedSrc}
-          alt="like"
-          className="product-like"
-          onClick={() => setHasBeenLiked(!hasBeenLiked)}
-        />
-        <img src="/assets/eye.svg" alt="like" className="product-eye" />
+
+        <div className="product-icon_container">
+          <img
+            src={likedSrc}
+            alt="like"
+            className="product-like"
+            onClick={() => setHasBeenLiked(!hasBeenLiked)}
+          />
+          <img src="/assets/eye.svg" alt="like" className="product-eye" />
+        </div>
         <div className="product-hover">Add To Cart</div>
       </div>
 
