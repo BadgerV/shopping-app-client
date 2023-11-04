@@ -32,7 +32,6 @@ const Product = ({
     ? "/assets/miniheart1.svg"
     : "/assets/miniheart.svg";
 
-
   return (
     <div className="product">
       <div className="product-top">
@@ -61,17 +60,21 @@ const Product = ({
         <span className="product_name">{name}</span>
         <span className="product_price">N{price}</span>
 
-        <div className="product-rating__container">
-          <StarRatingComponent
-            name="rate2"
-            editing={false}
-            starCount={5}
-            value={rating} // Use the provided rating value
-            starColor="#FFAD33"
-            emptyStarColor="grey"
-          />
+        <div className="product-rating__container" >
+          {rating ? (
+            <StarRatingComponent
+              name="rate2"
+              editing={false}
+              starCount={5}
+              value={rating} // Use the provided rating value
+              starColor="#FFAD33"
+              emptyStarColor="grey"
+            />
+          ) : (
+            <span style={{ fontSize: "0.7em"}}>No ratings yet</span>
+          )}
 
-          <span className="product-instock">
+          <span className="product-instock" style={{ fontSize: "0.7em" }}>
             {inStock ? stock : "(Out of Stock)"}
           </span>
         </div>
