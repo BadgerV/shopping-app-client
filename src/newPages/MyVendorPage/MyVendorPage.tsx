@@ -1,13 +1,18 @@
 import Header from "../../newComponents/Header/Header";
 import "./myVendorPage.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { RootState } from "../../redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { postProduct } from "../../redux/slice/userSlice";
 import { AppDispatch } from "../../redux/store";
 import { useNavigate } from "react-router-dom";
+import Select from "react-select";
 
 //commenting rubbish to keep up with the kardashians
+interface Option {
+  value: string;
+  label: string;
+}
 
 const MyVendorPage = () => {
   return (
@@ -47,6 +52,11 @@ const PostProduct = () => {
     shippingCost: 0,
     productImage: null,
   });
+  const [categoryOption, setCategoryOption] = useState([
+    {
+      value : "edibles", label : "Edibles"
+    }
+  ]);
 
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -118,6 +128,8 @@ const PostProduct = () => {
         productImage: productInfo.productImage,
         productPrice: productInfo.productPrice,
         shippingCost: productInfo.shippingCost,
+        category1: categoryOption[0].label,
+        category2: categoryOption[1].label,
       })
     );
 
@@ -131,10 +143,41 @@ const PostProduct = () => {
     const updatedInfo = { ...productInfo, productImage: e.target.files[0] };
     setProductInfo(updatedInfo);
   };
+  // const [selectedOption, setSelectedOption] = useState<Option | null>(null);
 
+  const productcategories = useSelector(
+    (state: RootState) => state.productSlice.productCategories
+  );
+
+  const genderOptions: Option[] = [];
+
+  const generateOptions = () => {
+    productcategories.map((product: string) => {
+      genderOptions.push({
+        value: product.toLocaleLowerCase(),
+        label: product,
+      });
+    });
+  };
+
+  generateOptions();
+
+  const maxSelections = 3;
+
+  const handleSelectChange = (selected: any) => {
+
+    if (selected && selected.length == maxSelections) {
+      return;
+    }
+    setCategoryOption(selected);
+  };
+
+  useEffect(() => {
+    setCategoryOption([])
+  }, []);
   return (
     <>
-      <div>
+      <div className="input-container_container">
         <div
           className={`input-container ${
             isFocused1 || productInfo.productName ? "focused" : ""
@@ -150,6 +193,42 @@ const PostProduct = () => {
             className="vendor-input"
             onChange={handleChange}
             name="productName"
+          />
+        </div>
+        <div
+          className={`input-container ${
+            isFocused1 || productInfo.productName ? "focused" : ""
+          }`}
+        >
+          <Select
+            isMulti
+            value={categoryOption}
+            onChange={handleSelectChange}
+            options={genderOptions}
+            styles={{
+              control: (provided) => ({
+                ...provided,
+                fontSize: "0.9em", // Set the font size to 0.9em
+                padding: "0.2em",
+                border: "none",
+                outline: "none",
+                margin: "0",
+              }),
+              option: (provided) => ({
+                ...provided,
+                fontSize: "0.9em", // Font size for the options in the dropdown
+                position: "static",
+                zIndex: "5",
+              }),
+              singleValue: (provided) => ({
+                ...provided,
+                fontSize: "0.9em", // Font size for the selected value
+              }),
+              placeholder: (provided) => ({
+                ...provided,
+                fontSize: "0.9em", // Font size for the placeholder
+              }),
+            }}
           />
         </div>
 

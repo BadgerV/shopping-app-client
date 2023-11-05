@@ -40,6 +40,7 @@ const Login = () => {
 
     const response = await dispatch(loginUser(formData));
     if (response.payload) {
+      window.location.reload();
       navigate("/");
     }
   };

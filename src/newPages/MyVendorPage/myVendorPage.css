@@ -24,9 +24,13 @@
   background-color: #f2f2f2;
 }
 
+.input-container_container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
 .input-container {
   position: relative;
-  margin: 0.8em 0;
   border: 2px solid #ccc;
   border-radius: 0.2em;
   width: 100%;
@@ -52,7 +56,7 @@ label {
   left: 10px;
   transition: 0.2s ease-in-out;
   background-color: white;
-  z-index: 1;
+  z-index: 0;
   padding: 0 5px;
 }
 

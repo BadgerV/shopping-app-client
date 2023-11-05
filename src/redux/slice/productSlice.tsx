@@ -17,12 +17,16 @@ const development = "http://localhost:3000/v1";
 interface ProductState {
   products: any;
   isLoadingProduct: boolean;
+  productCategories: any;
   error: string | undefined | any;
+  isLoadingRandomProducts : boolean
 }
 const initialState: ProductState = {
-  isLoadingProduct: false,
   error: null,
   products: [],
+  productCategories: [],
+  isLoadingProduct: false,
+  isLoadingRandomProducts : false
 };
 
 export const getRandomProducts = createAsyncThunk(
@@ -31,8 +35,18 @@ export const getRandomProducts = createAsyncThunk(
     const response = await axios.get(
       `${development}/product/get-random-products`
     );
-    console.log(response.data.randomProducts);
-    return response.data.randomProducts;
+    console.log(response.data);
+    return response.data;
+  }
+);
+
+export const GetProductCategories = createAsyncThunk(
+  "product/get-product-categories",
+  async () => {
+    const response = await axios.get(
+      `${development}/product/get-product-categories`
+    );
+    return response.data;
   }
 );
 
@@ -43,13 +57,24 @@ const productSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getRandomProducts.pending, (state) => {
-        state.isLoadingProduct = true;
+        state.isLoadingRandomProducts = true;
       })
       .addCase(getRandomProducts.fulfilled, (state, action) => {
-        state.isLoadingProduct = false;
         state.products = action.payload;
+        state.isLoadingRandomProducts = false;
       })
       .addCase(getRandomProducts.rejected, (state) => {
+        state.isLoadingRandomProducts = false;
+      })
+      .addCase(GetProductCategories.pending, (state) => {
+        state.isLoadingProduct = true;
+      })
+      .addCase(GetProductCategories.fulfilled, (state, action) => {
+        state.productCategories = action.payload;
+        state.isLoadingProduct = false;
+      })
+      .addCase(GetProductCategories.rejected, (state, action) => {
+        state.error = action.error;
         state.isLoadingProduct = false;
       });
   },

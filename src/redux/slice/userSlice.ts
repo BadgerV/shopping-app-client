@@ -57,6 +57,8 @@ interface PostProductProps {
   productDiscount: number;
   shippingCost: number;
   productImage: any;
+  category1?: string;
+  category2?: string;
 }
 
 // Define an async thunk to make the API call nonsese
@@ -226,6 +228,8 @@ export const postProduct = createAsyncThunk(
     shippingCost,
     productDiscount,
     productImage,
+    category1,
+    category2,
   }: PostProductProps) => {
     // Retrieve the token from localStorage
     const theToken = localStorage.getItem("token");
@@ -250,6 +254,8 @@ export const postProduct = createAsyncThunk(
         productDiscount: productDiscount,
         shippingCost: shippingCost,
         productImage: productImage,
+        category1: category1,
+        category2: category2,
       },
 
       { headers: headers }
@@ -258,7 +264,6 @@ export const postProduct = createAsyncThunk(
     return response.data;
   }
 );
-
 
 const initialState: UserState = {
   user: null,
@@ -350,6 +355,7 @@ const userSlice = createSlice({
         state.isSuccess = true;
       })
       .addCase(postProduct.rejected, (state, action) => {
+        state.isLoading = false;
         state.error = action.payload;
       });
   },

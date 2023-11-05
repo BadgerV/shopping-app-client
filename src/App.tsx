@@ -18,7 +18,10 @@ import BecomeVendor from "./newPages/BecomeVendor/BecomeVendor";
 import MyVendorPage from "./newPages/MyVendorPage/MyVendorPage";
 import PostProductSucessPage from "./pages/PostProductSucesssPage/PostProductSucessPage";
 import { useEffect } from "react";
-import { getRandomProducts } from "./redux/slice/productSlice";
+import {
+  GetProductCategories,
+  getRandomProducts,
+} from "./redux/slice/productSlice";
 // import Signup from "./newPages/SignUp/Signup";
 // import Login from "./newPages/Login/Login";
 
@@ -31,6 +34,8 @@ const App = () => {
   const asyncFunction = async () => {
     await dispatch(verifyToken());
   };
+
+  dispatch(GetProductCategories());
 
   if (!user && theToken) {
     console.log("blast off");

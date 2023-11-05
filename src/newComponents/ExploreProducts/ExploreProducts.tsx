@@ -5,10 +5,9 @@ import { useSelector } from "react-redux";
 
 const ExploreProducts = () => {
   const listOfProducts = useSelector(
-    (state: RootState) => state.productSlice.products
+    (state: RootState) => state.productSlice.products.randomProducts
   );
 
-  console.log(listOfProducts)
   // const products = [
   //   {
   //     name: "Game Pad",
@@ -113,7 +112,7 @@ const ExploreProducts = () => {
       </div>
 
       <div className="explore-products_product__container">
-        {listOfProducts.map((product : any, index : number) => {
+        {listOfProducts?.map((product : any, index : number) => {
           // console.log(product)
           return <Product key={index} {...product} />;
         })}

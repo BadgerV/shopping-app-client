@@ -9,7 +9,7 @@ import SplashLeft from "../../newComponents/SplashLeft/SplashLeft";
 import SplashMain from "../../newComponents/SplashMain/SplashMain";
 import TodaySales from "../../newComponents/TodaySales/TodaySales";
 import Categories from "../../newComponents/Categories/Categories";
-import { useState } from "react";
+import {  useState } from "react";
 import "./home.css";
 import BestSelling from "../../newComponents/BestSelling/BestSelling";
 import ExploreProducts from "../../newComponents/ExploreProducts/ExploreProducts";
@@ -24,13 +24,13 @@ const Home = () => {
   const isSpecialLoading = useSelector(
     (state: RootState) => state.userSlice.isSpecialLoading
   );
-  const isLoadingProduct = useSelector(
-    (state: RootState) => state.productSlice.isLoadingProduct
+  const isLoadingRandomProducts = useSelector(
+    (state: RootState) => state.productSlice.isLoadingRandomProducts
   );
 
   return (
     <>
-      {isSpecialLoading || isLoadingProduct ? (
+      {isLoadingRandomProducts || isSpecialLoading ? (
         <LoadingComponent />
       ) : (
         <div className="home-style">
