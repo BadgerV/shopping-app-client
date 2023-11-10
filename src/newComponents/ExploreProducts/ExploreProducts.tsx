@@ -2,11 +2,26 @@ import Product from "../Product/Product";
 import "./exploreProducts.css";
 import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
+import { getUser } from "../../redux/slice/userSlice";
 
 const ExploreProducts = () => {
   const listOfProducts = useSelector(
     (state: RootState) => state.productSlice.products.randomProducts
   );
+  const ownersIDArray = listOfProducts?.map((user: any) => user.owner) || [];
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const fetchOwners = async () => {
+    await dispatch(getUser(ownersIDArray));
+  };
+
+  useEffect(() => {
+    listOfProducts ? fetchOwners() : console.log("still loading");
+  }, [listOfProducts]);
 
   // const products = [
   //   {
@@ -112,7 +127,7 @@ const ExploreProducts = () => {
       </div>
 
       <div className="explore-products_product__container">
-        {listOfProducts?.map((product : any, index : number) => {
+        {listOfProducts?.map((product: any, index: number) => {
           // console.log(product)
           return <Product key={index} {...product} />;
         })}

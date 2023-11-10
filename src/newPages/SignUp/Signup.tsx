@@ -13,6 +13,7 @@ import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import LoadingComponent from "../../newComponents/LoadingComponent/LoadingComponent";
+
 const Signup = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
@@ -30,15 +31,18 @@ const Signup = () => {
     lastName: "",
     email: "",
     password: "",
+    avatar: "",
   });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await dispatch(registerUser(formData));
-      // console.log(response);
-      if (response.payload) {
-        navigate("/");
+      console.log(response);
+      if (response.payload == "Request failed with status code 400") {
+        return
+      } else {
+        navigate("/")
       }
     } catch (error) {
       console.log(error);
@@ -73,7 +77,7 @@ const Signup = () => {
 
                 <form
                   action="submit"
-                  onSubmit={handleSubmit}
+                  onSubmit={(e) => handleSubmit(e)}
                   className="signup-form"
                 >
                   <input

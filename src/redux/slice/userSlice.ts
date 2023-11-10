@@ -9,11 +9,21 @@ interface UserState {
   user: UserProps | null;
   isLoading: boolean;
   isSpecialLoading: boolean;
+  isLoadingOwners: boolean;
   error: string | undefined | any;
   isSuccess: boolean;
   userToken: string | null;
+  ownersOfProduct: any[];
 }
 
+interface UserProps {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  isVendor?: string;
+  avatar: null | string | ArrayBufferLike | any;
+}
 interface UserProps {
   firstName: string;
   lastName: string;
@@ -61,26 +71,38 @@ interface PostProductProps {
   category2?: string;
 }
 
+const timeout = (ms: number) =>
+  new Promise((_, reject) => setTimeout(() => reject("Request timed out"), ms));
+
 // Define an async thunk to make the API call nonsese
 export const registerUser = createAsyncThunk(
   "user/registerUser",
   async ({ firstName, lastName, email, password }: UserProps) => {
-    console.log("register user function Working");
-    const response = await axios.post(`${development}/v1/user/signup`, {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      password: password,
-    });
+    try {
+      // Set the timeout duration (e.g., 10 seconds)
+      const timeoutDuration = 10000; // 10 seconds in milliseconds
 
-    if (response.data) {
-      const userToken = JSON.stringify(response.data.token);
+      // Create a promise that races between the HTTP request and a timeout promise
+      const response: any = await Promise.race([
+        axios.post(`${development}/v1/user/signup`, {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+        }),
+        timeout(timeoutDuration),
+      ]);
 
-      localStorage.setItem("token", userToken);
+      if (response.data) {
+        const userToken = JSON.stringify(response.data.token);
+
+        localStorage.setItem("token", userToken);
+      }
+
+      return response.data; // Return the data you want to store in the Redux state
+    } catch (error: any) {
+      return error.message;
     }
-    // console.log(response.data);
-
-    return response.data; // Return the data you want to store in the Redux state
   }
 );
 
@@ -265,6 +287,20 @@ export const postProduct = createAsyncThunk(
   }
 );
 
+export const getUser = createAsyncThunk("getUser", async (array: number[]) => {
+  const userPromises = array.map(async (userId: number) => {
+    const response = await axios.get(
+      `${development}/v1/user/get-user/${userId}`
+    );
+    return response.data;
+  });
+
+  // Use Promise.all to await all promises and return an array of resolved data
+  const userData = await Promise.all(userPromises);
+
+  return userData;
+});
+
 const initialState: UserState = {
   user: null,
   userToken: null,
@@ -272,9 +308,11 @@ const initialState: UserState = {
   isSuccess: false, // Initialize isSuccess as false
   error: undefined,
   isSpecialLoading: false,
+  isLoadingOwners: false,
+  ownersOfProduct: [],
 };
 
-const userSlice = createSlice({
+const userSlice: any = createSlice({
   name: "user",
   initialState,
   reducers: {},
@@ -356,6 +394,17 @@ const userSlice = createSlice({
       })
       .addCase(postProduct.rejected, (state, action) => {
         state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(getUser.pending, (state) => {
+        state.isLoadingOwners = true;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.isLoadingOwners = false;
+        state.ownersOfProduct = action.payload;
+      })
+      .addCase(getUser.rejected, (state, action) => {
+        state.isLoadingOwners = false;
         state.error = action.payload;
       });
   },

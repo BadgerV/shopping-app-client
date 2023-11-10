@@ -10,7 +10,7 @@ import SplashLeft from "../../newComponents/SplashLeft/SplashLeft";
 import SplashMain from "../../newComponents/SplashMain/SplashMain";
 import TodaySales from "../../newComponents/TodaySales/TodaySales";
 import Categories from "../../newComponents/Categories/Categories";
-import {  useState } from "react";
+import { useState } from "react";
 import "./home.css";
 import BestSelling from "../../newComponents/BestSelling/BestSelling";
 import ExploreProducts from "../../newComponents/ExploreProducts/ExploreProducts";
@@ -19,6 +19,8 @@ import Footer from "../../newComponents/Footer/Footer";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import LoadingComponent from "../../newComponents/LoadingComponent/LoadingComponent";
+
+import "react-toastify/dist/ReactToastify.css";
 
 const Home = () => {
   const [menu, setMenu] = useState(false);
@@ -29,8 +31,10 @@ const Home = () => {
     (state: RootState) => state.productSlice.isLoadingRandomProducts
   );
 
+  
   return (
     <>
+      
       {isLoadingRandomProducts || isSpecialLoading ? (
         <LoadingComponent />
       ) : (
