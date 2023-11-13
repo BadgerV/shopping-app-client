@@ -4,12 +4,11 @@
   gap: 0.5em;
   width: 15em;
 
-  margin-bottom: 2em;
+  /* margin-bottom: 2em; */
+  outline: 1px solid red;
   min-height: 24em;
   max-height: 24em;
-
 }
-
 .product-top {
   position: relative;
   background-color: #f5f5f5;

@@ -6,7 +6,7 @@ const development = "http://localhost:3000";
 // const production = "https://shopping-app-j93p.onrender.com";
 
 interface UserState {
-  user: UserProps | null;
+  user: UserProps | null | number;
   isLoading: boolean;
   isSpecialLoading: boolean;
   isLoadingOwners: boolean;
@@ -302,7 +302,7 @@ export const getUser = createAsyncThunk("getUser", async (array: number[]) => {
 });
 
 const initialState: UserState = {
-  user: null,
+  user: 0,
   userToken: null,
   isLoading: false,
   isSuccess: false, // Initialize isSuccess as false

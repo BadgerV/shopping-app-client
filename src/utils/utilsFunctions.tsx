@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
 import { RootState } from "../redux/store";
 import { formatDistanceToNow } from "date-fns";
+import PostProductSucessPage from "../pages/PostProductSucesssPage/PostProductSucessPage";
 
 export default function ProtectedRoutes() {
   const user = useSelector((state: RootState) => state.userSlice.user);
@@ -38,3 +39,13 @@ export function formatRelativeTime(dateString: string) {
     console.log(error);
   }
 }
+
+export const NavigateUserToPendingPage = (user: any) => {
+  if (user == 0) {
+    return <Navigate to="/signin" />;
+  } else if (user.isVendor == "pending") {
+    return <PostProductSucessPage />;
+  } else {
+    return <Navigate to="/" />;
+  }
+};

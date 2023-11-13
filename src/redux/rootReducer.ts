@@ -4,9 +4,9 @@ import cartSlice from "./slice/cartSlice";
 import productSlice from "./slice/productSlice";
 
 const rootReducer = combineReducers({
-    userSlice : userSlice,
-    cartSlice : cartSlice,
-    productSlice : productSlice
-})
+  userSlice: userSlice,
+  cartSlice: cartSlice,
+  productSlice: productSlice,
+});
 
-export default rootReducer
+export default rootReducer;

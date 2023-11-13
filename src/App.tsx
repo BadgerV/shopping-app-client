@@ -1,12 +1,18 @@
 import Home from "./pages/Home/Home";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 // import SignUp from "./pages/Signup/SIgnup";
 // import Login from "./pages/Login/Login";
 // import Profile from "./pages/Profile/Profile";
 import Profile from "./newPages/Profile/Profile";
-import ProtectedRoutes, {
+import {
   DenyLoginPage,
   DenySignUpPage,
+  NavigateUserToPendingPage,
 } from "./utils/utilsFunctions";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./redux/store";
@@ -16,7 +22,6 @@ import Login from "./newPages/Login/Login";
 // import { useEffect, useState } from "react";
 import BecomeVendor from "./newPages/BecomeVendor/BecomeVendor";
 import MyVendorPage from "./newPages/MyVendorPage/MyVendorPage";
-import PostProductSucessPage from "./pages/PostProductSucesssPage/PostProductSucessPage";
 import { useEffect } from "react";
 import {
   GetProductCategories,
@@ -54,12 +59,22 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
 
-          <Route element={<ProtectedRoutes />}>
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/become-vendor" element={<BecomeVendor />} />
-            <Route path="my-vendor-page" element={<MyVendorPage />} />
-            <Route path="/success-page" element={<PostProductSucessPage />} />
-          </Route>
+          <Route
+            path="/profile"
+            element={user != 0 ? <Profile /> : <Navigate to="/signin" />}
+          />
+          <Route
+            path="/become-vendor"
+            element={user != 0 ? <BecomeVendor /> : <Navigate to="/signin" />}
+          />
+          <Route
+            path="my-vendor-page"
+            element={user != 0 ? <MyVendorPage /> : <Navigate to="/signin" />}
+          />
+          <Route
+            path="/success-page"
+            element={NavigateUserToPendingPage(user)}
+          />
 
           <Route element={<DenyLoginPage />}>
             <Route path="/signin" element={<Login />} />
