@@ -5,30 +5,21 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-// import SignUp from "./pages/Signup/SIgnup";
-// import Login from "./pages/Login/Login";
-// import Profile from "./pages/Profile/Profile";
 import Profile from "./newPages/Profile/Profile";
-import {
-  DenyLoginPage,
-  DenySignUpPage,
-  NavigateUserToPendingPage,
-} from "./utils/utilsFunctions";
+import { NavigateUserToPendingPage } from "./utils/utilsFunctions";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./redux/store";
 import { verifyToken } from "./redux/slice/userSlice";
 import Signup from "./newPages/SignUp/Signup";
 import Login from "./newPages/Login/Login";
-// import { useEffect, useState } from "react";
 import BecomeVendor from "./newPages/BecomeVendor/BecomeVendor";
 import MyVendorPage from "./newPages/MyVendorPage/MyVendorPage";
 import { useEffect } from "react";
+// import { useEffect } from "react";
 import {
   GetProductCategories,
-  getRandomProducts,
+  // getRandomProducts,
 } from "./redux/slice/productSlice";
-// import Signup from "./newPages/SignUp/Signup";
-// import Login from "./newPages/Login/Login";
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -36,23 +27,19 @@ const App = () => {
 
   const theToken = localStorage.getItem("token");
 
-  const asyncFunction = async () => {
-    await dispatch(verifyToken());
-  };
-
-  dispatch(GetProductCategories());
-
-  if (!user && theToken) {
-    console.log("blast off");
-    asyncFunction();
-  }
   useEffect(() => {
-    const func = async () => {
-      await dispatch(getRandomProducts());
+    const asyncFunction = async () => {
+      await dispatch(verifyToken());
     };
-    func();
-  }, []);
 
+    dispatch(GetProductCategories());
+    // dispatch(getRandomProducts());
+
+    if (!user && theToken) {
+      console.log("blast off");
+      asyncFunction();
+    }
+  }, []);
   return (
     <Router>
       <div>
@@ -76,13 +63,9 @@ const App = () => {
             element={NavigateUserToPendingPage(user)}
           />
 
-          <Route element={<DenyLoginPage />}>
-            <Route path="/signin" element={<Login />} />
-          </Route>
+          <Route path="/signin" element={<Login />} />
 
-          <Route element={<DenySignUpPage />}>
-            <Route path="/signup" element={<Signup />} />
-          </Route>
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </div>
     </Router>

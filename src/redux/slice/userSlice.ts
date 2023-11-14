@@ -98,10 +98,10 @@ export const registerUser = createAsyncThunk(
 
         localStorage.setItem("token", userToken);
       }
-
       return response.data; // Return the data you want to store in the Redux state
     } catch (error: any) {
-      return error.message;
+      console.log(error.response.data)
+      return Promise.reject(error.response.data);
     }
   }
 );
@@ -320,6 +320,8 @@ const userSlice: any = createSlice({
     builder
       .addCase(registerUser.pending, (state) => {
         state.isLoading = true;
+        state.error = undefined;
+        state.isSuccess = false;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.isLoading = false;

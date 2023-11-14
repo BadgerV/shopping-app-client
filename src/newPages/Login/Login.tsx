@@ -44,6 +44,9 @@ const Login = () => {
     }
   };
 
+  //REMOVE TOKEN FROM THE LOCALSTORAGE
+  localStorage.removeItem("token");
+
   return (
     <>
       {specialIsLoading ? (

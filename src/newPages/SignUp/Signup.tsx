@@ -26,6 +26,11 @@ const Signup = () => {
     (state: RootState) => state.userSlice.isSpecialLoading
   );
 
+  const isSuccess = useSelector(
+    (state: RootState) => state.userSlice.isSuccess
+  );
+  const error = useSelector((state: RootState) => state.userSlice.error);
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -37,17 +42,15 @@ const Signup = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await dispatch(registerUser(formData));
-      console.log(response);
-      if (response.payload == "Request failed with status code 400") {
-        return
-      } else {
-        navigate("/")
-      }
+      await dispatch(registerUser(formData));
     } catch (error) {
       console.log(error);
     }
   };
+
+  if (isSuccess) {
+    navigate("/");
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -73,6 +76,8 @@ const Signup = () => {
                 <span className="signup-small-text">
                   Enter your details below
                 </span>
+
+                {error ? <span className="error-message">{error}</span> : <></>}
 
                 <form
                   action="submit"

@@ -94,3 +94,11 @@
   font-size: 0.9em;
   width: 25em;
 }
+
+.error-message {
+  font-size: 0.8em;
+  color: red;
+  font-weight: 500;
+  text-align: right;
+  margin-bottom: 0.5em;
+}
