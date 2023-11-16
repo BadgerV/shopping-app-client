@@ -14,8 +14,6 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import LoadingComponent from "../../newComponents/LoadingComponent/LoadingComponent";
 
-//just another comment, look awy
-
 const Signup = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
