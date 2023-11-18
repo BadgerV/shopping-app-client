@@ -128,7 +128,6 @@ const ExploreProducts = () => {
 
       <div className="explore-products_product__container">
         {listOfProducts?.map((product: any, index: number) => {
-          // console.log(product)
           return <Product key={index} {...product} />;
         })}
       </div>

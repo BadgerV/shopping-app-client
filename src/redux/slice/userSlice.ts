@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // import { RootState } from "../store";
 import axios from "axios";
+// import { useDispatch } from "react-redux";
 
 const development = "http://localhost:3000";
 // const production = "https://shopping-app-j93p.onrender.com";
@@ -14,6 +15,8 @@ interface UserState {
   isSuccess: boolean;
   userToken: string | null;
   ownersOfProduct: any[];
+  loginError: string | undefined;
+  signupError: string | undefined;
 }
 
 interface UserProps {
@@ -100,7 +103,6 @@ export const registerUser = createAsyncThunk(
       }
       return response.data; // Return the data you want to store in the Redux state
     } catch (error: any) {
-      console.log(error.response.data)
       return Promise.reject(error.response.data);
     }
   }
@@ -110,17 +112,20 @@ export const registerUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   "user/loginUser",
   async ({ email, password }: LoginProps) => {
-    const response = await axios.post(`${development}/v1/user/login`, {
-      email: email,
-      password: password,
-    });
+    try {
+      const response = await axios.post(`${development}/v1/user/login`, {
+        email: email,
+        password: password,
+      });
 
-    if (response.data) {
-      const userToken = JSON.stringify(response.data.token);
+        const userToken = JSON.stringify(response.data.token);
+        console.log(userToken)
 
-      localStorage.setItem("token", userToken);
+        localStorage.setItem("token", userToken);
+      return response.data;
+    } catch (error: any) {
+      return Promise.reject(error.response.data);
     }
-    return response.data;
   }
 );
 
@@ -301,6 +306,12 @@ export const getUser = createAsyncThunk("getUser", async (array: number[]) => {
   return userData;
 });
 
+// export const logoutUser = createAsyncThunk("logoutuser", async ({getState} : any) => {
+//   const dispatch = useDispatch();
+//   const state = getState()
+//   dispatch(loginUser.fulfilled(state))
+// });
+
 const initialState: UserState = {
   user: 0,
   userToken: null,
@@ -310,16 +321,27 @@ const initialState: UserState = {
   isSpecialLoading: false,
   isLoadingOwners: false,
   ownersOfProduct: [],
+  loginError: undefined,
+  signupError: undefined,
 };
 
 const userSlice: any = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    logoutUser: (state) => {
+      state.user = 0;
+      state.loginError = undefined;
+      state.signupError = undefined;
+      state.isSuccess = false;
+      state.error = undefined;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.pending, (state) => {
         state.isLoading = true;
+        state.signupError = undefined;
         state.error = undefined;
         state.isSuccess = false;
       })
@@ -333,10 +355,14 @@ const userSlice: any = createSlice({
         state.isLoading = false;
         state.error = action.error.message || "An error occurred";
         state.isSuccess = false; // Update isSuccess when registration fails
+        state.signupError = action.error.message;
       })
 
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
+        state.error = undefined;
+        state.isSuccess = false;
+        state.signupError = undefined;
       })
 
       .addCase(loginUser.fulfilled, (state, action) => {
@@ -350,6 +376,7 @@ const userSlice: any = createSlice({
         state.isLoading = false;
         state.error = action.error.message || "An error occurred";
         state.isSuccess = false;
+        state.loginError = action.error.message;
       })
       .addCase(updateUser.pending, (state) => {
         state.isLoading = true;
@@ -411,5 +438,7 @@ const userSlice: any = createSlice({
       });
   },
 });
+
+export const { logoutUser } = userSlice.actions;
 
 export default userSlice.reducer;

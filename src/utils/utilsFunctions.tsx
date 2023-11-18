@@ -49,3 +49,14 @@ export const NavigateUserToPendingPage = (user: any) => {
     return <Navigate to="/" />;
   }
 };
+
+export const returnLetters = (category: string) => {
+  const categoryRevamped =
+    category[0].toUpperCase() + category.slice(1).toLowerCase();
+  return categoryRevamped;
+}
+
+
+export const navigateTo = (whereT0 :string, navigate : any) => {
+  navigate(`/${whereT0}`)
+}

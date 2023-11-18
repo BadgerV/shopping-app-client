@@ -1,10 +1,11 @@
 import "./moreDetails.css";
 import StarRatingComponent from "react-star-rating-component";
-import { formatNumberToCurrency } from "../../utils/utilsFunctions";
+import { formatNumberToCurrency, navigateTo } from "../../utils/utilsFunctions";
 import { formatRelativeTime } from "../../utils/utilsFunctions";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface MoredetailsProps {
   setIsModalOpen: any;
@@ -20,6 +21,7 @@ interface MoredetailsProps {
   createdAt: any;
   _id: number;
   rating: number; // Add the rating property to the interface
+  productCategories: [string];
 }
 
 const MoreDetails = ({
@@ -35,6 +37,7 @@ const MoreDetails = ({
   owner,
   shippingCost,
   createdAt,
+  productCategories,
 }: MoredetailsProps) => {
   const realRating = +rating;
 
@@ -52,6 +55,7 @@ const MoreDetails = ({
     }
   });
 
+  const navigate = useNavigate();
   return (
     <div className="more-details">
       <button className="close-button" onClick={() => setIsModalOpen(false)}>
@@ -114,6 +118,24 @@ const MoreDetails = ({
               starColor={`#db4444`}
               emptyStarColor={`white`}
             />
+          </div>
+
+          <div className="more-details_categories-container">
+            <span>Categories</span>
+            <div>
+              {productCategories.map((category, index) => {
+                return (
+                  <span
+                    key={index}
+                    onClick={() =>
+                      navigateTo(`category/${category}`, navigate)
+                    }
+                  >
+                    {category}
+                  </span>
+                );
+              })}
+            </div>
           </div>
 
           <div className="more-details__owner-info">

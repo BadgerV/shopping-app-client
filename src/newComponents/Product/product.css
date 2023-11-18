@@ -5,7 +5,12 @@
   width: 15em;
 
   /* margin-bottom: 2em; */
-  outline: 1px solid red;
+  /* outline: 1px solid red; */
+  border: 1px solid #FFFFFFFC;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+
+
   min-height: 24em;
   max-height: 24em;
 }

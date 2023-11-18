@@ -11,6 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .signup-right_inner {
@@ -69,7 +70,6 @@
   background-color: #db4444;
 }
 
-
 .already-have_account {
   font-size: 0.9em;
   text-align: center;
@@ -95,10 +95,17 @@
   width: 25em;
 }
 
+.error-container {
+  position: relative;
+  margin: 0 0 1em 0;
+}
+
 .error-message {
   font-size: 0.8em;
   color: red;
   font-weight: 500;
   text-align: right;
-  margin-bottom: 0.5em;
+  transition: 0.2s all ease-in-out;
+  position: absolute;
+  right: 0;
 }

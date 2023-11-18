@@ -18,8 +18,9 @@ import { useEffect } from "react";
 // import { useEffect } from "react";
 import {
   GetProductCategories,
-  // getRandomProducts,
+  getRandomProducts,
 } from "./redux/slice/productSlice";
+import CategoryPage from "./newPages/CategoryPage/CategoryPage";
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -33,7 +34,7 @@ const App = () => {
     };
 
     dispatch(GetProductCategories());
-    // dispatch(getRandomProducts());
+    dispatch(getRandomProducts());
 
     if (!user && theToken) {
       console.log("blast off");
@@ -45,6 +46,7 @@ const App = () => {
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path = "/category/:id" element = {<CategoryPage />} />
 
           <Route
             path="/profile"

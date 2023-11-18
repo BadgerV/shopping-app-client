@@ -18,15 +18,17 @@ interface ProductState {
   products: any;
   isLoadingProduct: boolean;
   productCategories: any;
+  categoriesProduct: any;
   error: string | undefined | any;
-  isLoadingRandomProducts : boolean
+  isLoadingRandomProducts: boolean;
 }
 const initialState: ProductState = {
   error: null,
   products: [],
   productCategories: [],
   isLoadingProduct: false,
-  isLoadingRandomProducts : false
+  isLoadingRandomProducts: false,
+  categoriesProduct: [],
 };
 
 export const getRandomProducts = createAsyncThunk(
@@ -35,7 +37,6 @@ export const getRandomProducts = createAsyncThunk(
     const response = await axios.get(
       `${development}/product/get-random-products`
     );
-    console.log(response.data);
     return response.data;
   }
 );
@@ -47,6 +48,47 @@ export const GetProductCategories = createAsyncThunk(
       `${development}/product/get-product-categories`
     );
     return response.data;
+  }
+);
+
+export const GetCategoriesProduct = createAsyncThunk(
+  "/product/get-categories-product",
+  async (category: string | undefined) => {
+    const response = await axios.get(
+      `${development}/product/get-categories-product/${category}`
+    );
+
+      function transformsImageStrings(products: any) {
+        // Create a new array to store modified products
+        const transformedProducts: any = [];
+
+        // Iterate over each product in the original array
+        products.forEach((element: any) => {
+          // Clone the original product to avoid modifying it directly
+          const modifiedProduct = { ...element };
+
+          const { data } = modifiedProduct.productImage;
+
+          // Convert the data array to a Uint8Array
+          const uint8Array: any = new Uint8Array(data);
+
+          // Convert Uint8Array to Base64
+          const base64String = btoa(
+            String.fromCharCode.apply(null, uint8Array)
+          );
+
+          // Update the productImage property in the cloned product
+          modifiedProduct.productImage = base64String;
+
+          // Add the modified product to the new array
+          transformedProducts.push(modifiedProduct);
+        });
+
+        // Return the new array with modified products
+        return transformedProducts;
+      }
+      const result = transformsImageStrings(response.data)
+    return result;
   }
 );
 
@@ -76,6 +118,20 @@ const productSlice = createSlice({
       .addCase(GetProductCategories.rejected, (state, action) => {
         state.error = action.error;
         state.isLoadingProduct = false;
+      })
+      .addCase(GetCategoriesProduct.pending, (state) => {
+        state.error = false;
+        state.isLoadingProduct = true;
+        state.categoriesProduct = []
+      })
+      .addCase(GetCategoriesProduct.fulfilled, (state, action) => {
+        state.isLoadingProduct = false;
+        state.categoriesProduct = action.payload;
+        console.log(state.categoriesProduct)
+      })
+      .addCase(GetCategoriesProduct.rejected, (state, action) => {
+        state.isLoadingProduct = false;
+        state.error = action.error;
       });
   },
 });

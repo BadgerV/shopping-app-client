@@ -4,7 +4,7 @@ import "./login.css";
 import { Link } from "react-router-dom";
 
 import { RootState } from "../../redux/store";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "../../redux/store";
@@ -24,6 +24,12 @@ const Login = () => {
     (state: RootState) => state.userSlice.isSpecialLoading
   );
 
+  const isSuccess = useSelector(
+    (state: RootState) => state.userSlice.isSuccess
+  );
+
+  const error = useSelector((state: RootState) => state.userSlice.loginError);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -37,15 +43,16 @@ const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const response = await dispatch(loginUser(formData));
-    if (response.payload) {
-      navigate("/");
-    }
+    await dispatch(loginUser(formData));
   };
 
-  //REMOVE TOKEN FROM THE LOCALSTORAGE
-  localStorage.removeItem("token");
+
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/");
+    }
+  }, [isSuccess]);
 
   return (
     <>
@@ -65,6 +72,13 @@ const Login = () => {
                 <span className="signup-small-text">
                   Enter your details below
                 </span>
+                <div className="error-container">
+                  {error ? (
+                    <span className="error-message">{error}</span>
+                  ) : (
+                    <></>
+                  )}
+                </div>
 
                 <form
                   action="submit"

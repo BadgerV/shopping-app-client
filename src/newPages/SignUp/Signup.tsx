@@ -29,7 +29,7 @@ const Signup = () => {
   const isSuccess = useSelector(
     (state: RootState) => state.userSlice.isSuccess
   );
-  const error = useSelector((state: RootState) => state.userSlice.error);
+  const error = useSelector((state: RootState) => state.userSlice.signupError);
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -77,7 +77,13 @@ const Signup = () => {
                   Enter your details below
                 </span>
 
-                {error ? <span className="error-message">{error}</span> : <></>}
+                <div className="error-container">
+                  {error ? (
+                    <span className="error-message">{error}</span>
+                  ) : (
+                    <></>
+                  )}
+                </div>
 
                 <form
                   action="submit"

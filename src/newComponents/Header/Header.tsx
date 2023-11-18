@@ -1,29 +1,28 @@
 import "./header.css";
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 
 import { RootState } from "../../redux/store";
 
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../../redux/slice/userSlice";
 
 interface MyComponentProps {
   showElement?: boolean; // Prop is optional and defaults to true
 }
 
 const Header: React.FC<MyComponentProps> = ({ showElement = true }) => {
-  interface UserProps {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-  }
-  const [theUser, setUser] = useState<null | UserProps>(null);
+
+
+  const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.userSlice.user);
 
-  useEffect(() => {
-    setUser(user);
-  }, [user]);
+  const logout = () => {
+    localStorage.removeItem("token");
+    dispatch(logoutUser());
+  };
 
   return (
     <div className="header">
@@ -60,7 +59,7 @@ const Header: React.FC<MyComponentProps> = ({ showElement = true }) => {
             <></>
           )}
 
-          {!theUser ? (
+          {user == 0 ? (
             <>
               <li className="header-center_link">
                 <Link to="/signup" className="header-link">
@@ -125,7 +124,7 @@ const Header: React.FC<MyComponentProps> = ({ showElement = true }) => {
                     My Reviews
                   </Link>
                 </div>
-                <div className="avatar-hoverable-comp">
+                <div className="avatar-hoverable-comp" onClick={logout}>
                   <img src="/assets/logout-icon.svg" alt="icon" />
                   <Link className="header-link-white" to="/signin">
                     Logout

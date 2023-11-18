@@ -17,6 +17,7 @@ interface ProductProps {
   createdAt: any;
   _id: number;
   rating: number; // Add the rating property to the interface
+  productCategories : [string];
 }
 
 const Product = ({
@@ -32,6 +33,7 @@ const Product = ({
   shippingCost,
   createdAt,
   _id,
+  productCategories,
 }: ProductProps) => {
   const [hasBeenLiked, setHasBeenLiked] = useState(false);
   const [modal, setModal] = useState(false);
@@ -41,7 +43,6 @@ const Product = ({
     : "/assets/miniheart.svg";
   const handleEyeClickButton = () => {
     setModal(!modal);
-    console.log(createdAt);
   };
 
   return (
@@ -61,6 +62,7 @@ const Product = ({
           createdAt={createdAt}
           _id={_id}
           setIsModalOpen={setModal}
+          productCategories={productCategories}
         />
       )}
       <div className="product">
