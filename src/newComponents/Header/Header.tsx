@@ -3,21 +3,83 @@ import "./header.css";
 
 import { Link } from "react-router-dom";
 
-import { RootState } from "../../redux/store";
+import { AppDispatch, RootState } from "../../redux/store";
 
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/slice/userSlice";
+import { useState, useEffect } from "react";
+import {
+  eraseListOfProducts,
+  getProductOrUserWithName,
+} from "../../redux/slice/productSlice";
+import { useSelector } from "react-redux";
+import SearchBarResults from "../SearchBarResults/SearchBarResults";
 
 interface MyComponentProps {
   showElement?: boolean; // Prop is optional and defaults to true
 }
 
 const Header: React.FC<MyComponentProps> = ({ showElement = true }) => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [typingTimeout, setTypingTimeout] = useState<any>(null);
+  const [trulyLoading, setTrulyLoading] = useState(true);
 
+  const listOfProducts = useSelector(
+    (state: RootState) => state.productSlice.listOfUsersAndproduct
+  );
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const user = useSelector((state: RootState) => state.userSlice.user);
+  const isLoading = useSelector(
+    (state: RootState) => state.productSlice.loadingWithUserOrProduct
+  );
+
+  const handleSearch = async () => {
+    if (searchQuery.trim() !== "") {
+      await dispatch(getProductOrUserWithName(searchQuery.trim()));
+    }
+  };
+
+  const handleInputChange = (value: string) => {
+    setSearchQuery(value);
+  };
+
+  useEffect(() => {
+    setTrulyLoading(isLoading);
+  }, [isLoading]);
+
+  useEffect(() => {
+    // Cleanup the timeout when the component unmounts
+    return () => {
+      if (typingTimeout) {
+        clearTimeout(typingTimeout);
+      }
+    };
+  }, [typingTimeout]);
+
+  useEffect(() => {
+    // Clear the previous timeout
+    if (typingTimeout) {
+      clearTimeout(typingTimeout);
+    }
+
+    // Set a new timeout
+    if (searchQuery.length !== 0) {
+      const timeoutId = setTimeout(() => {
+        handleSearch();
+      }, 500);
+
+      // Save the timeout ID for later clearing
+      setTypingTimeout(timeoutId);
+    }
+  }, [searchQuery]);
+
+  useEffect(() => {
+    if (searchQuery.length < 1) {
+      dispatch(eraseListOfProducts());
+    }
+  }, [searchQuery]);
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -80,7 +142,34 @@ const Header: React.FC<MyComponentProps> = ({ showElement = true }) => {
       </div>
       <div className="header-right" style={!user ? { marginRight: "8em" } : {}}>
         <div className="header-right__searchbar">
-          <input type="text" placeholder="What are you looking for?" />
+          <input
+            type="text"
+            placeholder="What are you looking for?"
+            onChange={(e: any) => handleInputChange(e.target.value)}
+          />
+
+          <div className="search-results">
+            {(!trulyLoading && searchQuery.length > 0) ||
+            listOfProducts.length > 0 ? (
+              searchQuery.length > 0 && listOfProducts.length > 0 ? (
+                listOfProducts.map((product: any, index: number) => (
+                  <SearchBarResults {...product} key={index} />
+                ))
+              ) : (
+                <>
+                  {searchQuery.length > 0 && (
+                    <span className="loading-text">Query not found</span>
+                  )}
+                </>
+              )
+            ) : (
+              <>
+                {searchQuery.length > 0 && (
+                  <span className="loading-text">Loading...</span>
+                )}
+              </>
+            )}
+          </div>
           <img src="/assets/searchicon.png" alt="icon" />
         </div>
 

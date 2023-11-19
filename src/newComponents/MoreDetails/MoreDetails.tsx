@@ -22,6 +22,7 @@ interface MoredetailsProps {
   _id: number;
   rating: number; // Add the rating property to the interface
   productCategories: [string];
+  originalProductPrice : number
 }
 
 const MoreDetails = ({
@@ -38,6 +39,8 @@ const MoreDetails = ({
   shippingCost,
   createdAt,
   productCategories,
+  _id,
+  // originalProductPrice,
 }: MoredetailsProps) => {
   const realRating = +rating;
 
@@ -54,8 +57,8 @@ const MoreDetails = ({
       thisOwner = vendor;
     }
   });
-
   const navigate = useNavigate();
+
   return (
     <div className="more-details">
       <button className="close-button" onClick={() => setIsModalOpen(false)}>
@@ -107,7 +110,7 @@ const MoreDetails = ({
           <span className="more-details-name">{name}</span>
           <span className="more-details-description">{description}</span>
           <span className="more-details-price">
-            N{formatNumberToCurrency(price)}
+            &#x20A6;{formatNumberToCurrency(price)}
           </span>
           <div className="starRating">
             <StarRatingComponent
@@ -127,9 +130,7 @@ const MoreDetails = ({
                 return (
                   <span
                     key={index}
-                    onClick={() =>
-                      navigateTo(`category/${category}`, navigate)
-                    }
+                    onClick={() => navigateTo(`category/${category}`, navigate)}
                   >
                     {category}
                   </span>
@@ -167,7 +168,12 @@ const MoreDetails = ({
             </div>
           </div>
           <div className="more-details-buttons">
-            <button className="more-details-button">Go to page</button>
+            <button
+              className="more-details-button"
+              onClick={() => navigateTo(`product/${_id}`, navigate)}
+            >
+              Go to page
+            </button>
             <button className="more-details-button">Add to cart</button>
           </div>
         </div>

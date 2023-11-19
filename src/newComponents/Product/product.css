@@ -11,8 +11,9 @@
   border-radius: 5px;
 
 
-  min-height: 24em;
-  max-height: 24em;
+  min-height: 22em;
+  max-height: 22em;
+  margin-bottom: 1em;
 }
 .product-top {
   position: relative;
@@ -22,6 +23,11 @@
   width: 100%;
   border-radius: 5px;
 }
+
+.product-image__main {
+    cursor: pointer;
+}
+
 
 .product-image__main {
   width: 70%;
@@ -74,10 +80,17 @@
   display: none;
   cursor: pointer;
   transition: 0.2s all ease-in-out;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
 }
 
 .product-top:hover .product-hover {
-  display: block !important;
+  display: flex !important;
+}
+
+.product-hover span {
+  font-size: 0.9em;
 }
 
 .product-bottom {
@@ -130,4 +143,12 @@
   padding: 0.2em 0.1em;
   border-radius: 5px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Adjust values as needed */
+}
+
+.product-price_striked-through {
+  text-decoration: line-through;
+  display: block;
+  font-size: 0.8em;
+  font-weight: 500;
+  margin-top: -0.6em;
 }

@@ -54,9 +54,36 @@ export const returnLetters = (category: string) => {
   const categoryRevamped =
     category[0].toUpperCase() + category.slice(1).toLowerCase();
   return categoryRevamped;
-}
+};
 
+export const navigateTo = (whereT0: string, navigate: any) => {
+  navigate(`/${whereT0}`);
+};
 
-export const navigateTo = (whereT0 :string, navigate : any) => {
-  navigate(`/${whereT0}`)
-}
+export const transformsImageStrings = (products: any) => {
+  // Create a new array to store modified products
+  const transformedProducts: any = [];
+
+  // Iterate over each product in the original array
+  products.forEach((element: any) => {
+    // Clone the original product to avoid modifying it directly
+    const modifiedProduct = { ...element };
+
+    const { data } = modifiedProduct.productImage;
+
+    // Convert the data array to a Uint8Array
+    const uint8Array: any = new Uint8Array(data);
+
+    // Convert Uint8Array to Base64
+    const base64String = btoa(String.fromCharCode.apply(null, uint8Array));
+
+    // Update the productImage property in the cloned product
+    modifiedProduct.productImage = base64String;
+
+    // Add the modified product to the new array
+    transformedProducts.push(modifiedProduct);
+  });
+
+  // Return the new array with modified products
+  return transformedProducts;
+};

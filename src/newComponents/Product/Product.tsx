@@ -3,6 +3,8 @@ import StarRatingComponent from "react-star-rating-component";
 import { useState } from "react";
 import MoreDetails from "../MoreDetails/MoreDetails";
 import { formatNumberToCurrency } from "../../utils/utilsFunctions";
+import { navigateTo } from "../../utils/utilsFunctions";
+import { useNavigate } from "react-router-dom";
 
 interface ProductProps {
   description: string;
@@ -17,7 +19,8 @@ interface ProductProps {
   createdAt: any;
   _id: number;
   rating: number; // Add the rating property to the interface
-  productCategories : [string];
+  productCategories: [string];
+  originalProductPrice: number;
 }
 
 const Product = ({
@@ -34,6 +37,7 @@ const Product = ({
   createdAt,
   _id,
   productCategories,
+  originalProductPrice,
 }: ProductProps) => {
   const [hasBeenLiked, setHasBeenLiked] = useState(false);
   const [modal, setModal] = useState(false);
@@ -45,6 +49,8 @@ const Product = ({
     setModal(!modal);
   };
 
+  const navigate = useNavigate();
+
   return (
     <>
       {modal && (
@@ -52,6 +58,7 @@ const Product = ({
           name={name}
           inStock={inStock}
           price={price}
+          originalProductPrice={originalProductPrice}
           productImage={productImage}
           productDiscount={productDiscount}
           stock={stock}
@@ -74,6 +81,7 @@ const Product = ({
             src={`data:image/png;base64,${productImage}`}
             alt="Product"
             className="product-image__main"
+            onClick={() => navigateTo(`product/${_id}`, navigate)}
           />
 
           <div className="product-icon_container">
@@ -90,13 +98,19 @@ const Product = ({
               onClick={() => handleEyeClickButton()}
             />
           </div>
-          <div className="product-hover">Add To Cart</div>
+          <div className="product-hover">
+            <img src="/assets/CartIconImage.svg" alt="" />
+            <span>Add To Cart</span>
+          </div>
         </div>
 
         <div className="product-bottom">
           <span className="product_name">{name}</span>
           <span className="product_price">
-            N{formatNumberToCurrency(price)}
+            &#x20A6;{formatNumberToCurrency(price)}
+          </span>
+          <span className="product-price_striked-through">
+            &#x20A6;{formatNumberToCurrency(originalProductPrice)}
           </span>
 
           <div className="product-rating__container">

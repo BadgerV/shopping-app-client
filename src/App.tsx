@@ -1,26 +1,29 @@
-import Home from "./pages/Home/Home";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   Navigate,
 } from "react-router-dom";
-import Profile from "./newPages/Profile/Profile";
 import { NavigateUserToPendingPage } from "./utils/utilsFunctions";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./redux/store";
 import { verifyToken } from "./redux/slice/userSlice";
-import Signup from "./newPages/SignUp/Signup";
-import Login from "./newPages/Login/Login";
-import BecomeVendor from "./newPages/BecomeVendor/BecomeVendor";
-import MyVendorPage from "./newPages/MyVendorPage/MyVendorPage";
 import { useEffect } from "react";
-// import { useEffect } from "react";
 import {
   GetProductCategories,
   getRandomProducts,
 } from "./redux/slice/productSlice";
-import CategoryPage from "./newPages/CategoryPage/CategoryPage";
+import { lazy, Suspense } from "react";
+import LoadingComponent from "./newComponents/LoadingComponent/LoadingComponent";
+
+const Signup = lazy(() => import("./newPages/SignUp/Signup"));
+const Login = lazy(() => import("./newPages/Login/Login"));
+const BecomeVendor = lazy(() => import("./newPages/BecomeVendor/BecomeVendor"));
+const MyVendorPage = lazy(() => import("./newPages/MyVendorPage/MyVendorPage"));
+const CategoryPage = lazy(() => import("./newPages/CategoryPage/CategoryPage"));
+const ProductPage = lazy(() => import("./newPages/ProductPage/ProductPage"));
+const Profile = lazy(() => import("./newPages/Profile/Profile"));
+const Home = lazy(() => import("./pages/Home/Home"));
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -44,31 +47,34 @@ const App = () => {
   return (
     <Router>
       <div>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path = "/category/:id" element = {<CategoryPage />} />
+        <Suspense fallback={<LoadingComponent />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/category/:id" element={<CategoryPage />} />
+            <Route path="/product/:id" element={<ProductPage />} />
 
-          <Route
-            path="/profile"
-            element={user != 0 ? <Profile /> : <Navigate to="/signin" />}
-          />
-          <Route
-            path="/become-vendor"
-            element={user != 0 ? <BecomeVendor /> : <Navigate to="/signin" />}
-          />
-          <Route
-            path="my-vendor-page"
-            element={user != 0 ? <MyVendorPage /> : <Navigate to="/signin" />}
-          />
-          <Route
-            path="/success-page"
-            element={NavigateUserToPendingPage(user)}
-          />
+            <Route
+              path="/profile"
+              element={user != 0 ? <Profile /> : <Navigate to="/signin" />}
+            />
+            <Route
+              path="/become-vendor"
+              element={user != 0 ? <BecomeVendor /> : <Navigate to="/signin" />}
+            />
+            <Route
+              path="my-vendor-page"
+              element={user != 0 ? <MyVendorPage /> : <Navigate to="/signin" />}
+            />
+            <Route
+              path="/success-page"
+              element={NavigateUserToPendingPage(user)}
+            />
 
-          <Route path="/signin" element={<Login />} />
+            <Route path="/signin" element={<Login />} />
 
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
+            <Route path="/signup" element={<Signup />} />
+          </Routes>
+        </Suspense>
       </div>
     </Router>
   );
