@@ -68,7 +68,7 @@ const Header: React.FC<MyComponentProps> = ({ showElement = true }) => {
     if (searchQuery.length !== 0) {
       const timeoutId = setTimeout(() => {
         handleSearch();
-      }, 500);
+      }, 1000);
 
       // Save the timeout ID for later clearing
       setTypingTimeout(timeoutId);
