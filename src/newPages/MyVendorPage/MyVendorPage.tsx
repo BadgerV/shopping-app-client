@@ -3,7 +3,7 @@ import "./myVendorPage.css";
 import { useState, useEffect } from "react";
 import { RootState } from "../../redux/store";
 import { useSelector, useDispatch } from "react-redux";
-import { postProduct } from "../../redux/slice/userSlice";
+import { postProduct, resetSuccess } from "../../redux/slice/userSlice";
 import { AppDispatch } from "../../redux/store";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
@@ -37,6 +37,9 @@ const MyVendorPage = () => {
 };
 
 const PostProduct = () => {
+  const isSuccess = useSelector(
+    (state: RootState) => state.userSlice.isSuccess
+  );
   const [isFocused1, setIsFocused1] = useState(false);
   const [isFocused2, setIsFocused2] = useState(false);
   const [isFocused3, setIsFocused3] = useState(false);
@@ -52,11 +55,7 @@ const PostProduct = () => {
     shippingCost: 0,
     productImage: null,
   });
-  const [categoryOption, setCategoryOption] = useState([
-    {
-      value : "edibles", label : "Edibles"
-    }
-  ]);
+  const [categoryOption, setCategoryOption] = useState<any>([]);
 
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -128,12 +127,11 @@ const PostProduct = () => {
         productImage: productInfo.productImage,
         productPrice: productInfo.productPrice,
         shippingCost: productInfo.shippingCost,
-        category1: categoryOption[0].label,
-        category2: categoryOption[1].label,
+        category1: categoryOption[0]?.label,
+        category2: categoryOption[1]?.label,
       })
     );
 
-    console.log(response);
     if (response.payload) {
       navigate("/success-page");
     }
@@ -165,16 +163,24 @@ const PostProduct = () => {
   const maxSelections = 3;
 
   const handleSelectChange = (selected: any) => {
-
     if (selected && selected.length == maxSelections) {
       return;
     }
     setCategoryOption(selected);
   };
 
+  //RESETS THE SUCCESS VALUE IN THE OVERALL STATE AND SETS THE CATEGORY OPTION TO
+
   useEffect(() => {
-    setCategoryOption([])
+    dispatch(resetSuccess());
   }, []);
+
+  useEffect(() => {
+    if(isSuccess) {
+      navigate("")
+    }
+  }, [])
+
   return (
     <>
       <div className="input-container_container">

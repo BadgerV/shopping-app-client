@@ -11,6 +11,7 @@ import { AppDispatch } from "../../redux/store";
 import { loginUser } from "../../redux/slice/userSlice";
 import { useNavigate } from "react-router-dom";
 import LoadingComponent from "../../newComponents/LoadingComponent/LoadingComponent";
+import { removeLoginAndSignUpErrors } from "../../redux/slice/userSlice";
 
 const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -42,17 +43,20 @@ const Login = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    dispatch(removeLoginAndSignUpErrors());
     e.preventDefault();
     await dispatch(loginUser(formData));
   };
-
-
 
   useEffect(() => {
     if (isSuccess) {
       navigate("/");
     }
   }, [isSuccess]);
+
+  useEffect(() => {
+    dispatch(removeLoginAndSignUpErrors());
+  }, [])
 
   return (
     <>
@@ -74,7 +78,11 @@ const Login = () => {
                 </span>
                 <div className="error-container">
                   {error ? (
-                    <span className="error-message">{error}</span>
+                    <span className="error-message">
+                      {error === "error.response is undefined"
+                        ? "An error occured. Please try again"
+                        : error}
+                    </span>
                   ) : (
                     <></>
                   )}

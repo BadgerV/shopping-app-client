@@ -118,10 +118,10 @@ export const loginUser = createAsyncThunk(
         password: password,
       });
 
-        const userToken = JSON.stringify(response.data.token);
-        console.log(userToken)
+      const userToken = JSON.stringify(response.data.token);
+      console.log(userToken);
 
-        localStorage.setItem("token", userToken);
+      localStorage.setItem("token", userToken);
       return response.data;
     } catch (error: any) {
       return Promise.reject(error.response.data);
@@ -336,6 +336,13 @@ const userSlice: any = createSlice({
       state.isSuccess = false;
       state.error = undefined;
     },
+    removeLoginAndSignUpErrors: (state) => {
+      state.loginError = undefined;
+      state.signupError = undefined;
+    },
+    resetSuccess: (state) => {
+      state.isSuccess = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -416,6 +423,7 @@ const userSlice: any = createSlice({
       })
       .addCase(postProduct.pending, (state) => {
         state.isLoading = true;
+        state.isSuccess = false;
       })
       .addCase(postProduct.fulfilled, (state) => {
         state.isLoading = false;
@@ -439,6 +447,6 @@ const userSlice: any = createSlice({
   },
 });
 
-export const { logoutUser } = userSlice.actions;
+export const { logoutUser, removeLoginAndSignUpErrors, resetSuccess } = userSlice.actions;
 
 export default userSlice.reducer;

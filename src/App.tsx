@@ -1,3 +1,4 @@
+import "./App.css";
 import {
   BrowserRouter as Router,
   Route,
@@ -46,35 +47,41 @@ const App = () => {
   }, []);
   return (
     <Router>
-      <div>
-        <Suspense fallback={<LoadingComponent />}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/category/:id" element={<CategoryPage />} />
-            <Route path="/product/:id" element={<ProductPage />} />
+      <div className="app-container">
+        <div className="app">
+          <Suspense fallback={<LoadingComponent />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/category/:id" element={<CategoryPage />} />
+              <Route path="/product/:id" element={<ProductPage />} />
 
-            <Route
-              path="/profile"
-              element={user != 0 ? <Profile /> : <Navigate to="/signin" />}
-            />
-            <Route
-              path="/become-vendor"
-              element={user != 0 ? <BecomeVendor /> : <Navigate to="/signin" />}
-            />
-            <Route
-              path="my-vendor-page"
-              element={user != 0 ? <MyVendorPage /> : <Navigate to="/signin" />}
-            />
-            <Route
-              path="/success-page"
-              element={NavigateUserToPendingPage(user)}
-            />
+              <Route
+                path="/profile"
+                element={user != 0 ? <Profile /> : <Navigate to="/signin" />}
+              />
+              <Route
+                path="/become-vendor"
+                element={
+                  user != 0 ? <BecomeVendor /> : <Navigate to="/signin" />
+                }
+              />
+              <Route
+                path="my-vendor-page"
+                element={
+                  user != 0 ? <MyVendorPage /> : <Navigate to="/signin" />
+                }
+              />
+              <Route
+                path="pending-vendor"
+                element={NavigateUserToPendingPage(user)}
+              />
 
-            <Route path="/signin" element={<Login />} />
+              <Route path="/signin" element={<Login />} />
 
-            <Route path="/signup" element={<Signup />} />
-          </Routes>
-        </Suspense>
+              <Route path="/signup" element={<Signup />} />
+            </Routes>
+          </Suspense>
+        </div>
       </div>
     </Router>
   );

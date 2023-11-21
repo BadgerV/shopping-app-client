@@ -108,4 +108,5 @@
   transition: 0.2s all ease-in-out;
   position: absolute;
   right: 0;
+  top: -0.2em;
 }

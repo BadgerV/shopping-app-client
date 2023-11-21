@@ -4,9 +4,13 @@ import "./signup.css";
 import { Link } from "react-router-dom";
 
 import { useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import { registerUser } from "../../redux/slice/userSlice";
+import {
+  registerUser,
+  removeLoginAndSignUpErrors,
+} from "../../redux/slice/userSlice";
 import { AppDispatch } from "../../redux/store";
 import { RootState } from "../../redux/store";
 
@@ -48,15 +52,21 @@ const Signup = () => {
     }
   };
 
-  if (isSuccess) {
-    navigate("/");
-  }
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/");
+    }
+  }, [isSuccess]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
     // console.log(`${name} : ${value}`)
   };
+
+  useEffect(() => {
+    dispatch(removeLoginAndSignUpErrors());
+  }, []);
 
   return (
     <>
@@ -79,7 +89,11 @@ const Signup = () => {
 
                 <div className="error-container">
                   {error ? (
-                    <span className="error-message">{error}</span>
+                    <span className="error-message">
+                      {error === "error.response is undefined"
+                        ? "An error occured. Please try again"
+                        : error}
+                    </span>
                   ) : (
                     <></>
                   )}
