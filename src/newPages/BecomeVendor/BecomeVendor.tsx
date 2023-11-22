@@ -33,6 +33,7 @@ const CategoryOptions: Option[] = [
   { value: "edibles", label: "Edibles" },
   // Add more options as needed
 ];
+//FRIVOLOUS COMMENT
 
 const maxSelections = 3;
 
