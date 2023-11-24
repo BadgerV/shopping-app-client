@@ -31,7 +31,6 @@ const CategoryOptions: Option[] = [
   { value: "phones", label: "Phones" },
   { value: "shoes", label: "Shoes" },
   { value: "edibles", label: "Edibles" },
-  // Add more options as needed
 ];
 
 
