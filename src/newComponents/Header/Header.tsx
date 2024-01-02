@@ -17,7 +17,7 @@ import { useSelector } from "react-redux";
 import SearchBarResults from "../SearchBarResults/SearchBarResults";
 
 interface MyComponentProps {
-  showElement?: boolean; // Prop is optional and defaults to true
+  showElement?: boolean; 
 }
 
 const Header: React.FC<MyComponentProps> = ({ showElement = true }) => {

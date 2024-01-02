@@ -364,7 +364,6 @@ const userSlice: any = createSlice({
         state.isSuccess = false; // Update isSuccess when registration fails
         state.signupError = action.error.message;
       })
-
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
         state.error = undefined;
