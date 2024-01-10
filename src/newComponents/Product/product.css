@@ -4,6 +4,9 @@
   gap: 0.5em;
   width: 15em;
 
+  outline: 1px solid red;
+  flex-grow: 0.7;
+
   /* margin-bottom: 2em; */
   /* outline: 1px solid red; */
   border: 1px solid #FFFFFFFC;
@@ -12,7 +15,7 @@
 
 
   min-height: 22em;
-  max-height: 22em;
+  max-width: 22em;
   margin-bottom: 1em;
 }
 .product-top {

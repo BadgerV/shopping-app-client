@@ -70,8 +70,7 @@ interface PostProductProps {
   productDiscount: number;
   shippingCost: number;
   productImage: any;
-  category1?: string;
-  category2?: string;
+  categories : [string]
 }
 
 const timeout = (ms: number) =>
@@ -255,8 +254,7 @@ export const postProduct = createAsyncThunk(
     shippingCost,
     productDiscount,
     productImage,
-    category1,
-    category2,
+    categories
   }: PostProductProps) => {
     // Retrieve the token from localStorage
     const theToken = localStorage.getItem("token");
@@ -281,13 +279,13 @@ export const postProduct = createAsyncThunk(
         productDiscount: productDiscount,
         shippingCost: shippingCost,
         productImage: productImage,
-        category1: category1,
-        category2: category2,
+        categories : categories
       },
 
       { headers: headers }
     );
 
+    console.log(response.data)
     return response.data;
   }
 );

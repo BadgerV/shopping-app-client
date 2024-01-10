@@ -40,12 +40,7 @@ const PostProduct = () => {
   const isSuccess = useSelector(
     (state: RootState) => state.userSlice.isSuccess
   );
-  const [isFocused1, setIsFocused1] = useState(false);
-  const [isFocused2, setIsFocused2] = useState(false);
-  const [isFocused3, setIsFocused3] = useState(false);
-  const [isFocused4, setIsFocused4] = useState(false);
-  const [isFocused5, setIsFocused5] = useState(false);
-  const [isFocused6, setIsFocused6] = useState(false);
+
   const [productInfo, setProductInfo] = useState({
     productName: "",
     prodcuDescription: "",
@@ -55,7 +50,16 @@ const PostProduct = () => {
     shippingCost: 0,
     productImage: null,
   });
-  const [categoryOption, setCategoryOption] = useState<any>([]);
+  const [categoryOption, setCategoryOption] = useState<Option[]>([]);
+  const [categories, setCategories] = useState<any>([]);
+
+  useEffect(() => {
+    setCategories(categoryOption.map((item) => item.label));
+  }, [categoryOption]);
+
+  useEffect(() => {
+    console.log(categories);
+  }, [categories]);
 
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -64,50 +68,22 @@ const PostProduct = () => {
     (state: RootState) => state.userSlice.isLoading
   );
 
-  const handleFocus1 = () => {
-    setIsFocused1(true);
+  const focusStateCount = 6;
+
+  const [focusStates, setFocusStates] = useState(
+    Array(focusStateCount).fill(false)
+  );
+
+  const handleFocus = (index: number) => {
+    const updatedFocusStates = [...focusStates];
+    updatedFocusStates[index] = true;
+    setFocusStates(updatedFocusStates);
   };
 
-  const handleBlur1 = () => {
-    setIsFocused1(false);
-  };
-
-  const handleFocus2 = () => {
-    setIsFocused2(true);
-  };
-
-  const handleBlur2 = () => {
-    setIsFocused2(false);
-  };
-
-  const handleFocus3 = () => {
-    setIsFocused3(true);
-  };
-
-  const handleBlur3 = () => {
-    setIsFocused3(false);
-  };
-
-  const handleFocus4 = () => {
-    setIsFocused4(true);
-  };
-
-  const handleBlur4 = () => {
-    setIsFocused4(false);
-  };
-  const handleFocus5 = () => {
-    setIsFocused5(true);
-  };
-
-  const handleBlur5 = () => {
-    setIsFocused5(false);
-  };
-  const handleFocus6 = () => {
-    setIsFocused6(true);
-  };
-
-  const handleBlur6 = () => {
-    setIsFocused6(false);
+  const handleBlur = (index: number) => {
+    const updatedFocusStates = [...focusStates];
+    updatedFocusStates[index] = false;
+    setFocusStates(updatedFocusStates);
   };
 
   const handleChange = (e: any) => {
@@ -127,8 +103,7 @@ const PostProduct = () => {
         productImage: productInfo.productImage,
         productPrice: productInfo.productPrice,
         shippingCost: productInfo.shippingCost,
-        category1: categoryOption[0]?.label,
-        category2: categoryOption[1]?.label,
+        categories: categories,
       })
     );
 
@@ -160,7 +135,7 @@ const PostProduct = () => {
 
   generateOptions();
 
-  const maxSelections = 3;
+  const maxSelections = 4;
 
   const handleSelectChange = (selected: any) => {
     if (selected && selected.length == maxSelections) {
@@ -170,23 +145,22 @@ const PostProduct = () => {
   };
 
   //RESETS THE SUCCESS VALUE IN THE OVERALL STATE AND SETS THE CATEGORY OPTION TO
-
   useEffect(() => {
     dispatch(resetSuccess());
   }, []);
 
   useEffect(() => {
-    if(isSuccess) {
-      navigate("")
+    if (isSuccess) {
+      navigate("");
     }
-  }, [])
+  }, []);
 
   return (
     <>
       <div className="input-container_container">
         <div
           className={`input-container ${
-            isFocused1 || productInfo.productName ? "focused" : ""
+            focusStates[1] || productInfo.productName ? "focused" : ""
           }`}
         >
           <label htmlFor="floating-label1" className="floating-label">
@@ -194,8 +168,8 @@ const PostProduct = () => {
           </label>
           <input
             type="text"
-            onFocus={handleFocus1}
-            onBlur={handleBlur1}
+            onFocus={() => handleFocus(1)}
+            onBlur={() => handleBlur(1)}
             className="vendor-input"
             onChange={handleChange}
             name="productName"
@@ -203,7 +177,7 @@ const PostProduct = () => {
         </div>
         <div
           className={`input-container ${
-            isFocused1 || productInfo.productName ? "focused" : ""
+            focusStates[1] || productInfo.productName ? "focused" : ""
           }`}
         >
           <Select
@@ -241,7 +215,7 @@ const PostProduct = () => {
         <div className="vendor-page-two-inputs">
           <div
             className={`input-container ${
-              isFocused3 || productInfo.productPrice ? "focused" : ""
+              focusStates[3] || productInfo.productPrice ? "focused" : ""
             }`}
           >
             <label htmlFor="floating-label3" className="floating-label">
@@ -249,8 +223,8 @@ const PostProduct = () => {
             </label>
             <input
               type="text"
-              onFocus={handleFocus3}
-              onBlur={handleBlur3}
+              onFocus={() => handleFocus(3)}
+              onBlur={() => handleBlur(3)}
               className="vendor-input"
               onChange={handleChange}
               name="productPrice"
@@ -258,7 +232,7 @@ const PostProduct = () => {
           </div>
           <div
             className={`input-container ${
-              isFocused4 || productInfo.productStock ? "focused" : ""
+              focusStates[4] || productInfo.productStock ? "focused" : ""
             }`}
           >
             <label htmlFor="floating-label4" className="floating-label">
@@ -266,8 +240,8 @@ const PostProduct = () => {
             </label>
             <input
               type="text"
-              onFocus={handleFocus4}
-              onBlur={handleBlur4}
+              onFocus={() => handleFocus(4)}
+              onBlur={() => handleBlur(4)}
               onChange={handleChange}
               className="vendor-input"
               name="productStock"
@@ -277,7 +251,7 @@ const PostProduct = () => {
         <div className="vendor-page-two-inputs">
           <div
             className={`input-container ${
-              isFocused5 || productInfo.productDiscount ? "focused" : ""
+              focusStates[5] || productInfo.productDiscount ? "focused" : ""
             }`}
           >
             <label htmlFor="floating-label3" className="floating-label">
@@ -285,8 +259,8 @@ const PostProduct = () => {
             </label>
             <input
               type="text"
-              onFocus={handleFocus5}
-              onBlur={handleBlur5}
+              onFocus={() => handleFocus(5)}
+              onBlur={() => handleBlur(5)}
               onChange={handleChange}
               className="vendor-input"
               name="productDiscount"
@@ -294,7 +268,7 @@ const PostProduct = () => {
           </div>
           <div
             className={`input-container ${
-              isFocused6 || productInfo.shippingCost ? "focused" : ""
+              focusStates[6] || productInfo.shippingCost ? "focused" : ""
             }`}
           >
             <label htmlFor="floating-label4" className="floating-label">
@@ -302,8 +276,8 @@ const PostProduct = () => {
             </label>
             <input
               type="text"
-              onFocus={handleFocus6}
-              onBlur={handleBlur6}
+              onFocus={() => handleFocus(6)}
+              onBlur={() => handleBlur(6)}
               onChange={handleChange}
               className="vendor-input"
               name="shippingCost"
@@ -313,7 +287,7 @@ const PostProduct = () => {
 
         <div
           className={`input-container ${
-            isFocused2 || productInfo.prodcuDescription ? "focused" : ""
+            focusStates[2] || productInfo.prodcuDescription ? "focused" : ""
           }`}
         >
           <label htmlFor="floating-label2" className="floating-label">
@@ -321,8 +295,8 @@ const PostProduct = () => {
           </label>
           <textarea
             rows={4}
-            onFocus={handleFocus2}
-            onBlur={handleBlur2}
+            onFocus={() => handleFocus(2)}
+            onBlur={() => handleBlur(2)}
             onChange={handleChange}
             className="vendor-page_textarea vendor-input"
             name="prodcuDescription"
