@@ -10,7 +10,7 @@ import {
 import "./categories.css";
 
 const Categories = () => {
-  const [scrollNumber, setScrollNumber] = useState(0);
+  const [scrollNumber, setScrollNumber] = useState(8);
 
   const scrollRight = () => {
     // console.log(scrollNumber);

@@ -9,7 +9,7 @@ import image4 from '/assets/image13.jpg';
 import image5 from '/assets/image14.jpg';
 import image6 from '/assets/image15.jpg';
 
-const TheCategories = [
+const categoriesData = [
     {
         name : 'Accessories',
         desc : 'Get your phones, laptops and electronic appliances.',
@@ -44,7 +44,7 @@ const Categories = () => {
         <span className="categories_header">Categories</span>
         <div className="categoriesContainer">
             {
-                TheCategories.map((cat, index) => {
+                categoriesData.map((cat, index) => {
                     return(
                         <Category key = {index} {...cat}  />
                     )
