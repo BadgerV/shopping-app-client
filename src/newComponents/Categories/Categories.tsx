@@ -12,6 +12,8 @@ import "./categories.css";
 const Categories = () => {
   const [scrollNumber, setScrollNumber] = useState(8);
 
+  //just another comment
+
   const scrollRight = () => {
     // console.log(scrollNumber);
     if (scrollNumber == -8) {
