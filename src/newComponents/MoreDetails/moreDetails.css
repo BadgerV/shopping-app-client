@@ -90,8 +90,9 @@
 .more-details-description {
   display: block;
   margin-bottom: 1em;
-  font-size: 0.9em;
+  font-size: 0.8em;
   font-weight: 400;
+  text-align: justify;
 }
 
 .more-details-price {
@@ -107,7 +108,7 @@
 }
 
 .more-details-buttons {
-  position: absolute;
+  /* position: absolute; */
   bottom: 1em;
   display: flex;
   gap: 2em;
@@ -140,15 +141,21 @@
     font-size: 0.9em;
 }
 
+.more-details__vendor-iner-cont-lower {
+  margin: 1em 0;
+}
+
 .more-details__vendor-iner-cont-lower__link {
     text-decoration: none;
     color: #db4444;
-    font-size: 0.9em;
+    font-size: 0.8em;
+    
 }
 
 .more-details__vendor-inner-cont {
   display: flex;
   flex-direction: column;
+
 }
 
 .more-details__vendor-iner-cont-upper {
@@ -156,6 +163,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin: 1em 0;
 }
 
 .more-details__vendor-iner-cont-upper img {
@@ -168,6 +176,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 1em;
+
 }
 
 .more-details_categories-container span{

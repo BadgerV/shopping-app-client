@@ -45,9 +45,6 @@ const ProductPage = () => {
   useEffect(() => {
     getParticularProduct(id);
   }, []);
-  useEffect(() => {
-    console.log(particularProduct);
-  }, [particularProduct]);
 
   useEffect(() => {
     if (loading == false) {
@@ -56,6 +53,10 @@ const ProductPage = () => {
       setIsloading(true);
     }
   }, [loading]);
+
+  useEffect(() => {
+    particularProduct && console.log(particularProduct.productImage);
+  }, [particularProduct]);
 
   return (
     <>
@@ -76,7 +77,12 @@ const ProductPage = () => {
             <div className="product-page_main">
               <div className="product-page_main-left">
                 <img
-                  src={`data:image/png;base64,${particularProduct?.productImage}`}
+                  src={`data:image/png;base64,${btoa(
+                    String.fromCharCode.apply(
+                      null,
+                      new Uint8Array(particularProduct.productImage[0].data)
+                    )
+                  )}`}
                   alt=""
                 />
               </div>

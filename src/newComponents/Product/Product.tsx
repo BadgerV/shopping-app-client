@@ -59,7 +59,7 @@ const Product = ({
           inStock={inStock}
           price={price}
           originalProductPrice={originalProductPrice}
-          productImage={productImage}
+          productImage={productImage && productImage[0]}
           productDiscount={productDiscount}
           stock={stock}
           rating={rating}
@@ -78,7 +78,7 @@ const Product = ({
             <span className="product_discount">-{productDiscount}%</span>
           ) : null}
           <img
-            src={`data:image/png;base64,${productImage}`}
+            src={`data:image/png;base64,${productImage && productImage[0]}`}
             alt="Product"
             className="product-image__main"
             onClick={() => navigateTo(`product/${_id}`, navigate)}

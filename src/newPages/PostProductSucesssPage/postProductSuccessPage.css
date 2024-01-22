@@ -40,3 +40,9 @@
   gap: 1.5em;
   background-color: #228b22;
 }
+
+.post-product-success-div {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}

@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
 import { RootState } from "../redux/store";
 import { formatDistanceToNow } from "date-fns";
-import PostProductSucessPage from "../newPages/PostProductSucesssPage/PostProductSucessPage";
+// import PostProductSucessPage from "../newPages/PostProductSucesssPage/PostProductSucessPage";
 import PendingVendor from "../newComponents/PendingVendor/PendingVendor";
 
 export default function ProtectedRoutes() {
@@ -42,10 +42,10 @@ export function formatRelativeTime(dateString: string) {
 }
 
 export const NavigateUserToPendingPage = (user: any) => {
-  if(user?.isVendor == "pending") {
-    return <PendingVendor />
+  if (user?.isVendor == "pending") {
+    return <PendingVendor />;
   } else {
-    return <Navigate to="/" />
+    return <Navigate to="/" />;
   }
 };
 
@@ -59,30 +59,24 @@ export const navigateTo = (whereT0: string, navigate: any) => {
   navigate(`/${whereT0}`);
 };
 
-export const transformsImageStrings = (products: any) => {
-  // Create a new array to store modified products
-  const transformedProducts: any = [];
+export const transformsImageStrings = (product: any) => {
+  const productReplica = product;
 
-  // Iterate over each product in the original array
-  products.forEach((element: any) => {
-    // Clone the original product to avoid modifying it directly
-    const modifiedProduct = { ...element };
+  const imageArray = productReplica.productImage;
 
-    const { data } = modifiedProduct.productImage;
+  const newImageArray: any = [];
 
-    // Convert the data array to a Uint8Array
-    const uint8Array: any = new Uint8Array(data);
+  imageArray.map((data: any) => {
+    const buffer = data.data;
+    console.log(buffer)
+    // Convert the buffer to a base64 string
+    // const image  = new Buffer.from(buffer).toString("base64");
 
-    // Convert Uint8Array to Base64
-    const base64String = btoa(String.fromCharCode.apply(null, uint8Array));
-
-    // Update the productImage property in the cloned product
-    modifiedProduct.productImage = base64String;
-
-    // Add the modified product to the new array
-    transformedProducts.push(modifiedProduct);
+    newImageArray.push(image);
   });
 
-  // Return the new array with modified products
-  return transformedProducts;
+  productReplica.productImage = newImageArray;
+
+
+  return productReplica;
 };

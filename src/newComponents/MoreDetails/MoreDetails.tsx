@@ -4,7 +4,7 @@ import { formatNumberToCurrency, navigateTo } from "../../utils/utilsFunctions";
 import { formatRelativeTime } from "../../utils/utilsFunctions";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 interface MoredetailsProps {
@@ -22,7 +22,7 @@ interface MoredetailsProps {
   _id: number;
   rating: number; // Add the rating property to the interface
   productCategories: [string];
-  originalProductPrice : number
+  originalProductPrice: number;
 }
 
 const MoreDetails = ({
@@ -40,8 +40,8 @@ const MoreDetails = ({
   createdAt,
   productCategories,
   _id,
-  // originalProductPrice,
-}: MoredetailsProps) => {
+}: // originalProductPrice,
+MoredetailsProps) => {
   const realRating = +rating;
 
   let thisOwner: any;
@@ -112,16 +112,18 @@ const MoreDetails = ({
           <span className="more-details-price">
             &#x20A6;{formatNumberToCurrency(price)}
           </span>
-          <div className="starRating">
-            <StarRatingComponent
-              name="rate2"
-              editing={false}
-              starCount={5}
-              value={realRating}
-              starColor={`#db4444`}
-              emptyStarColor={`white`}
-            />
-          </div>
+          {rating && rating != 0 && (
+            <div className="starRating">
+              <StarRatingComponent
+                name="rate2"
+                editing={false}
+                starCount={5}
+                value={realRating}
+                starColor={`#db4444`}
+                emptyStarColor={`white`}
+              />
+            </div>
+          )}
 
           <div className="more-details_categories-container">
             <span>Categories</span>
@@ -154,14 +156,6 @@ const MoreDetails = ({
                       src={`data:image/png;base64,${thisOwner.avatar}`}
                       alt=""
                     />
-                  </div>
-                  <div className="more-details__vendor-iner-cont-lower">
-                    <Link
-                      to=""
-                      className="more-details__vendor-iner-cont-lower__link"
-                    >
-                      Go to {thisOwner.firstName}'s page
-                    </Link>
                   </div>
                 </div>
               )}

@@ -70,7 +70,7 @@ interface PostProductProps {
   productDiscount: number;
   shippingCost: number;
   productImage: any;
-  categories : [string]
+  categories: [string];
 }
 
 const timeout = (ms: number) =>
@@ -246,47 +246,33 @@ export const becomeVendor = createAsyncThunk(
 
 export const postProduct = createAsyncThunk(
   "user/postProduct",
-  async ({
-    productName,
-    productPrice,
-    productDescription,
-    productStock,
-    shippingCost,
-    productDiscount,
-    productImage,
-    categories
-  }: PostProductProps) => {
-    // Retrieve the token from localStorage
-    const theToken = localStorage.getItem("token");
-    let theNewToken = null;
-    if (theToken) {
-      theNewToken = JSON.parse(theToken);
+  async (formData: any) => {
+    try {
+      // Retrieve the token from localStorage
+      const theToken = localStorage.getItem("token");
+      let theNewToken = null;
+      if (theToken) {
+        theNewToken = JSON.parse(theToken);
+      }
+
+      // Set the Axios request headers with the Authorization header
+      const headers = {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${theNewToken}`,
+      };
+
+      const response = await axios.post(
+        `${development}/v1/product/post-product`,
+        formData,
+
+        { headers: headers }
+      );
+
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log(error);
     }
-
-    // Set the Axios request headers with the Authorization header
-    const headers = {
-      "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${theNewToken}`,
-    };
-
-    const response = await axios.post(
-      `${development}/v1/product/post-product`,
-      {
-        name: productName,
-        description: productDescription,
-        originalProductPrice: productPrice,
-        stock: productStock,
-        productDiscount: productDiscount,
-        shippingCost: shippingCost,
-        productImage: productImage,
-        categories : categories
-      },
-
-      { headers: headers }
-    );
-
-    console.log(response.data)
-    return response.data;
   }
 );
 
@@ -444,6 +430,7 @@ const userSlice: any = createSlice({
   },
 });
 
-export const { logoutUser, removeLoginAndSignUpErrors, resetSuccess } = userSlice.actions;
+export const { logoutUser, removeLoginAndSignUpErrors, resetSuccess } =
+  userSlice.actions;
 
 export default userSlice.reducer;

@@ -16,6 +16,7 @@ import {
 } from "./redux/slice/productSlice";
 import { lazy, Suspense } from "react";
 import LoadingComponent from "./newComponents/LoadingComponent/LoadingComponent";
+import PostProductSucessPage from "./newPages/PostProductSucesssPage/PostProductSucessPage";
 
 const Signup = lazy(() => import("./newPages/SignUp/Signup"));
 const Login = lazy(() => import("./newPages/Login/Login"));
@@ -29,7 +30,6 @@ const Home = lazy(() => import("./pages/Home/Home"));
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
   const user = useSelector((state: RootState) => state.userSlice.user);
-
   const theToken = localStorage.getItem("token");
 
   useEffect(() => {
@@ -41,7 +41,6 @@ const App = () => {
     dispatch(getRandomProducts());
 
     if (!user && theToken) {
-      console.log("blast off");
       asyncFunction();
     }
   }, []);
@@ -74,6 +73,17 @@ const App = () => {
               <Route
                 path="pending-vendor"
                 element={NavigateUserToPendingPage(user)}
+              />
+
+              <Route
+                path="success-page"
+                element={
+                  user.isVendor ? (
+                    <PostProductSucessPage />
+                  ) : (
+                    <Navigate to="/" />
+                  )
+                }
               />
 
               <Route path="/signin" element={<Login />} />

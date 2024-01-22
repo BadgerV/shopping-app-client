@@ -106,9 +106,7 @@ export const getParticularProductWithId = createAsyncThunk(
       `${development}/product/get-product/${id}`
     );
 
-    const result = transformsImageStrings(response.data);
-
-    return result[0];
+    return (response.data);
   }
 );
 

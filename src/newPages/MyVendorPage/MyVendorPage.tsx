@@ -7,6 +7,7 @@ import { postProduct, resetSuccess } from "../../redux/slice/userSlice";
 import { AppDispatch } from "../../redux/store";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
+import FileUpload from "../../utils/FileUploads/FileUpload";
 
 //commenting rubbish to keep up with the kardashians
 interface Option {
@@ -50,16 +51,14 @@ const PostProduct = () => {
     shippingCost: 0,
     productImage: null,
   });
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+
   const [categoryOption, setCategoryOption] = useState<Option[]>([]);
   const [categories, setCategories] = useState<any>([]);
 
   useEffect(() => {
     setCategories(categoryOption.map((item) => item.label));
   }, [categoryOption]);
-
-  useEffect(() => {
-    console.log(categories);
-  }, [categories]);
 
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -68,11 +67,10 @@ const PostProduct = () => {
     (state: RootState) => state.userSlice.isLoading
   );
 
-  const focusStateCount = 6;
+  // Create a new FormData object to send files and other product data
+  const formData = new FormData();
 
-  const [focusStates, setFocusStates] = useState(
-    Array(focusStateCount).fill(false)
-  );
+  const [focusStates, setFocusStates] = useState(Array(6).fill(false));
 
   const handleFocus = (index: number) => {
     const updatedFocusStates = [...focusStates];
@@ -94,29 +92,32 @@ const PostProduct = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const response = await dispatch(
-      postProduct({
-        productName: productInfo.productName,
-        productDescription: productInfo.prodcuDescription,
-        productStock: productInfo.productStock,
-        productDiscount: productInfo.productDiscount,
-        productImage: productInfo.productImage,
-        productPrice: productInfo.productPrice,
-        shippingCost: productInfo.shippingCost,
-        categories: categories,
-      })
+
+    formData.append("name", productInfo.productName);
+    formData.append("description", productInfo.prodcuDescription);
+    formData.append(
+      "originalProductPrice",
+      productInfo.productPrice.toString()
     );
+    formData.append("stock", productInfo.productStock.toString());
+    formData.append("productDiscount", productInfo.productDiscount.toString());
+    formData.append("shippingCost", productInfo.shippingCost.toString());
+
+    // Append the images to the FormData
+    uploadedFiles.forEach((file) => {
+      formData.append(`productImage`, file);
+    });
+    categories.forEach((category: string) => {
+      formData.append("categories", category);
+    });
+    console.log(formData);
+
+    const response = await dispatch(postProduct(formData));
 
     if (response.payload) {
       navigate("/success-page");
     }
   };
-
-  const onFileChange = (e: any) => {
-    const updatedInfo = { ...productInfo, productImage: e.target.files[0] };
-    setProductInfo(updatedInfo);
-  };
-  // const [selectedOption, setSelectedOption] = useState<Option | null>(null);
 
   const productcategories = useSelector(
     (state: RootState) => state.productSlice.productCategories
@@ -304,19 +305,9 @@ const PostProduct = () => {
         </div>
 
         <div className="image-upload">
-          <label
-            htmlFor="image-input"
-            className="become-vendor-label extra-label"
-          >
-            Upload Image
-          </label>
-          <input
-            type="file"
-            id="image-input"
-            accept="image/*"
-            onChange={onFileChange}
-            style={{ display: "none" }}
-            name="avatar"
+          <FileUpload
+            setUploadedFiles={setUploadedFiles}
+            uploadedFiles={uploadedFiles}
           />
         </div>
 
