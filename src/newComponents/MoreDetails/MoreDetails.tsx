@@ -2,9 +2,7 @@ import "./moreDetails.css";
 import StarRatingComponent from "react-star-rating-component";
 import { formatNumberToCurrency, navigateTo } from "../../utils/utilsFunctions";
 import { formatRelativeTime } from "../../utils/utilsFunctions";
-import { useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 interface MoredetailsProps {
@@ -13,7 +11,7 @@ interface MoredetailsProps {
   inStock: boolean;
   name: string;
   price: number;
-  owner: number;
+  owner: any;
   productImage: any;
   stock: number;
   productDiscount?: number;
@@ -44,19 +42,6 @@ const MoreDetails = ({
 MoredetailsProps) => {
   const realRating = +rating;
 
-  let thisOwner: any;
-  const ownersOfProduct = useSelector(
-    (state: RootState) => state.userSlice.ownersOfProduct
-  );
-  const isLoadingProductOwner = useSelector(
-    (state: RootState) => state.userSlice.isLoadingOwners
-  );
-
-  ownersOfProduct?.map((vendor: any) => {
-    if (owner === vendor._id) {
-      thisOwner = vendor;
-    }
-  });
   const navigate = useNavigate();
 
   return (
@@ -109,21 +94,26 @@ MoredetailsProps) => {
         <div className="more-details-container-right">
           <span className="more-details-name">{name}</span>
           <span className="more-details-description">{description}</span>
-          <span className="more-details-price">
-            &#x20A6;{formatNumberToCurrency(price)}
-          </span>
-          {rating && rating != 0 && (
+
+          <div className="more-details__price-and-rating">
+            <span className="more-details-price">
+              &#x20A6;{formatNumberToCurrency(price)}
+            </span>
             <div className="starRating">
-              <StarRatingComponent
-                name="rate2"
-                editing={false}
-                starCount={5}
-                value={realRating}
-                starColor={`#db4444`}
-                emptyStarColor={`white`}
-              />
+              {!realRating || realRating === 0 ? (
+                <span>"No ratings yet"</span>
+              ) : (
+                <StarRatingComponent
+                  name="rate2"
+                  editing={false}
+                  starCount={5}
+                  value={realRating}
+                  starColor={`#db4444`}
+                  emptyStarColor={`white`}
+                />
+              )}
             </div>
-          )}
+          </div>
 
           <div className="more-details_categories-container">
             <span>Categories</span>
@@ -144,21 +134,14 @@ MoredetailsProps) => {
           <div className="more-details__owner-info">
             <span className="more-details__vendor-text">About Vendor</span>
             <div className="more-details__vendor-cont">
-              {isLoadingProductOwner ? (
-                <img src="/assets/spinner.svg" alt="" />
-              ) : (
-                <div className="more-details__vendor-inner-cont">
-                  <div className="more-details__vendor-iner-cont-upper">
-                    <span className="more-details_vendor-name">
-                      {thisOwner.firstName} {thisOwner.lastName}
-                    </span>
-                    <img
-                      src={`data:image/png;base64,${thisOwner.avatar}`}
-                      alt=""
-                    />
-                  </div>
-                </div>
-              )}
+              <div className="more-details__vendor-inner-cont">
+                <Link to="" className="more-details__vendor-iner-cont-upper">
+                  <span className="more-details_vendor-name">
+                    {owner.firstName} {owner.lastName}
+                  </span>
+                  <img src={`data:image/png;base64,${owner.avatar}`} alt="" />
+                </Link>
+              </div>
             </div>
           </div>
           <div className="more-details-buttons">

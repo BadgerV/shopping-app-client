@@ -59,24 +59,30 @@ export const navigateTo = (whereT0: string, navigate: any) => {
   navigate(`/${whereT0}`);
 };
 
-export const transformsImageStrings = (product: any) => {
-  const productReplica = product;
+export function transformsImageStrings(products: any) {
+  // Create a new array to store modified products
+  const transformedProducts: any = [];
 
-  const imageArray = productReplica.productImage;
+  // Iterate over each product in the original array
+  products.forEach((element: any) => {
+    // Clone the original product to avoid modifying it directly
+    const modifiedProduct = { ...element };
 
-  const newImageArray: any = [];
+    const { data } = modifiedProduct.productImage;
 
-  imageArray.map((data: any) => {
-    const buffer = data.data;
-    console.log(buffer)
-    // Convert the buffer to a base64 string
-    // const image  = new Buffer.from(buffer).toString("base64");
+    // Convert the data array to a Uint8Array
+    const uint8Array: any = new Uint8Array(data);
 
-    newImageArray.push(image);
+    // Convert Uint8Array to Base64
+    const base64String = btoa(String.fromCharCode.apply(null, uint8Array));
+
+    // Update the productImage property in the cloned product
+    modifiedProduct.productImage = base64String;
+
+    // Add the modified product to the new array
+    transformedProducts.push(modifiedProduct);
   });
 
-  productReplica.productImage = newImageArray;
-
-
-  return productReplica;
-};
+  // Return the new array with modified products
+  return transformedProducts;
+}

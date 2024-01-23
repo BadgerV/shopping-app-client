@@ -2,26 +2,20 @@ import Product from "../Product/Product";
 import "./exploreProducts.css";
 import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../redux/store";
-import { getUser } from "../../redux/slice/userSlice";
+
+// import { useEffect } from "react";
 
 const ExploreProducts = () => {
   const listOfProducts = useSelector(
     (state: RootState) => state.productSlice.products.randomProducts
   );
-  const ownersIDArray = listOfProducts?.map((user: any) => user.owner) || [];
 
-  const dispatch = useDispatch<AppDispatch>();
-
-  const fetchOwners = async () => {
-    await dispatch(getUser(ownersIDArray));
-  };
-
-  useEffect(() => {
-    listOfProducts && fetchOwners();
-  }, [listOfProducts]);
+  // useEffect(() => {
+  //   console.log("omo")
+  //   if (listOfProducts) {
+  //     console.log(listOfProducts[0]);
+  //   }
+  // }, [listOfProducts]);
 
   return (
     <div className="exploreProduct">

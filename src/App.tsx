@@ -12,7 +12,6 @@ import { verifyToken } from "./redux/slice/userSlice";
 import { useEffect } from "react";
 import {
   GetProductCategories,
-  getRandomProducts,
 } from "./redux/slice/productSlice";
 import { lazy, Suspense } from "react";
 import LoadingComponent from "./newComponents/LoadingComponent/LoadingComponent";
@@ -38,7 +37,6 @@ const App = () => {
     };
 
     dispatch(GetProductCategories());
-    dispatch(getRandomProducts());
 
     if (!user && theToken) {
       asyncFunction();

@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { transformsImageStrings } from "../../utils/utilsFunctions";
 
 const development = "http://localhost:3000/v1";
 // const production = "https://shopping-app-j93p.onrender.com";
@@ -67,35 +66,7 @@ export const GetCategoriesProduct = createAsyncThunk(
       `${development}/product/get-categories-product/${category}`
     );
 
-    function transformsImageStrings(products: any) {
-      // Create a new array to store modified products
-      const transformedProducts: any = [];
-
-      // Iterate over each product in the original array
-      products.forEach((element: any) => {
-        // Clone the original product to avoid modifying it directly
-        const modifiedProduct = { ...element };
-
-        const { data } = modifiedProduct.productImage;
-
-        // Convert the data array to a Uint8Array
-        const uint8Array: any = new Uint8Array(data);
-
-        // Convert Uint8Array to Base64
-        const base64String = btoa(String.fromCharCode.apply(null, uint8Array));
-
-        // Update the productImage property in the cloned product
-        modifiedProduct.productImage = base64String;
-
-        // Add the modified product to the new array
-        transformedProducts.push(modifiedProduct);
-      });
-
-      // Return the new array with modified products
-      return transformedProducts;
-    }
-    const result = transformsImageStrings(response.data);
-    return result;
+    return response.data;
   }
 );
 
@@ -106,7 +77,7 @@ export const getParticularProductWithId = createAsyncThunk(
       `${development}/product/get-product/${id}`
     );
 
-    return (response.data);
+    return response.data;
   }
 );
 
@@ -136,6 +107,7 @@ const productSlice = createSlice({
       })
       .addCase(getRandomProducts.fulfilled, (state, action) => {
         state.products = action.payload;
+        console.log(state.products);
         state.isLoadingRandomProducts = false;
       })
       .addCase(getRandomProducts.rejected, (state) => {
@@ -160,7 +132,6 @@ const productSlice = createSlice({
       .addCase(GetCategoriesProduct.fulfilled, (state, action) => {
         state.isLoadingProduct = false;
         state.categoriesProduct = action.payload;
-        console.log(state.categoriesProduct);
       })
       .addCase(GetCategoriesProduct.rejected, (state, action) => {
         state.isLoadingProduct = false;

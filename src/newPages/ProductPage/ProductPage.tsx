@@ -80,7 +80,9 @@ const ProductPage = () => {
                   src={`data:image/png;base64,${btoa(
                     String.fromCharCode.apply(
                       null,
-                      new Uint8Array(particularProduct.productImage[0].data)
+                      Array.from(
+                        new Uint8Array(particularProduct.productImage[0].data)
+                      )
                     )
                   )}`}
                   alt=""
