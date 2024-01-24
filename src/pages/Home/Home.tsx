@@ -24,24 +24,18 @@ const Home = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    const fetchData = async () => {
-      await dispatch(getRandomProducts());
-    };
-
-    fetchData();
+    dispatch(getRandomProducts());
   }, []);
 
   const [menu, setMenu] = useState(false);
-  const isSpecialLoading = useSelector(
-    (state: RootState) => state.userSlice.isSpecialLoading
-  );
+
   const isLoadingRandomProducts = useSelector(
     (state: RootState) => state.productSlice.isLoadingRandomProducts
   );
 
   return (
     <>
-      {isLoadingRandomProducts || isSpecialLoading ? (
+      {isLoadingRandomProducts ? (
         <LoadingComponent />
       ) : (
         <div className="home-style">

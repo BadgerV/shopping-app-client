@@ -1,5 +1,5 @@
 import "./moreDetails.css";
-import StarRatingComponent from "react-star-rating-component";
+import { Rating } from "@mui/material";
 import { formatNumberToCurrency, navigateTo } from "../../utils/utilsFunctions";
 import { formatRelativeTime } from "../../utils/utilsFunctions";
 import { Link } from "react-router-dom";
@@ -101,15 +101,14 @@ MoredetailsProps) => {
             </span>
             <div className="starRating">
               {!realRating || realRating === 0 ? (
-                <span>"No ratings yet"</span>
+                <span>No ratings yet</span>
               ) : (
-                <StarRatingComponent
-                  name="rate2"
-                  editing={false}
-                  starCount={5}
-                  value={realRating}
-                  starColor={`#db4444`}
-                  emptyStarColor={`white`}
+                <Rating
+                  name="size-large"
+                  defaultValue={realRating}
+                  size="large"
+                  precision={1}
+                  readOnly
                 />
               )}
             </div>

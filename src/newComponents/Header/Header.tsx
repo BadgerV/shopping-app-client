@@ -17,10 +17,10 @@ import { useSelector } from "react-redux";
 import SearchBarResults from "../SearchBarResults/SearchBarResults";
 
 interface MyComponentProps {
-  showElement?: boolean; 
+  showElement?: boolean;
 }
 
-const Header: React.FC<MyComponentProps> = ({ showElement = true }) => {
+const Header: React.FC<MyComponentProps> = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [typingTimeout, setTypingTimeout] = useState<any>(null);
   const [trulyLoading, setTrulyLoading] = useState(true);
@@ -110,13 +110,11 @@ const Header: React.FC<MyComponentProps> = ({ showElement = true }) => {
           </li>
 
           {user?.isVendor == "true" ? (
-            showElement && (
-              <li className="header-center_link">
-                <Link to="/my-vendor-page" className="header-link">
-                  My Page
-                </Link>
-              </li>
-            )
+            <li className="header-center_link">
+              <Link to="/my-vendor-page" className="header-link">
+                My Page
+              </Link>
+            </li>
           ) : (
             <></>
           )}

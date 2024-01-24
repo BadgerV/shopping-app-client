@@ -49,6 +49,10 @@
   align-items: center;
   flex-direction: row;
   gap: 1em;
+} 
+.product-page_rating-div > :first-child {
+  font-size: 1.5em;
+  color: #db4444;
 }
 
 .product-page_rating-div span {

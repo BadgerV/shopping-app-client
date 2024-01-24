@@ -56,7 +56,7 @@ const Login = () => {
 
   useEffect(() => {
     dispatch(removeLoginAndSignUpErrors());
-  }, [])
+  }, []);
 
   return (
     <>
@@ -64,16 +64,15 @@ const Login = () => {
         <LoadingComponent />
       ) : (
         <>
-          {" "}
           <Header />
-          <div className="signup">
-            <div className="signup-left">
+          <div className="signin">
+            <div className="signin-left">
               <img src="/assets/SideImage.png" alt="Image" />
             </div>
-            <div className="signup-right">
-              <div className="signup-right_inner">
-                <span className="signup-big-text">Login to LagShop</span>
-                <span className="signup-small-text">
+            <div className="signin-right">
+              <div className="signin-right_inner">
+                <span className="signin-big-text">Login to LagShop</span>
+                <span className="signin-small-text">
                   Enter your details below
                 </span>
                 <div className="error-container">
@@ -90,7 +89,7 @@ const Login = () => {
 
                 <form
                   action="submit"
-                  className="signup-form"
+                  className="signin-form"
                   onSubmit={handleSubmit}
                 >
                   <input
@@ -112,7 +111,7 @@ const Login = () => {
                     name="password"
                   />
                   <button
-                    className="create-account_button"
+                    className="login-button"
                     disabled={isLoading}
                     type="submit"
                   >
@@ -126,7 +125,7 @@ const Login = () => {
 
                 <span className="already-have_account">
                   Don't have an account?{" "}
-                  <Link to="/signup" className="link">
+                  <Link to="/signin" className="link">
                     Sign up
                   </Link>
                 </span>

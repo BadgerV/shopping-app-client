@@ -27,9 +27,9 @@
 }
 
 .uploaded-file img {
-  height: 10rem;
-  width: 10rem;
-  object-fit: cover;
+  height: 7.5rem;
+  width: 7.5rem;
+  object-fit: contain;
   border-radius: 5px;
   transition: 0.2s all ease-in-out;
 }

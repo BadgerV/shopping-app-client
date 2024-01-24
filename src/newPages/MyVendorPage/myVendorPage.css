@@ -5,6 +5,7 @@
 .myvendor-page {
   display: grid;
   grid-template-columns: 1fr 4.5fr;
+  gap: 1em;
 }
 
 .vendor-page_right-options {
@@ -35,6 +36,21 @@
   border-radius: 0.2em;
   width: 100%;
 }
+
+.input-container-label__count {
+  /* outline: 1px solid red; */
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 0.5em;
+  margin-top: -1.05em;
+}
+.input-container-label__count span {
+  font-size: 0.65em;
+  font-weight: 400;
+  color: #666;
+}
+
+
 
 input {
   width: 100%;
@@ -87,4 +103,29 @@ label {
   display: flex;
   flex-direction: row;
   gap: 2em;
+}
+.image-upload {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  height: 9em;
+
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.become-vendor_submit-button {
+  background-color: #db4444;
+  outline: none;
+  border: none;
+  height: 3rem;
+  color: white;
+  font-size: 0.9em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s all ease-in-out;
+}
+
+.become-vendor_submit-button:hover {
+  background-color: #db8944;
 }

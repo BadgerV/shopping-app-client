@@ -5,6 +5,7 @@
 
 .signup-left img {
   height: 100%;
+  max-width: 100%;
 }
 
 .signup-right {
@@ -53,7 +54,7 @@
   font-weight: 300;
 
   border-radius: 5px;
-  height: 3.5em;
+  height: 3em;
   width: 100%;
   margin-top: 1em;
   transition: 0.2s ease-in-out;

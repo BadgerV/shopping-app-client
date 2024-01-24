@@ -122,21 +122,31 @@
 }
 
 .avatar-hoverable {
+  display: flex;
+  flex-direction: column;
+
   position: absolute;
   top: 100%;
-  padding-bottom: 0.5em;
+  /* padding-bottom: 0.5em; */
   right: 0;
 
-  z-index: 9999999999999999999999999999999999999999999999999;
+  z-index: 99999999999999999;
 
-  background: #00000016;
-
-  display: flex;
+  background: #00000094;
   flex-direction: column;
 
   border-radius: 0.3em;
 
   display: none;
+}
+
+.avatar-hoverable > :first-child {
+  border-top-right-radius: 0.3em;
+  border-top-left-radius: 0.3em;
+}
+.avatar-hoverable > :last-child {
+  border-bottom-right-radius: 0.3em;
+  border-bottom-left-radius: 0.3em;
 }
 
 .header-left__avatar:hover .avatar-hoverable {
@@ -145,11 +155,13 @@
 
 .avatar-hoverable-comp {
   min-width: max-content;
-  padding: 0.4em 1em;
+  padding: 0.6em 1em;
 
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  transition: 0.2s all ease-in-out;
 }
 
 .avatar-hoverable-comp:hover {

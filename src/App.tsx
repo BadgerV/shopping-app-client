@@ -10,38 +10,38 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./redux/store";
 import { verifyToken } from "./redux/slice/userSlice";
 import { useEffect } from "react";
-import {
-  GetProductCategories,
-} from "./redux/slice/productSlice";
+import { GetProductCategories } from "./redux/slice/productSlice";
 import { lazy, Suspense } from "react";
 import LoadingComponent from "./newComponents/LoadingComponent/LoadingComponent";
 import PostProductSucessPage from "./newPages/PostProductSucesssPage/PostProductSucessPage";
 
-const Signup = lazy(() => import("./newPages/SignUp/Signup"));
-const Login = lazy(() => import("./newPages/Login/Login"));
 const BecomeVendor = lazy(() => import("./newPages/BecomeVendor/BecomeVendor"));
 const MyVendorPage = lazy(() => import("./newPages/MyVendorPage/MyVendorPage"));
-const CategoryPage = lazy(() => import("./newPages/CategoryPage/CategoryPage"));
-const ProductPage = lazy(() => import("./newPages/ProductPage/ProductPage"));
+
 const Profile = lazy(() => import("./newPages/Profile/Profile"));
-const Home = lazy(() => import("./pages/Home/Home"));
+
+import Home from "./pages/Home/Home";
+import CategoryPage from "./newPages/CategoryPage/CategoryPage";
+import ProductPage from "./newPages/ProductPage/ProductPage";
+import Signup from "./newPages/SignUp/Signup";
+import Login from "./newPages/Login/Login";
 
 const App = () => {
   const dispatch = useDispatch<AppDispatch>();
   const user = useSelector((state: RootState) => state.userSlice.user);
   const theToken = localStorage.getItem("token");
 
+  const asyncFunction = async () => {
+    await dispatch(verifyToken());
+  };
+
   useEffect(() => {
-    const asyncFunction = async () => {
-      await dispatch(verifyToken());
-    };
-
-    dispatch(GetProductCategories());
-
     if (!user && theToken) {
       asyncFunction();
     }
+    dispatch(GetProductCategories());
   }, []);
+
   return (
     <Router>
       <div className="app-container">
@@ -72,7 +72,6 @@ const App = () => {
                 path="pending-vendor"
                 element={NavigateUserToPendingPage(user)}
               />
-
               <Route
                 path="success-page"
                 element={

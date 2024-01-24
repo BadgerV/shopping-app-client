@@ -1,7 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-// import { RootState } from "../store";
 import axios from "axios";
-// import { useDispatch } from "react-redux";
 
 const development = "http://localhost:3000";
 // const production = "https://shopping-app-j93p.onrender.com";
@@ -62,47 +60,41 @@ interface BecomeVendorProps {
   thirdCategory: string;
 }
 
-interface PostProductProps {
-  productName: string;
-  productPrice: number;
-  productDescription: string;
-  productStock: number;
-  productDiscount: number;
-  shippingCost: number;
-  productImage: any;
-  categories: [string];
-}
-
-const timeout = (ms: number) =>
-  new Promise((_, reject) => setTimeout(() => reject("Request timed out"), ms));
+// interface PostProductProps {
+//   productName: string;
+//   productPrice: number;
+//   productDescription: string;
+//   productStock: number;
+//   productDiscount: number;
+//   shippingCost: number;
+//   productImage: any;
+//   categories: [string];
+// }
 
 // Define an async thunk to make the API call nonsese
 export const registerUser = createAsyncThunk(
   "user/registerUser",
-  async ({ firstName, lastName, email, password }: UserProps) => {
+  async ({ firstName, lastName, email, password }: UserProps, thunkAPI) => {
     try {
       // Set the timeout duration (e.g., 10 seconds)
-      const timeoutDuration = 10000; // 10 seconds in milliseconds
 
       // Create a promise that races between the HTTP request and a timeout promise
-      const response: any = await Promise.race([
-        axios.post(`${development}/v1/user/signup`, {
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          password: password,
-        }),
-        timeout(timeoutDuration),
-      ]);
+      const response: any = axios.post(`${development}/v1/user/signup`, {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+      });
 
       if (response.data) {
         const userToken = JSON.stringify(response.data.token);
 
         localStorage.setItem("token", userToken);
       }
+
       return response.data; // Return the data you want to store in the Redux state
     } catch (error: any) {
-      return Promise.reject(error.response.data);
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
@@ -110,7 +102,7 @@ export const registerUser = createAsyncThunk(
 //outlet that allows users to logink
 export const loginUser = createAsyncThunk(
   "user/loginUser",
-  async ({ email, password }: LoginProps) => {
+  async ({ email, password }: LoginProps, thunkAPI) => {
     try {
       const response = await axios.post(`${development}/v1/user/login`, {
         email: email,
@@ -123,56 +115,62 @@ export const loginUser = createAsyncThunk(
       localStorage.setItem("token", userToken);
       return response.data;
     } catch (error: any) {
-      return Promise.reject(error.response.data);
+      return thunkAPI.rejectWithValue(error.response.data);
     }
   }
 );
 
 export const updateUser = createAsyncThunk(
   "user/updateUser",
-  async ({
-    firstName,
-    lastName,
-    email,
-    phoneNumber,
-    password,
-    newPassword,
-  }: UpdateUserProps) => {
-    // Retrieve the token from localStorage
-    const theToken = localStorage.getItem("token");
-    let theNewToken = null;
-    if (theToken) {
-      theNewToken = JSON.parse(theToken);
+  async (
+    {
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      password,
+      newPassword,
+    }: UpdateUserProps,
+    thunkAPI
+  ) => {
+    try {
+      // Retrieve the token from localStorage
+      const theToken = localStorage.getItem("token");
+      let theNewToken = null;
+      if (theToken) {
+        theNewToken = JSON.parse(theToken);
+      }
+
+      // Set the Axios request headers with the Authorization header
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${theNewToken}`,
+      };
+
+      // Make the Axios request with the configured headers
+      const response = await axios.post(
+        `${development}/v1/user/patch`,
+        {
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          phoneNumber: phoneNumber,
+          password: password,
+          newPassword: newPassword,
+        },
+        { headers: headers }
+      );
+
+      return response.data;
+    } catch (error) {
+      thunkAPI.rejectWithValue(error);
     }
-
-    // Set the Axios request headers with the Authorization header
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${theNewToken}`,
-    };
-
-    // Make the Axios request with the configured headers
-    const response = await axios.post(
-      `${development}/v1/user/patch`,
-      {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        phoneNumber: phoneNumber,
-        password: password,
-        newPassword: newPassword,
-      },
-      { headers: headers }
-    );
-
-    return response.data;
   }
 );
 
 export const verifyToken = createAsyncThunk("user/verifyToken", async () => {
   try {
-    // Retrieve the token from localStorage nonsese
-
+    // Retrieve the token from localStorage
     const theToken = localStorage.getItem("token");
     let theNewToken = null;
     if (theToken) {
@@ -200,53 +198,60 @@ export const verifyToken = createAsyncThunk("user/verifyToken", async () => {
 
 export const becomeVendor = createAsyncThunk(
   "user/becomeVendor",
-  async ({
-    matricNumber,
-    DOB,
-    gender,
-    motto,
-    department,
-    avatar,
-    thirdCategory,
-    secondCategory,
-    firstCategory,
-  }: BecomeVendorProps) => {
-    // Retrieve the token from localStorage
-    const theToken = localStorage.getItem("token");
-    let theNewToken = null;
-    if (theToken) {
-      theNewToken = JSON.parse(theToken);
+  async (
+    {
+      matricNumber,
+      DOB,
+      gender,
+      motto,
+      department,
+      avatar,
+      thirdCategory,
+      secondCategory,
+      firstCategory,
+    }: BecomeVendorProps,
+    thunkAPI
+  ) => {
+    try {
+      // Retrieve the token from localStorage
+      const theToken = localStorage.getItem("token");
+      let theNewToken = null;
+      if (theToken) {
+        theNewToken = JSON.parse(theToken);
+      }
+
+      // Set the Axios request headers with the Authorization header
+      const headers = {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${theNewToken}`,
+      };
+
+      const response = await axios.post(
+        `${development}/v1/user/be-vendor/`,
+        {
+          matricNumber: matricNumber,
+          DOB: DOB,
+          gender: gender,
+          motto: motto,
+          department: department,
+          avatar: avatar,
+          firstCategory: firstCategory,
+          secondCategory: secondCategory,
+          thirdCategory: thirdCategory,
+        },
+        { headers: headers }
+      );
+
+      return response.data;
+    } catch (error) {
+      thunkAPI.rejectWithValue(error);
     }
-
-    // Set the Axios request headers with the Authorization header
-    const headers = {
-      "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${theNewToken}`,
-    };
-
-    const response = await axios.post(
-      `${development}/v1/user/be-vendor/`,
-      {
-        matricNumber: matricNumber,
-        DOB: DOB,
-        gender: gender,
-        motto: motto,
-        department: department,
-        avatar: avatar,
-        firstCategory: firstCategory,
-        secondCategory: secondCategory,
-        thirdCategory: thirdCategory,
-      },
-      { headers: headers }
-    );
-
-    return response.data;
   }
 );
 
 export const postProduct = createAsyncThunk(
   "user/postProduct",
-  async (formData: any) => {
+  async (formData: any, thunkAPI) => {
     try {
       // Retrieve the token from localStorage
       const theToken = localStorage.getItem("token");
@@ -268,10 +273,9 @@ export const postProduct = createAsyncThunk(
         { headers: headers }
       );
 
-      console.log(response.data);
       return response.data;
     } catch (error) {
-      console.log(error);
+      thunkAPI.rejectWithValue(error);
     }
   }
 );

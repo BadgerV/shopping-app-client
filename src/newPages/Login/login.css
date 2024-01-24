@@ -1,26 +1,26 @@
-.signup {
+.signin {
   display: grid;
   grid-template-columns: 1fr 1fr;
   position: relative;
 }
 
-.signup-left img {
+.signin-left img {
   height: 100%;
   max-width: 100%;
 }
 
-.signup-right {
+.signin-right {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.signup-right_inner {
+.signin-right_inner {
   display: flex;
   flex-direction: column;
 }
 
-.signup-big-text {
+.signin-big-text {
   font-size: 2em;
   font-weight: 500;
   letter-spacing: 1px;
@@ -31,7 +31,7 @@
   margin-bottom: 0.5em;
 }
 
-.signup-small-text {
+.signin-small-text {
   font-size: 0.85em;
   font-weight: 400;
   margin-bottom: 1em;
@@ -48,11 +48,11 @@
   font-size: 0.9em;
 }
 
-.signup-form {
+.signin-form {
   display: flex;
   flex-direction: column;
 }
-.create-account_button {
+.login-button {
   background-color: #db4444e5;
   outline: none;
   border: none;
@@ -60,12 +60,20 @@
   font-weight: 300;
 
   border-radius: 5px;
+  height: 3em;
+  width: 100%;
   margin-top: 1em;
   transition: 0.2s ease-in-out;
   cursor: pointer;
+  font-size: 0.9em;
+  text-align: center;
 }
 
-.create-account_button:hover {
+.login-button:disabled {
+  background-color: #db4444;
+}
+
+.login-button:hover {
   background-color: #db4444;
 }
 
@@ -81,4 +89,15 @@
   color: black;
 
   margin-left: 0.5em;
+}
+
+.error-container {
+  margin: 0.5em 0;
+}
+
+.error-message {
+  font-size: 0.8em;
+  color: red;
+  font-weight: 300;
+  margin-bottom: 1em;
 }

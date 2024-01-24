@@ -1,5 +1,7 @@
 import "./moreDetails.css";
-import StarRatingComponent from "react-star-rating-component";
+
+import { Rating } from "@mui/material";
+import StarIcon from "@mui/icons-material/Star";
 
 interface MoredetailsProps {
   name: string;
@@ -22,7 +24,9 @@ const MoreDetails = ({
 
   return (
     <div className="more-details">
-      <button className="close-button" onClick={() => setIsModalOpen(false)}>X</button>
+      <button className="close-button" onClick={() => setIsModalOpen(false)}>
+        X
+      </button>
 
       <div className="more-details-container">
         <div className="more-details-container-left">
@@ -34,13 +38,11 @@ const MoreDetails = ({
           <span className="more-details-description">{description}</span>
           <span className="more-details-price">N{price}</span>
           <div className="starRating">
-            <StarRatingComponent
-              name="rate2"
-              editing={false}
-              starCount={5}
+            <Rating
+              icon={<StarIcon />}
+              emptyIcon={<StarIcon fontSize="small" />}
               value={realRating}
-              starColor={`black`}
-              emptyStarColor={`rgba(0, 0, 0, 0.7)`}
+              precision={0.1}
             />
           </div>
           <div className="more-details-buttons">

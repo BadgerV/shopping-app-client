@@ -18,7 +18,7 @@ interface Option {
 const MyVendorPage = () => {
   return (
     <>
-      <Header showElement={false} />
+      <Header />
       <div className="myvendor-page">
         <div className="vendor-page_left">
           <div className="vendor-page_right-options">
@@ -88,13 +88,14 @@ const PostProduct = () => {
     const { name, value } = e.target;
 
     setProductInfo({ ...productInfo, [name]: value });
+    handleDescriptionChange(e);
   };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     formData.append("name", productInfo.productName);
-    formData.append("description", productInfo.prodcuDescription);
+    formData.append("description", productDescription);
     formData.append(
       "originalProductPrice",
       productInfo.productPrice.toString()
@@ -155,6 +156,18 @@ const PostProduct = () => {
       navigate("");
     }
   }, []);
+
+  const [productDescription, setProductDescription] = useState("");
+  const maxCharacters = 300;
+
+  const handleDescriptionChange = (e: any) => {
+    const inputValue = e.target.value;
+    if (inputValue.length <= maxCharacters) {
+      setProductDescription(inputValue);
+    }
+  };
+
+  const charactersRemaining = maxCharacters - productDescription.length;
 
   return (
     <>
@@ -291,9 +304,12 @@ const PostProduct = () => {
             focusStates[2] || productInfo.prodcuDescription ? "focused" : ""
           }`}
         >
-          <label htmlFor="floating-label2" className="floating-label">
-            Desciption
-          </label>
+          <div className="input-container-label__count">
+            <label htmlFor="floating-label2" className="floating-label">
+              Description
+            </label>
+            <span>{charactersRemaining} words remaining</span>
+          </div>
           <textarea
             rows={4}
             onFocus={() => handleFocus(2)}
@@ -301,6 +317,7 @@ const PostProduct = () => {
             onChange={handleChange}
             className="vendor-page_textarea vendor-input"
             name="prodcuDescription"
+            value={productDescription}
           ></textarea>
         </div>
 

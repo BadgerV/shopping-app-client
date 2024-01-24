@@ -25,6 +25,7 @@ interface ProductState {
   particularProductLoading: boolean;
   loadingWithUserOrProduct: boolean;
   listOfUsersAndproduct: any;
+  selectedProduct: object;
 }
 const initialState: ProductState = {
   error: null,
@@ -37,6 +38,8 @@ const initialState: ProductState = {
   particularProductLoading: false,
   loadingWithUserOrProduct: true,
   listOfUsersAndproduct: [],
+
+  selectedProduct: {},
 };
 
 export const getRandomProducts = createAsyncThunk(
@@ -99,6 +102,9 @@ const productSlice = createSlice({
     eraseListOfProducts: (state) => {
       state.listOfUsersAndproduct = [];
     },
+    selectParticularProduct: (state, action) => {
+      state.selectedProduct = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -107,22 +113,16 @@ const productSlice = createSlice({
       })
       .addCase(getRandomProducts.fulfilled, (state, action) => {
         state.products = action.payload;
-        console.log(state.products);
         state.isLoadingRandomProducts = false;
       })
       .addCase(getRandomProducts.rejected, (state) => {
         state.isLoadingRandomProducts = false;
       })
-      .addCase(GetProductCategories.pending, (state) => {
-        state.isLoadingProduct = true;
-      })
       .addCase(GetProductCategories.fulfilled, (state, action) => {
         state.productCategories = action.payload;
-        state.isLoadingProduct = false;
       })
       .addCase(GetProductCategories.rejected, (state, action) => {
         state.error = action.error;
-        state.isLoadingProduct = false;
       })
       .addCase(GetCategoriesProduct.pending, (state) => {
         state.error = false;
@@ -165,6 +165,7 @@ const productSlice = createSlice({
   },
 });
 
-export const { eraseListOfProducts } = productSlice.actions;
+export const { eraseListOfProducts, selectParticularProduct } =
+  productSlice.actions;
 
 export default productSlice.reducer;

@@ -1,17 +1,20 @@
 import "./product.css";
-import StarRatingComponent from "react-star-rating-component";
+import { Rating } from "@mui/material";
 import { useState } from "react";
 import MoreDetails from "../MoreDetails/MoreDetails";
 import { formatNumberToCurrency } from "../../utils/utilsFunctions";
 import { navigateTo } from "../../utils/utilsFunctions";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
+import { selectParticularProduct } from "../../redux/slice/productSlice";
 
 interface ProductProps {
   description: string;
   inStock: boolean;
   name: string;
   price: number;
-  owner: number;
+  owner: any;
   productImage: any;
   stock: number;
   productDiscount?: number;
@@ -50,6 +53,30 @@ const Product = ({
   };
 
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const gotoProductPage = () => {
+    console.log("workwing");
+    dispatch(
+      selectParticularProduct({
+        inStock,
+        name,
+        price,
+        productImage,
+        stock,
+        productDiscount,
+        rating, // Add the rating property to the component's props
+        description,
+        owner,
+        shippingCost,
+        createdAt,
+        _id,
+        productCategories,
+        originalProductPrice,
+      })
+    );
+    navigate(`/product/${_id}`);
+  };
 
   return (
     <>
@@ -81,9 +108,8 @@ const Product = ({
             src={`data:image/png;base64,${productImage && productImage[0]}`}
             alt="Product"
             className="product-image__main"
-            onClick={() => navigateTo(`product/${_id}`, navigate)}
+            onClick={gotoProductPage}
           />
-
           <div className="product-icon_container">
             <img
               src={likedSrc}
@@ -115,19 +141,18 @@ const Product = ({
 
           <div className="product-rating__container">
             {rating ? (
-              <StarRatingComponent
-                name="rate2"
-                editing={false}
-                starCount={5}
-                value={rating} // Use the provided rating value
-                starColor="#FFAD33"
-                emptyStarColor="grey"
+              <Rating
+                name="size-large"
+                size="large"
+                defaultValue={+rating}
+                precision={1}
+                readOnly
               />
             ) : (
               <span style={{ fontSize: "0.7em" }}>No ratings yet</span>
             )}
 
-            <span className="product-instock" style={{ fontSize: "0.7em" }}>
+            <span className="product-instock" style={{ fontSize: "0.65em" }}>
               {inStock ? stock : "(Out of Stock)"}
             </span>
           </div>
