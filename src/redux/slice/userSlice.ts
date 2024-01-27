@@ -294,12 +294,6 @@ export const getUser = createAsyncThunk("getUser", async (array: number[]) => {
   return userData;
 });
 
-// export const logoutUser = createAsyncThunk("logoutuser", async ({getState} : any) => {
-//   const dispatch = useDispatch();
-//   const state = getState()
-//   dispatch(loginUser.fulfilled(state))
-// });
-
 const initialState: UserState = {
   user: 0,
   userToken: null,
