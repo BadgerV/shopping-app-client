@@ -294,6 +294,8 @@ export const getUser = createAsyncThunk("getUser", async (array: number[]) => {
   return userData;
 });
 
+//another comment for commit purposes
+
 const initialState: UserState = {
   user: 0,
   userToken: null,
